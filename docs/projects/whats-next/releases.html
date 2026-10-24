@@ -22,14 +22,12 @@
   <link rel="icon" href="../../assets/images/icon-whats-next.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <script src="../../assets/js/main.js" defer></script>
+  <script src="../../assets/js/site-utils.js" defer></script>
   <script src="../../assets/js/releases.js" defer></script>
   <style>
-    .release-page-hero{padding:34px 0 28px}
-    .release-page-hero h1{font-size:clamp(2.35rem,6vw,4rem);letter-spacing:-1.8px;margin:12px 0}
-    .release-page-hero p{max-width:760px;color:var(--muted);line-height:1.8}
     .source-line{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
     .source-pill{padding:7px 11px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.85rem}
-    .release-status{margin:14px 0 22px;color:var(--muted);font-size:.94rem}
+    .release-status{margin:0 0 14px;color:var(--muted);font-size:.94rem}
     .release-list{display:grid;grid-template-columns:1fr;gap:16px}
     .release-card{padding:22px;border:1px solid var(--border);border-radius:18px;background:var(--panel);min-width:0}
     .release-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
@@ -67,7 +65,7 @@
     .empty-state p{margin:8px 0 14px}
     .safety-note{margin:26px 0;padding:18px;border:1px solid var(--border);border-radius:14px;color:var(--muted);line-height:1.75}
     .safety-note strong{color:var(--text)}
-    @media(max-width:560px){.release-card{padding:17px}.release-card-head{display:block}.release-badges{justify-content:flex-start;margin-top:10px}.asset-box{align-items:flex-start;flex-direction:column}.download-button{width:100%}}
+    @media(max-width:560px){.release-controls{padding:14px}.control-sort{flex-basis:100%}#releaseReset{width:100%}.release-card{padding:17px}.release-card-head{display:block}.release-badges{justify-content:flex-start;margin-top:10px}.asset-box{align-items:flex-start;flex-direction:column}.download-button{width:100%}}
   </style>
 </head>
 <body>
@@ -97,21 +95,59 @@
   </header>
 
   <main>
-    <section class="container release-page-hero">
+    <section class="container page-hero">
       <a class="back-link" href="../whats-next.html">← Back to What's Next</a>
       <div class="eyebrow">Official project downloads</div>
       <h1>APK <span class="gradient-text">Releases</span></h1>
-      <p>Browse APK files attached to What's Next GitHub releases. Each entry includes the published build, file size, upload date, and a direct download link. This list is refreshed automatically from the project's public GitHub releases every few hours.</p>
+      <p class="page-lead">Browse APK files attached to What's Next GitHub releases. Each entry shows the release, build type, file size, upload date, release notes, and a direct download link. The list is refreshed automatically from the project's public GitHub releases every few hours.</p>
       <div class="source-line">
         <span class="source-pill">Source: official GitHub releases</span>
         <span class="source-pill">APK files only</span>
         <a class="text-link" href="https://github.com/tokyo720022-create/What-Next/releases" target="_blank" rel="noopener noreferrer">Open GitHub releases ↗</a>
+      </div>
+      <div class="hero-buttons">
+        <a class="button button-primary" href="installation.html">Installation guide →</a>
+        <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
+        <a class="button" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-feedback target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
         <div id="releaseStatus" class="release-status" role="status" aria-live="polite">Loading APK releases from GitHub…</div>
+        <div id="releaseNotice" class="release-notice" hidden></div>
+
+        <form id="releaseControls" class="release-controls" role="search" aria-label="Search, filter and sort APK files" hidden>
+          <div class="control control-search">
+            <label for="releaseSearch">Search APK files</label>
+            <input id="releaseSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Release name, version/tag or file name" aria-controls="releaseList">
+          </div>
+
+          <fieldset class="control control-type">
+            <legend>Build type</legend>
+            <div class="chip-group">
+              <label class="chip"><input type="radio" name="releaseType" value="all" checked><span class="chip-label">All builds <span class="chip-count" data-count="all">0</span></span></label>
+              <label class="chip"><input type="radio" name="releaseType" value="stable"><span class="chip-label">Stable <span class="chip-count" data-count="stable">0</span></span></label>
+              <label class="chip"><input type="radio" name="releaseType" value="prerelease"><span class="chip-label">Pre-releases <span class="chip-count" data-count="prerelease">0</span></span></label>
+              <label class="chip"><input type="radio" name="releaseType" value="debug"><span class="chip-label">Debug / testing <span class="chip-count" data-count="debug">0</span></span></label>
+            </div>
+          </fieldset>
+
+          <div class="control control-sort">
+            <label for="releaseSort">Sort by</label>
+            <select id="releaseSort" aria-controls="releaseList">
+              <option value="newest" selected>Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="largest">Largest file</option>
+              <option value="smallest">Smallest file</option>
+              <option value="downloads">Most downloads</option>
+            </select>
+          </div>
+
+          <button id="releaseReset" class="button" type="button">Clear filters</button>
+        </form>
+        <div id="releaseResults" class="release-results" role="status" aria-live="polite" aria-atomic="true"></div>
+
         <div id="releaseList" class="release-list">
           <div class="empty-state"><strong>Loading releases</strong>Checking the official release list for APK files.</div>
         </div>
@@ -119,10 +155,12 @@
           <div class="empty-state"><strong>JavaScript is required</strong>The release list is loaded with JavaScript. You can browse the builds directly on <a class="text-link" href="https://github.com/tokyo720022-create/What-Next/releases">GitHub releases</a>.</div>
         </noscript>
         <div class="safety-note">
-          <strong>Install carefully.</strong> Some builds may be debug/testing packages; filenames that include <code>debug</code> are marked in the list. Check the release information before installing and download only from the official project links shown here. A build published here is not the same as a Play Store release.
+          <strong>Install carefully.</strong> Builds marked <em>Debug / testing build</em> are meant for testing and may behave unexpectedly. Check the release information before installing, download only from the official links shown here, and read the <a class="text-link" href="installation.html">installation guide</a> for update and safety tips.
         </div>
         <div class="about-links">
+          <a class="text-link" href="installation.html">Installation guide →</a>
           <a class="text-link" href="../whats-next.html">Project information →</a>
+          <a class="text-link report-link" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
           <a class="text-link" href="https://github.com/tokyo720022-create/What-Next" target="_blank" rel="noopener noreferrer">Source repository ↗</a>
           <a class="text-link" href="../../index.html">Tokyo Brotherhood Lab home →</a>
         </div>

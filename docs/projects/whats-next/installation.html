@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b14">
+  <meta name="description" content="How to download, install and update the What's Next Android APK safely, what to do when Android says the package can't be installed, and how to report installation errors.">
+  <link rel="canonical" href="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next/installation.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tokyo Brotherhood Lab">
+  <meta property="og:title" content="Android Installation Guide — What's Next | Tokyo Brotherhood Lab">
+  <meta property="og:description" content="How to download, install and update the What's Next Android APK safely, what to do when Android says the package can't be installed, and how to report installation errors.">
+  <meta property="og:url" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next/installation.html">
+  <meta property="og:image" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/assets/images/og-whats-next.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Android Installation Guide — What's Next | Tokyo Brotherhood Lab">
+  <meta name="twitter:description" content="How to download, install and update the What's Next Android APK safely, what to do when Android says the package can't be installed, and how to report installation errors.">
+  <meta name="twitter:image" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/assets/images/og-whats-next.jpg">
+  <title>Android Installation Guide — What's Next | Tokyo Brotherhood Lab</title>
+  <link rel="icon" href="../../assets/images/icon-whats-next.png" type="image/png" sizes="64x64">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <script src="../../assets/js/main.js" defer></script>
+  <script src="../../assets/js/site-utils.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-glow" aria-hidden="true"></div>
+    <div class="container nav">
+      <a class="brand" href="../../index.html" aria-label="Tokyo Brotherhood Lab home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <defs><linearGradient id="brandGradient" x1="5" y1="5" x2="43" y2="43"><stop offset="0%" stop-color="#f45bda"/><stop offset="52%" stop-color="#a18aff"/><stop offset="100%" stop-color="#62caff"/></linearGradient></defs>
+            <rect x="2.5" y="2.5" width="43" height="43" rx="14" stroke="url(#brandGradient)" stroke-width="1.5"/>
+            <path d="M13 16H35M24 16V35M16 28L24 20L32 28" stroke="url(#brandGradient)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="37" r="2" fill="#62caff"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">Tokyo Brotherhood <span class="brand-lab">Lab</span></span>
+          <span class="brand-tagline">ANIME <span>·</span> MANGA <span>·</span> TECHNOLOGY</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-link" href="../../index.html#projects"><span class="nav-link-index">01</span><span>Projects</span></a>
+        <a class="nav-link" href="../../index.html#contact"><span class="nav-link-index">02</span><span>Contact</span></a>
+        <a class="nav-link nav-about" href="../../index.html#about"><span class="nav-link-index">03</span><span>About</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-hero">
+      <a class="back-link" href="../whats-next.html">← Back to What's Next</a>
+      <div class="eyebrow">Android guide</div>
+      <h1>Install &amp; <span class="gradient-text">update</span></h1>
+      <p class="page-lead">How to download, install and update the What's Next Android APK, what to try when Android says the package can't be installed, and how to report a problem. APKs from outside the Google Play Store need a little extra care, so please read the safety section first.</p>
+      <div class="hero-buttons">
+        <a class="button button-primary" href="releases.html">Browse APK releases →</a>
+        <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container guide-layout">
+        <nav class="guide-toc" aria-label="On this page">
+          <strong>On this page</strong>
+          <ol>
+            <li><a href="#before">Before you install</a></li>
+            <li><a href="#download">Download the APK</a></li>
+            <li><a href="#install">Install it</a></li>
+            <li><a href="#update">Update an installed app</a></li>
+            <li><a href="#troubleshooting">If it can't be installed</a></li>
+            <li><a href="#signatures">Signature mismatches</a></li>
+            <li><a href="#report">Report an installation error</a></li>
+          </ol>
+        </nav>
+
+        <div class="guide-content">
+          <section id="before">
+            <h2>1. Before you install</h2>
+            <h3>Safety precautions</h3>
+            <ul>
+              <li><strong>Use official links only.</strong> Download from the <a class="inline-link" href="releases.html">APK release list</a> on this site or from the project's own GitHub releases. An official download link starts with <code>https://github.com/tokyo720022-create/What-Next/releases/download/</code>. Don't install a file with a similar name that someone sent you in a chat or found on another website.</li>
+              <li><strong>Know what you're installing.</strong> Each entry on the release list is labelled <em>Stable release</em>, <em>Pre-release</em> or <em>Debug / testing build</em>. Debug and testing builds are meant for testing and can be less polished. If the list shows no stable release, none has been published yet.</li>
+              <li><strong>Check the checksum if you can.</strong> When GitHub provides one, the release list shows a SHA-256 checksum under each APK. After downloading, compare it with the checksum of your file (for example <code>sha256sum file.apk</code> on Linux/macOS or <code>Get-FileHash file.apk</code> in Windows PowerShell). If they differ, delete the file and download it again.</li>
+              <li><strong>Read the release notes</strong> before installing, and read the permission prompts Android shows.</li>
+              <li><strong>Protect your AniList login.</strong> What's Next logs you in through AniList's own website in your browser. Treat any login token like a password and never share it.</li>
+              <li><strong>Turn permissions back off.</strong> Installing outside the Play Store needs the "install unknown apps" permission for the app you used to open the file. You can switch it off again afterwards.</li>
+            </ul>
+            <div class="callout">
+              <strong>What this guide doesn't state.</strong> A minimum Android version, device compatibility list and permission list haven't been published for What's Next, so none are given here. If an install fails or the app misbehaves on your phone, please <a class="inline-link" href="#report">report your device model and Android version</a>.
+            </div>
+          </section>
+
+          <section id="download">
+            <h2>2. Download the APK</h2>
+            <ol class="guide-steps">
+              <li>Open the <a class="inline-link" href="releases.html">APK releases</a> page on your Android phone.</li>
+              <li>Pick a build. Use the search box, build-type filter and sort menu if the list is long, and read the release notes. Some builds reuse the same file name (for example <code>app-debug.apk</code>), so compare the <strong>APK uploaded</strong> date rather than the file name to tell builds apart.</li>
+              <li>Tap <strong>Download APK</strong>. Your browser may warn that this type of file can harm your device. That warning appears for every APK; continue only because you used an official link.</li>
+              <li>Wait for the download to finish. If it is interrupted, download it again instead of trying to install a partial file.</li>
+            </ol>
+          </section>
+
+          <section id="install">
+            <h2>3. Install it</h2>
+            <p>Menu names differ slightly between Android versions and phone makers, but the normal system prompts look like this.</p>
+            <ol class="guide-steps">
+              <li>Open the downloaded file from the browser's download notification, or find it in your <strong>Files</strong> or <strong>Downloads</strong> app.</li>
+              <li>If Android says your phone isn't allowed to install unknown apps from this source, tap <strong>Settings</strong> and allow it for the app you are using (for example your browser or file manager). Then go back and open the file again. On older Android versions this is a single "Unknown sources" setting.</li>
+              <li>Tap <strong>Install</strong>. Google Play Protect may scan the app or show a warning because the app isn't from the Play Store. Read the message and continue only if you trust the source.</li>
+              <li>When it finishes, tap <strong>Open</strong>. The app appears as <strong>What Next?</strong>.</li>
+              <li>Log in with your AniList account. AniList opens in your browser and returns you to the app after you approve it.</li>
+            </ol>
+          </section>
+
+          <section id="update">
+            <h2>4. Update an installed app</h2>
+            <ol class="guide-steps">
+              <li>Find your installed version: <strong>Settings → Apps → What Next? → App info</strong> (the version is usually listed at the bottom).</li>
+              <li>Open the <a class="inline-link" href="releases.html">APK releases</a> page and check whether a newer build exists, using the upload date and release notes.</li>
+              <li>Before updating, open What's Next while online and let it finish syncing. The app keeps changes made offline on your device until you are back online, so anything still waiting could be lost if the update has to be done another way.</li>
+              <li>Download the newer APK and open it as described above. Android should offer an <strong>Update</strong> button because it is the same app.</li>
+              <li>If Android refuses, see <a class="inline-link" href="#troubleshooting">If it can't be installed</a> and <a class="inline-link" href="#signatures">Signature mismatches</a>.</li>
+            </ol>
+            <div class="callout callout-warn">
+              <strong>About your data.</strong> Android normally keeps an app's data when a newer version is installed over it, but this isn't guaranteed, and it does not apply if the old version has to be uninstalled first. Locally stored data, such as your saved login, cached lists and unsynced changes, may be lost in that case. Your AniList account data itself is stored by AniList, not by the app.
+            </div>
+          </section>
+
+          <section id="troubleshooting">
+            <h2>5. If it can't be installed</h2>
+            <p>Android may say <em>"App not installed"</em>, <em>"There was a problem parsing the package"</em> or that the package conflicts with an existing one. Work through these in order:</p>
+            <ul>
+              <li><strong>Download problem.</strong> Delete the file and download it again, ideally on a stable connection. Compare the SHA-256 checksum if the release list shows one.</li>
+              <li><strong>Not allowed to install from this source.</strong> Allow "install unknown apps" for the browser or file manager you opened the file with (see step 3 above).</li>
+              <li><strong>Not enough storage.</strong> Free some space and try again.</li>
+              <li><strong>Conflict with an existing install.</strong> If What's Next is already installed, the new file must be signed with the same key. This is the most common cause when updating. See <a class="inline-link" href="#signatures">Signature mismatches</a>.</li>
+              <li><strong>Trying to go backwards.</strong> Android won't install an older build over a newer one. Use the newest build, or uninstall first (which removes local app data).</li>
+              <li><strong>Blocked by Play Protect or a managed device.</strong> Work, school or parental-control profiles can block apps from outside the Play Store. That is a setting on your device, not something the app can change.</li>
+              <li><strong>Still failing?</strong> It may be a compatibility problem with your phone or Android version. <a class="inline-link" href="#report">Report it</a> with the exact message Android showed.</li>
+            </ul>
+          </section>
+
+          <section id="signatures">
+            <h2>6. Why signature mismatches happen</h2>
+            <p>Every Android APK is signed with a key. To install an update over an existing app, Android requires the new APK to be signed with the <strong>same key</strong> as the one already installed. If the key is different, Android treats the file as a different publisher's app and refuses to install it as an update, with a message such as <em>"App not installed as package conflicts with an existing package"</em>.</p>
+            <p>This can happen when:</p>
+            <ul>
+              <li><strong>Debug builds are signed with a debug key.</strong> The project's build script (<code>build-apk.yml</code> in the What-Next repository) builds debug APKs with the Android Gradle task <code>assembleDebug</code>. Android build tools create the debug key automatically on the machine doing the build. If builds are made on different or fresh machines, they can end up with different debug keys.</li>
+              <li><strong>The signing key is changed on purpose.</strong> For example, if a future build is signed with a separate release key, it won't update over a debug build, and the other way round.</li>
+            </ul>
+            <p>The release list can't show which key signed a given APK, so there's no way to tell in advance. If you hit a mismatch, the usual fix is to uninstall the existing What's Next app and install the new APK. <strong>Uninstalling removes the app's local data</strong>, so first open the app online and let any pending changes sync. Afterwards you will need to log in with AniList again.</p>
+          </section>
+
+          <section id="report" class="report-panel">
+            <div>
+              <div class="eyebrow">Something went wrong?</div>
+              <h2>Report an installation error</h2>
+              <p>The best reports are specific. The bug-report button opens a GitHub issue with a ready-made template (a free GitHub account is needed to post). Please include:</p>
+              <ul>
+                <li>The <strong>APK file name</strong> and its <strong>upload date</strong> from the release list</li>
+                <li>Your <strong>device model</strong> and <strong>Android version</strong> (Settings → About phone)</li>
+                <li>The <strong>exact message</strong> Android showed, or a screenshot</li>
+                <li>What you did, step by step, and what you expected to happen</li>
+                <li>Whether What's Next was already installed, and from which build</li>
+              </ul>
+            </div>
+            <div class="report-actions">
+              <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
+              <a class="button" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-feedback target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
+              <a class="button" href="../../index.html#contact">Contact on Discord →</a>
+            </div>
+          </section>
+
+          <div class="about-links">
+            <a class="text-link" href="releases.html">APK releases →</a>
+            <a class="text-link" href="../whats-next.html">Project information →</a>
+            <a class="text-link" href="../../index.html">Tokyo Brotherhood Lab home →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Tokyo Brotherhood Lab.</span>
+      <a href="https://github.com/tokyo720022-create/tokyo-brotherhood-lab-site" target="_blank" rel="noopener noreferrer">Website source ↗</a>
+    </div>
+  </footer>
+
+</body>
+</html>

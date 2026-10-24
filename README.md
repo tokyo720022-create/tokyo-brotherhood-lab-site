@@ -10,16 +10,26 @@ docs/                              published by GitHub Pages
 ├── 404.html                       self-contained "page not found" page
 ├── sitemap.xml, robots.txt
 ├── assets/
-│   ├── css/style.css              all shared styles (site, header, project pages)
+│   ├── css/style.css              all shared styles
 │   ├── js/main.js                 footer year + "copy Discord username"
-│   ├── js/releases.js             APK release list (reads data/releases.json)
-│   └── images/                    *.webp logos, icon-*.png favicons, og-*.jpg social cards
-├── data/releases.json             generated release snapshot (do not edit by hand)
+│   ├── js/site-utils.js           shared helpers (DOM, safe Markdown, bug-report links)
+│   ├── js/releases.js             APK list: search, filter, sort (reads data/releases.json)
+│   ├── js/gallery.js              screenshot gallery + lightbox (reads data/screenshots.json)
+│   ├── js/roadmap.js              roadmap renderer (reads data/roadmap.json)
+│   └── images/
+│       ├── *.webp, icon-*.png, og-*.jpg
+│       └── whats-next/screenshots/   real app screenshots (see README there)
+├── data/
+│   ├── releases.json              generated release snapshot (do not edit by hand)
+│   ├── screenshots.json           gallery manifest (edit)
+│   └── roadmap.json               roadmap content (edit)
 └── projects/
-    ├── whats-next.html
-    ├── whats-next/releases.html
+    ├── whats-next.html            overview, screenshots, roadmap, report-a-bug
+    ├── whats-next/releases.html   APK list
+    ├── whats-next/installation.html   Android install / update guide
     └── tokyo-manga-lab.html
 tools/fetch_releases.py            builds data/releases.json from the What-Next releases
+tools/optimize_screenshots.py      resizes screenshots to WebP + writes manifest entries
 .github/workflows/update-releases.yml
 ```
 
@@ -40,11 +50,40 @@ Repository **Settings → Pages**: **Deploy from a branch**, branch `main`, fold
 
 Run the snapshot locally: `python3 tools/fetch_releases.py` (set `GITHUB_TOKEN` for a higher rate limit).
 
+## Updating content (no HTML editing needed)
+
+| To change…            | Edit…                                        |
+|-----------------------|----------------------------------------------|
+| Roadmap items/status  | `docs/data/roadmap.json`                     |
+| App screenshots       | `docs/data/screenshots.json` + images (see `docs/assets/images/whats-next/screenshots/README.md`) |
+| APK list              | nothing: generated from GitHub releases      |
+
+### Roadmap
+
+Each item has a `status` of `planned`, `in-progress`, `testing` or `released`. Only mark an item
+`released` when it is in the app people can use today. Released items show under "Available now";
+everything else shows separately under "Coming up".
+
+### Release types on the APK page
+
+- **Debug / testing build:** the file name, tag or release title contains `debug`, `test` or `testing`.
+- **Pre-release:** marked as a pre-release on GitHub.
+- **Stable release:** everything else. Only a stable APK is ever labelled "Latest stable".
+
+The What-Next build script currently produces debug APKs (`assembleDebug`), so until a stable,
+release-signed APK is published the page shows a "no stable release yet" notice.
+
+### Bug reports
+
+"Report a bug" links open a prefilled new-issue form on the What-Next repository. The prefill is built in
+`docs/assets/js/site-utils.js`. If you later add `bug_report.md` / `feedback.md` issue templates to the
+What-Next repository, set `useIssueTemplates: true` in that file.
+
 ## Adding a project page
 
 1. Copy `docs/projects/tokyo-manga-lab.html` and edit the content. Shared styles (`.project-hero`,
-   `.tag`, `.notice`, `.card-icon`, …) already live in `style.css`; keep only page-specific CSS inline.
-2. Add a logo as `.webp` (about 640 px), a 64 px `icon-<name>.png`, and a 1200×630 `og-<name>.jpg`.
+   `.tag`, `.notice`, `.card-icon`, ...) already live in `style.css`; keep only page-specific CSS inline.
+2. Add a logo as `.webp` (about 640 px), a 64 px `icon-<name>.png`, and a 1200x630 `og-<name>.jpg`.
 3. Add a card to `docs/index.html` and the page URL to `docs/sitemap.xml`.
 4. The header and footer are copied into each page, so update them in every page if you change them.
 

@@ -1,0 +1,75 @@
+{
+  "_help": "Edit this file to update the roadmap on docs/projects/whats-next.html. 'status' must be one of the ids in 'statuses'. Only mark an item 'released' when it is in the app people can use today. Items appear under 'Available now' (released) or 'Coming up' (everything else).",
+  "reviewed": "2026-10-24",
+  "appVersion": "2.1.1",
+  "reviewedAgainst": "What-Next README (v2.1.1), build-apk.yml and capacitor.config.json. Individual features were not re-tested against the app's source files.",
+  "note": "Planned, in-progress and testing items will be added here as they are confirmed. Nothing is listed as coming soon until it is real.",
+  "statuses": [
+    { "id": "planned",     "label": "Planned",     "description": "Not started yet" },
+    { "id": "in-progress", "label": "In progress", "description": "Being worked on now" },
+    { "id": "testing",     "label": "Testing",     "description": "Built and being checked before release" },
+    { "id": "released",    "label": "Released",    "description": "Available in the app today" }
+  ],
+  "areas": [
+    {
+      "id": "discovery",
+      "title": "Discovery",
+      "description": "Finding something to watch or read next.",
+      "items": [
+        { "title": "Pick for me", "status": "released", "description": "Choose Watch, Read or Either and how much time you have (15 minutes to 2 hours) to get a suggestion from your Watching, Reading, Repeating and Planning lists." },
+        { "title": "Discover tab", "status": "released", "description": "Search AniList for new anime or manga by type, genre, sort order (Trending, Popular, Top rated, Newest) and title. Titles already on your list are marked." },
+        { "title": "Trending carousels", "status": "released", "description": "Trending anime and manga on the Pick screen." },
+        { "title": "Genre and 18+ filters", "status": "released", "description": "Genre chips built from your own list, plus show everything, only 18+ or hide 18+ titles." }
+      ]
+    },
+    {
+      "id": "anilist",
+      "title": "AniList integration",
+      "description": "Using your AniList account and AniList's data.",
+      "items": [
+        { "title": "AniList login", "status": "released", "description": "Log in with your AniList account on the web and in the Android app. There is no guest mode." },
+        { "title": "Media pages", "status": "released", "description": "Score, genres, synopsis, characters, staff, relations, recommendations and where to watch for any title." },
+        { "title": "Character, staff and studio pages", "status": "released", "description": "Dedicated pages with favourites, voice actors, roles and related media." },
+        { "title": "Chat", "status": "released", "description": "One-to-one private messages with other AniList users, using AniList's own message system." },
+        { "title": "Discord sync", "status": "released", "description": "Anime and manga updates from your AniList list posted to Discord forum threads, run from inside the app." }
+      ]
+    },
+    {
+      "id": "lists",
+      "title": "List management",
+      "description": "Browsing and updating your anime and manga lists.",
+      "items": [
+        { "title": "Anime and manga lists", "status": "released", "description": "Status tabs, search, a filter sheet (sort, format, status, country, year, length, score, genres) and grid/list customisation." },
+        { "title": "List editor", "status": "released", "description": "Status, progress, score, dates, rewatches, priority, custom lists, notes, private and favourite flags, and remove." },
+        { "title": "Progress tracking", "status": "released", "description": "+1 / -1 progress and Mark as done save to AniList, with consistent status and date rules everywhere." }
+      ]
+    },
+    {
+      "id": "usability",
+      "title": "Usability",
+      "description": "Making the app comfortable to use every day.",
+      "items": [
+        { "title": "Stats and daily goal", "status": "released", "description": "Backlog hours, top genres, titles finished this month, and a daily goal with a streak." },
+        { "title": "Airing schedule", "status": "released", "description": "A countdown to the next episode of every airing anime on your list." },
+        { "title": "Appearance and privacy options", "status": "released", "description": "System, Light, Dark, AMOLED or custom colours, plus a Blur covers option for use in public." }
+      ]
+    },
+    {
+      "id": "stability",
+      "title": "Stability and offline use",
+      "description": "Keeping the app dependable.",
+      "items": [
+        { "title": "Offline mode", "status": "released", "description": "Installs to your home screen and shows your last saved list without a connection. Changes made offline are kept on the device and sent when you are back online." },
+        { "title": "Automated tests", "status": "released", "description": "Structure checks, tracking-rule unit tests and real-browser tests run by a GitHub Actions workflow on every push." }
+      ]
+    },
+    {
+      "id": "android",
+      "title": "Android releases",
+      "description": "Getting the app onto Android phones.",
+      "items": [
+        { "title": "Android APK builds", "status": "released", "description": "An Android app (package com.whatnext.app) with AniList login returning to the app. APKs are currently built as debug/testing builds and published through GitHub releases." }
+      ]
+    }
+  ]
+}

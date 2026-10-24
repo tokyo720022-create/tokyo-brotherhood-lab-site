@@ -1,0 +1,3061 @@
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000000000000000000000000000000000000..f6defee0549daf3cf38fb75c827e57a2ec101305
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,3 @@
++__pycache__/
++*.pyc
++screenshots-source/
+diff --git a/README.md b/README.md
+index 2910198e5d2b6c45ee1222ee22aba2c3eec0174a..258142ee3a97388a5eadfede0ca39baac2fa8455 100644
+--- a/README.md
++++ b/README.md
+@@ -10,16 +10,26 @@ docs/                              published by GitHub Pages
+ ├── 404.html                       self-contained "page not found" page
+ ├── sitemap.xml, robots.txt
+ ├── assets/
+-│   ├── css/style.css              all shared styles (site, header, project pages)
++│   ├── css/style.css              all shared styles
+ │   ├── js/main.js                 footer year + "copy Discord username"
+-│   ├── js/releases.js             APK release list (reads data/releases.json)
+-│   └── images/                    *.webp logos, icon-*.png favicons, og-*.jpg social cards
+-├── data/releases.json             generated release snapshot (do not edit by hand)
++│   ├── js/site-utils.js           shared helpers (DOM, safe Markdown, bug-report links)
++│   ├── js/releases.js             APK list: search, filter, sort (reads data/releases.json)
++│   ├── js/gallery.js              screenshot gallery + lightbox (reads data/screenshots.json)
++│   ├── js/roadmap.js              roadmap renderer (reads data/roadmap.json)
++│   └── images/
++│       ├── *.webp, icon-*.png, og-*.jpg
++│       └── whats-next/screenshots/   real app screenshots (see README there)
++├── data/
++│   ├── releases.json              generated release snapshot (do not edit by hand)
++│   ├── screenshots.json           gallery manifest (edit)
++│   └── roadmap.json               roadmap content (edit)
+ └── projects/
+-    ├── whats-next.html
+-    ├── whats-next/releases.html
++    ├── whats-next.html            overview, screenshots, roadmap, report-a-bug
++    ├── whats-next/releases.html   APK list
++    ├── whats-next/installation.html   Android install / update guide
+     └── tokyo-manga-lab.html
+ tools/fetch_releases.py            builds data/releases.json from the What-Next releases
++tools/optimize_screenshots.py      resizes screenshots to WebP + writes manifest entries
+ .github/workflows/update-releases.yml
+ ```
+ 
+@@ -40,11 +50,40 @@ Repository **Settings → Pages**: **Deploy from a branch**, branch `main`, fold
+ 
+ Run the snapshot locally: `python3 tools/fetch_releases.py` (set `GITHUB_TOKEN` for a higher rate limit).
+ 
++## Updating content (no HTML editing needed)
++
++| To change…            | Edit…                                        |
++|-----------------------|----------------------------------------------|
++| Roadmap items/status  | `docs/data/roadmap.json`                     |
++| App screenshots       | `docs/data/screenshots.json` + images (see `docs/assets/images/whats-next/screenshots/README.md`) |
++| APK list              | nothing: generated from GitHub releases      |
++
++### Roadmap
++
++Each item has a `status` of `planned`, `in-progress`, `testing` or `released`. Only mark an item
++`released` when it is in the app people can use today. Released items show under "Available now";
++everything else shows separately under "Coming up".
++
++### Release types on the APK page
++
++- **Debug / testing build:** the file name, tag or release title contains `debug`, `test` or `testing`.
++- **Pre-release:** marked as a pre-release on GitHub.
++- **Stable release:** everything else. Only a stable APK is ever labelled "Latest stable".
++
++The What-Next build script currently produces debug APKs (`assembleDebug`), so until a stable,
++release-signed APK is published the page shows a "no stable release yet" notice.
++
++### Bug reports
++
++"Report a bug" links open a prefilled new-issue form on the What-Next repository. The prefill is built in
++`docs/assets/js/site-utils.js`. If you later add `bug_report.md` / `feedback.md` issue templates to the
++What-Next repository, set `useIssueTemplates: true` in that file.
++
+ ## Adding a project page
+ 
+ 1. Copy `docs/projects/tokyo-manga-lab.html` and edit the content. Shared styles (`.project-hero`,
+-   `.tag`, `.notice`, `.card-icon`, …) already live in `style.css`; keep only page-specific CSS inline.
+-2. Add a logo as `.webp` (about 640 px), a 64 px `icon-<name>.png`, and a 1200×630 `og-<name>.jpg`.
++   `.tag`, `.notice`, `.card-icon`, ...) already live in `style.css`; keep only page-specific CSS inline.
++2. Add a logo as `.webp` (about 640 px), a 64 px `icon-<name>.png`, and a 1200x630 `og-<name>.jpg`.
+ 3. Add a card to `docs/index.html` and the page URL to `docs/sitemap.xml`.
+ 4. The header and footer are copied into each page, so update them in every page if you change them.
+ 
+diff --git a/docs/assets/css/style.css b/docs/assets/css/style.css
+index f92686ba319e3c7eae561c38a788c1104650a47a..215e3e3709b4346cd89f3c541970955f2940611b 100644
+--- a/docs/assets/css/style.css
++++ b/docs/assets/css/style.css
+@@ -1072,6 +1072,898 @@ h1 {
+   }
+ }
+ 
++/* In-text links (project and guide pages) */
++
++.inline-link {
++  color: var(--blue);
++  text-decoration: none;
++}
++
++.inline-link:hover {
++  text-decoration: underline;
++}
++
++.guide-content a.inline-link,
++.report-panel a.inline-link,
++.notice a.inline-link,
++.shot-empty a.inline-link {
++  text-decoration: underline;
++  text-underline-offset: 3px;
++}
++
++/* ========================================
++   SUB-PAGE HERO, BUG REPORT ACTIONS
++   ======================================== */
++
++.page-hero {
++  padding: 34px 0 28px;
++}
++
++.page-hero h1 {
++  margin: 12px 0;
++
++  font-size: clamp(2.35rem, 6vw, 4rem);
++  letter-spacing: -1.8px;
++}
++
++.page-lead {
++  max-width: 760px;
++
++  color: var(--muted);
++  line-height: 1.8;
++}
++
++.page-hero .hero-buttons {
++  margin-top: 22px;
++}
++
++.button-bug {
++  border-color: #f45bda66;
++  background: #f45bda12;
++  color: #ffd3f7;
++}
++
++.button-bug:hover {
++  border-color: #f45bdaaa;
++  background: #f45bda22;
++}
++
++.report-panel {
++  display: flex;
++  justify-content: space-between;
++  align-items: flex-start;
++  gap: 28px;
++
++  padding: clamp(22px, 4vw, 34px);
++
++  border: 1px solid #f45bda3a;
++  border-radius: 20px;
++
++  background: linear-gradient(145deg, #1a1329, #101522);
++}
++
++.report-panel > div:first-child {
++  max-width: 640px;
++}
++
++.report-panel h2 {
++  margin: 12px 0;
++}
++
++.report-panel p,
++.report-panel li {
++  color: var(--muted);
++  line-height: 1.75;
++}
++
++.report-panel ul {
++  margin: 12px 0 0;
++  padding-left: 20px;
++}
++
++.report-actions {
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
++
++  min-width: 200px;
++}
++
++.report-actions .button {
++  width: 100%;
++}
++
++@media (max-width: 760px) {
++  .report-panel {
++    flex-direction: column;
++  }
++
++  .report-actions {
++    width: 100%;
++    min-width: 0;
++  }
++}
++
++/* Text for screen readers only */
++
++.visually-hidden {
++  position: absolute;
++
++  width: 1px;
++  height: 1px;
++  margin: -1px;
++  padding: 0;
++  overflow: hidden;
++
++  border: 0;
++  clip: rect(0, 0, 0, 0);
++  white-space: nowrap;
++}
++
++/* ========================================
++   SCREENSHOT GALLERY + LIGHTBOX
++   ======================================== */
++
++.shot-gallery {
++  display: grid;
++  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
++  gap: 18px;
++}
++
++.shot-card {
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
++
++  min-width: 0;
++  margin: 0;
++}
++
++.shot-button {
++  display: block;
++
++  width: 100%;
++  padding: 0;
++  overflow: hidden;
++
++  border: 1px solid var(--border);
++  border-radius: 18px;
++
++  background: var(--panel);
++  cursor: zoom-in;
++
++  transition:
++    transform .2s ease,
++    border-color .2s ease;
++}
++
++.shot-button:hover {
++  transform: translateY(-2px);
++  border-color: #a18aff66;
++}
++
++.shot-button img {
++  display: block;
++
++  width: 100%;
++  height: auto;
++}
++
++.shot-card figcaption {
++  min-width: 0;
++
++  color: var(--muted);
++  font-size: .86rem;
++  line-height: 1.5;
++  overflow-wrap: anywhere;
++}
++
++.shot-card figcaption strong {
++  display: block;
++  margin-bottom: 2px;
++
++  color: var(--text);
++  font-size: .92rem;
++}
++
++.shot-empty {
++  grid-column: 1 / -1;
++
++  padding: 26px;
++
++  border: 1px dashed var(--border);
++  border-radius: 16px;
++
++  background: var(--panel);
++  color: var(--muted);
++  line-height: 1.75;
++}
++
++.shot-empty-title {
++  display: block;
++  margin-bottom: 7px;
++
++  color: var(--text);
++  font-weight: 700;
++}
++
++.shot-empty strong {
++  color: var(--text);
++}
++
++.shot-empty p {
++  margin: 8px 0;
++}
++
++.shot-empty code,
++.guide-content code {
++  padding: 1px 6px;
++
++  border-radius: 6px;
++
++  background: #0d111d;
++  color: #d8d2ef;
++  font-size: .86em;
++  overflow-wrap: anywhere;
++}
++
++.shot-empty ul {
++  margin: 8px 0 0;
++  padding-left: 20px;
++  columns: 2 220px;
++}
++
++html.lightbox-open {
++  overflow: hidden;
++}
++
++.lightbox {
++  width: min(96vw, 940px);
++  max-width: none;
++  max-height: 96vh;
++  padding: 0;
++  overflow: hidden;
++
++  border: 1px solid var(--border);
++  border-radius: 20px;
++
++  background: #0b0e1b;
++  color: var(--text);
++}
++
++.lightbox::backdrop {
++  background: rgba(4, 5, 12, .88);
++}
++
++.lightbox-bar {
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  gap: 12px;
++
++  padding: 12px 14px 0;
++
++  color: var(--muted);
++  font-size: .86rem;
++}
++
++.lightbox-body {
++  display: grid;
++  grid-template-columns: auto minmax(0, 1fr) auto;
++  align-items: center;
++  gap: 8px;
++
++  padding: 10px 12px 16px;
++}
++
++.lightbox-figure {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  gap: 12px;
++
++  min-width: 0;
++  margin: 0;
++}
++
++.lightbox-figure img {
++  display: block;
++
++  width: auto;
++  max-width: 100%;
++  height: auto;
++  max-height: calc(96vh - 210px);
++
++  object-fit: contain;
++  border-radius: 12px;
++}
++
++.lightbox-caption {
++  max-width: 62ch;
++  overflow-wrap: anywhere;
++
++  color: var(--muted);
++  font-size: .92rem;
++  line-height: 1.6;
++  text-align: center;
++}
++
++.lightbox-caption strong {
++  display: block;
++  color: var(--text);
++}
++
++.lightbox-button {
++  display: inline-grid;
++  place-items: center;
++  flex: none;
++
++  width: 44px;
++  min-width: 44px;
++  height: 44px;
++  padding: 0;
++
++  border: 1px solid var(--border);
++  border-radius: 50%;
++
++  background: var(--panel2);
++  color: var(--text);
++  cursor: pointer;
++
++  font-size: 1.3rem;
++  line-height: 1;
++}
++
++.lightbox-button:hover {
++  border-color: #a18aff88;
++}
++
++.lightbox-button[disabled] {
++  opacity: .35;
++  cursor: default;
++}
++
++@media (max-width: 560px) {
++  .lightbox-body {
++    grid-template-columns: 1fr 1fr;
++  }
++
++  .lightbox-figure {
++    grid-column: 1 / -1;
++    grid-row: 1;
++  }
++
++  .lightbox-prev {
++    grid-column: 1;
++    grid-row: 2;
++    justify-self: start;
++  }
++
++  .lightbox-next {
++    grid-column: 2;
++    grid-row: 2;
++    justify-self: end;
++  }
++
++  .lightbox-figure img {
++    max-height: calc(96vh - 250px);
++  }
++}
++
++@media (prefers-reduced-motion: no-preference) {
++  .lightbox[open] {
++    animation: lightbox-in .18s ease-out;
++  }
++
++  @keyframes lightbox-in {
++    from { opacity: 0; transform: scale(.98); }
++    to   { opacity: 1; transform: none; }
++  }
++}
++
++/* ========================================
++   ROADMAP
++   ======================================== */
++
++.roadmap-legend {
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: center;
++  gap: 10px;
++
++  margin: 0 0 26px;
++  padding: 0;
++
++  list-style: none;
++}
++
++.roadmap-legend li {
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++
++  padding: 6px 12px;
++
++  border: 1px solid var(--border);
++  border-radius: 999px;
++
++  background: var(--panel);
++  color: var(--muted);
++  font-size: .84rem;
++}
++
++.roadmap-legend strong {
++  color: var(--text);
++}
++
++.roadmap-grid {
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
++  gap: 16px;
++}
++
++.roadmap-area {
++  min-width: 0;
++  padding: 22px;
++
++  border: 1px solid var(--border);
++  border-radius: 18px;
++
++  background: var(--panel);
++}
++
++.roadmap-area h3 {
++  margin: 0 0 4px;
++}
++
++.roadmap-area-desc {
++  margin: 0 0 6px;
++
++  color: var(--muted);
++  font-size: .9rem;
++  line-height: 1.6;
++}
++
++.roadmap-group-title {
++  margin: 18px 0 8px;
++
++  color: var(--muted);
++  font-size: .74rem;
++  letter-spacing: .1em;
++  text-transform: uppercase;
++}
++
++.roadmap-items {
++  display: grid;
++  gap: 9px;
++
++  margin: 0;
++  padding: 0;
++
++  list-style: none;
++}
++
++.roadmap-item {
++  display: flex;
++  justify-content: space-between;
++  align-items: flex-start;
++  gap: 12px;
++
++  padding: 11px 12px;
++
++  border: 1px solid var(--border);
++  border-radius: 12px;
++
++  background: #0d111d;
++}
++
++.roadmap-item-text {
++  min-width: 0;
++}
++
++.roadmap-item-text strong {
++  display: block;
++  font-size: .93rem;
++}
++
++.roadmap-item-text span {
++  display: block;
++  margin-top: 2px;
++
++  color: var(--muted);
++  font-size: .84rem;
++  line-height: 1.55;
++}
++
++.status-badge {
++  flex: none;
++
++  padding: 4px 9px;
++
++  border: 1px solid var(--border);
++  border-radius: 999px;
++
++  font-size: .72rem;
++  font-weight: 700;
++  white-space: nowrap;
++}
++
++.status-released {
++  border-color: #4cbf9255;
++  background: #163126;
++  color: #a8e9d0;
++}
++
++.status-testing {
++  border-color: #4a9fd655;
++  background: #12283a;
++  color: #9fd8ff;
++}
++
++.status-in-progress {
++  border-color: #cf9b4d55;
++  background: #302516;
++  color: #ffd69a;
++}
++
++.status-planned {
++  border-color: #8c7cff55;
++  background: #1b1830;
++  color: #c7b7ff;
++}
++
++.roadmap-note {
++  max-width: 760px;
++  margin: 22px auto 0;
++
++  color: var(--muted);
++  font-size: .9rem;
++  line-height: 1.7;
++  text-align: center;
++}
++
++/* ========================================
++   APK RELEASE LIST CONTROLS + BADGES
++   ======================================== */
++
++.release-controls {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: flex-end;
++  gap: 14px 18px;
++
++  margin: 0 0 14px;
++  padding: 18px;
++
++  border: 1px solid var(--border);
++  border-radius: 16px;
++
++  background: var(--panel);
++}
++
++.release-controls[hidden] {
++  display: none;
++}
++
++.control {
++  min-width: 0;
++  margin: 0;
++  padding: 0;
++
++  border: 0;
++}
++
++.control-search {
++  flex: 1 1 100%;
++}
++
++.control-type {
++  flex: 1 1 340px;
++}
++
++.control-sort {
++  flex: 0 1 230px;
++}
++
++.control label,
++.control legend {
++  display: block;
++  margin-bottom: 6px;
++  padding: 0;
++
++  color: var(--muted);
++  font-size: .82rem;
++  font-weight: 650;
++}
++
++.control input[type="search"],
++.control select {
++  width: 100%;
++  min-height: 44px;
++  padding: 10px 12px;
++
++  border: 1px solid var(--border);
++  border-radius: 11px;
++
++  background: #0d111d;
++  color: var(--text);
++  font: inherit;
++  font-size: .94rem;
++}
++
++.chip-group {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 8px;
++}
++
++.chip {
++  position: relative;
++  display: inline-flex;
++}
++
++.chip input {
++  position: absolute;
++  inset: 0;
++  z-index: 1;
++
++  width: 100%;
++  height: 100%;
++  margin: 0;
++
++  cursor: pointer;
++  opacity: 0;
++}
++
++.chip-label {
++  display: inline-flex;
++  align-items: center;
++  gap: 7px;
++
++  min-height: 40px;
++  padding: 8px 12px;
++
++  border: 1px solid var(--border);
++  border-radius: 999px;
++
++  background: #0d111d;
++  color: var(--muted);
++  font-size: .86rem;
++}
++
++.chip input:checked + .chip-label {
++  border-color: #a18aff88;
++  background: #a18aff1c;
++  color: var(--text);
++}
++
++.chip input:focus-visible + .chip-label {
++  outline: 2px solid var(--blue);
++  outline-offset: 3px;
++}
++
++.chip-count {
++  padding: 1px 7px;
++
++  border-radius: 999px;
++
++  background: #ffffff12;
++  font-size: .76rem;
++}
++
++.release-results {
++  margin: 0 0 18px;
++
++  color: var(--muted);
++  font-size: .94rem;
++}
++
++.release-notice {
++  margin: 0 0 16px;
++  padding: 16px 18px;
++
++  border: 1px solid #cf9b4d55;
++  border-radius: 14px;
++
++  background: #2a2114;
++  color: #e6d4b4;
++  line-height: 1.7;
++}
++
++.release-notice strong {
++  color: #ffd69a;
++}
++
++.release-badge.stable {
++  border-color: #4cbf9255;
++  background: #163126;
++  color: #a8e9d0;
++}
++
++.release-badge.prerelease {
++  border-color: #4a9fd655;
++  background: #12283a;
++  color: #9fd8ff;
++}
++
++.release-badge.latest-stable {
++  border-color: #4cbf92aa;
++  background: #1d4a36;
++  color: #d3f7e8;
++  font-weight: 700;
++}
++
++.release-badge.newest-test {
++  border-style: dashed;
++  color: #ffd69a;
++}
++
++.report-link {
++  color: #ffc7f5;
++}
++
++/* ========================================
++   GUIDE PAGES (installation guide)
++   ======================================== */
++
++.guide-layout {
++  display: grid;
++  grid-template-columns: 230px minmax(0, 1fr);
++  gap: 34px;
++  align-items: start;
++}
++
++.guide-toc {
++  position: sticky;
++  top: 96px;
++
++  padding: 18px;
++
++  border: 1px solid var(--border);
++  border-radius: 16px;
++
++  background: var(--panel);
++  font-size: .9rem;
++}
++
++.guide-toc strong {
++  display: block;
++  color: var(--text);
++}
++
++.guide-toc ol {
++  margin: 10px 0 0;
++  padding-left: 18px;
++
++  color: var(--muted);
++  line-height: 1.9;
++}
++
++.guide-toc a {
++  color: var(--muted);
++}
++
++.guide-toc a:hover {
++  color: var(--text);
++}
++
++.guide-content {
++  min-width: 0;
++}
++
++.guide-content section {
++  margin: 0 0 40px;
++  scroll-margin-top: 96px;
++}
++
++.guide-content h2 {
++  margin: 0 0 12px;
++  font-size: 1.5rem;
++}
++
++.guide-content h3 {
++  margin: 22px 0 8px;
++  font-size: 1.1rem;
++}
++
++.guide-content p,
++.guide-content li {
++  color: var(--muted);
++  line-height: 1.8;
++}
++
++.guide-content strong {
++  color: var(--text);
++}
++
++.guide-content ul {
++  padding-left: 22px;
++}
++
++.guide-content li + li {
++  margin-top: 6px;
++}
++
++.guide-steps {
++  display: grid;
++  gap: 12px;
++
++  margin: 16px 0;
++  padding: 0;
++
++  counter-reset: step;
++  list-style: none;
++}
++
++.guide-content .guide-steps > li {
++  position: relative;
++
++  margin: 0;
++  padding: 14px 16px 14px 58px;
++
++  border: 1px solid var(--border);
++  border-radius: 14px;
++
++  background: var(--panel);
++  counter-increment: step;
++}
++
++.guide-steps > li::before {
++  content: counter(step);
++
++  position: absolute;
++  top: 14px;
++  left: 15px;
++
++  display: grid;
++  place-items: center;
++
++  width: 28px;
++  height: 28px;
++
++  border-radius: 50%;
++
++  background: #a18aff22;
++  color: #c7b7ff;
++  font-size: .85rem;
++  font-weight: 800;
++}
++
++.callout {
++  margin: 16px 0;
++  padding: 16px 18px;
++
++  border: 1px solid #a18aff38;
++  border-radius: 14px;
++
++  background: #171825;
++  color: var(--muted);
++  line-height: 1.75;
++}
++
++.callout strong {
++  color: var(--text);
++}
++
++.callout-warn {
++  border-color: #cf9b4d55;
++  background: #2a2114;
++}
++
++.callout-warn strong {
++  color: #ffd69a;
++}
++
++@media (max-width: 900px) {
++  .guide-layout {
++    grid-template-columns: 1fr;
++  }
++
++  .guide-toc {
++    position: static;
++  }
++}
++
+ /* Reduce animations for users who request it */
+ 
+ @media (prefers-reduced-motion: reduce) {
+diff --git a/docs/assets/images/whats-next/screenshots/README.md b/docs/assets/images/whats-next/screenshots/README.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..d1f30c79564e59943a6af5bd4e1f7770a8002a22
+--- /dev/null
++++ b/docs/assets/images/whats-next/screenshots/README.md
+@@ -0,0 +1,60 @@
++# What's Next screenshots
++
++Real screenshots of the What's Next app, shown in the gallery on
++`docs/projects/whats-next.html`. **Only add genuine screenshots of the running app.**
++Do not use promotional artwork, mock-ups or edited images.
++
++## Expected file names
++
++Each screen has a full-size image and a small thumbnail (used in the grid):
++
++| Screen              | Full size            | Thumbnail                 |
++|---------------------|----------------------|---------------------------|
++| Home / Pick screen  | `home.webp`          | `home-thumb.webp`         |
++| Discover            | `discover.webp`      | `discover-thumb.webp`     |
++| Anime list          | `anime-list.webp`    | `anime-list-thumb.webp`   |
++| Manga list          | `manga-list.webp`    | `manga-list-thumb.webp`   |
++| Media page          | `media-page.webp`    | `media-page-thumb.webp`   |
++| Airing schedule     | `schedule.webp`      | `schedule-thumb.webp`     |
++| Statistics          | `statistics.webp`    | `statistics-thumb.webp`   |
++| Settings            | `settings.webp`      | `settings-thumb.webp`     |
++
++You don't need all of them; add the ones you have. File names may only contain
++letters, digits, `.`, `_` and `-`.
++
++## How to add them
++
++1. Take screenshots on a phone (portrait). Hide anything private first (use the app's
++   **Blur covers** option if the titles shouldn't be shown, and don't show chat messages
++   or account details).
++2. Put the original PNG/JPG files in a folder named `screenshots-source/` in the repository root
++   (or any folder), named like the table above, e.g. `home.png`.
++3. Optimise them for mobile (needs `pip install pillow`):
++
++   ```bash
++   python3 tools/optimize_screenshots.py screenshots-source
++   ```
++
++   This writes `<name>.webp` (max 1080 px wide) and `<name>-thumb.webp` (440 px wide) into this
++   folder and prints a ready-to-paste JSON entry for each image.
++4. Paste the entries into `docs/data/screenshots.json` and write a real `title`, `alt`
++   (what the screenshot shows, for screen readers) and `caption` for each one:
++
++   ```json
++   {
++     "screenshots": [
++       {
++         "file": "home.webp",
++         "thumb": "home-thumb.webp",
++         "width": 1080,
++         "height": 2340,
++         "title": "Pick screen",
++         "alt": "What's Next Pick screen showing time options and a suggested title",
++         "caption": "Choose how much time you have and get a suggestion from your lists."
++       }
++     ]
++   }
++   ```
++
++5. Commit the images and the JSON. The gallery appears automatically; while the list is empty
++   the page shows a "screenshots coming soon" notice.
+diff --git a/docs/assets/js/gallery.js b/docs/assets/js/gallery.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..347e539ce31a78d71dbd2978d4baa77b1c3b36f7
+--- /dev/null
++++ b/docs/assets/js/gallery.js
+@@ -0,0 +1,211 @@
++/* Screenshot gallery + lightbox for the What's Next project page.
++ *
++ * Reads ../data/screenshots.json (genuine app screenshots only). While that
++ * list is empty the static "screenshots coming soon" notice in the page stays.
++ *
++ * The lightbox uses a native <dialog> opened with showModal(), which gives a
++ * focus trap, an inert background and Esc-to-close for free. On top of that:
++ * close button, previous/next buttons, arrow/Home/End keys, swipe, a click on
++ * the backdrop, and focus returning to the thumbnail that opened it.
++ *
++ * Requires site-utils.js (window.TBL).
++ */
++(function () {
++  "use strict";
++
++  var TBL = window.TBL;
++  var root = document.getElementById("screenshotGallery");
++  if (!TBL || !root) return;
++  var el = TBL.element;
++
++  var MANIFEST_URL = root.getAttribute("data-manifest") || "../data/screenshots.json";
++  var IMAGE_DIR = root.getAttribute("data-image-dir") || "../assets/images/whats-next/screenshots/";
++  var FILE_RE = /^[A-Za-z0-9][A-Za-z0-9._-]*\.(?:webp|avif|png|jpe?g)$/i;
++  var SWIPE_PX = 50;
++
++  var items = [];
++  var dialog = null;
++  var parts = {};
++  var current = 0;
++  var opener = null;
++
++  /* ---------- manifest ---------- */
++
++  function text(value) { return typeof value === "string" ? value.trim() : ""; }
++  function dimension(value) { var n = Number(value); return Number.isInteger(n) && n > 0 && n < 20000 ? n : 0; }
++
++  // Only well-formed entries with real alt text are shown; paths can't leave the image folder.
++  function cleanEntries(list) {
++    var clean = [];
++    (Array.isArray(list) ? list : []).forEach(function (raw) {
++      if (!raw || !FILE_RE.test(text(raw.file)) || !text(raw.alt)) return;
++      var thumb = FILE_RE.test(text(raw.thumb)) ? text(raw.thumb) : text(raw.file);
++      clean.push({
++        full: IMAGE_DIR + text(raw.file),
++        thumb: IMAGE_DIR + thumb,
++        width: dimension(raw.width),
++        height: dimension(raw.height),
++        title: text(raw.title) || "Screenshot",
++        alt: text(raw.alt),
++        caption: text(raw.caption)
++      });
++    });
++    return clean;
++  }
++
++  /* ---------- lightbox ---------- */
++
++  function buildDialog() {
++    dialog = el("dialog", "lightbox");
++    dialog.setAttribute("aria-labelledby", "lightboxTitle");
++    dialog.setAttribute("aria-describedby", "lightboxCaption");
++
++    var bar = el("div", "lightbox-bar");
++    parts.count = el("span", "", "");
++    parts.count.setAttribute("aria-live", "polite");
++    parts.close = el("button", "lightbox-button", "×");
++    parts.close.type = "button";
++    parts.close.setAttribute("aria-label", "Close screenshot viewer");
++    bar.appendChild(parts.count);
++    bar.appendChild(parts.close);
++
++    var body = el("div", "lightbox-body");
++    parts.prev = el("button", "lightbox-button lightbox-prev", "‹");
++    parts.prev.type = "button";
++    parts.prev.setAttribute("aria-label", "Previous screenshot");
++    parts.next = el("button", "lightbox-button lightbox-next", "›");
++    parts.next.type = "button";
++    parts.next.setAttribute("aria-label", "Next screenshot");
++
++    var figure = el("figure", "lightbox-figure");
++    parts.image = el("img");
++    parts.title = el("strong");
++    parts.title.id = "lightboxTitle";
++    parts.caption = el("span");
++    parts.caption.id = "lightboxCaption";
++    var caption = el("figcaption", "lightbox-caption");
++    caption.appendChild(parts.title);
++    caption.appendChild(parts.caption);
++    figure.appendChild(parts.image);
++    figure.appendChild(caption);
++
++    body.appendChild(parts.prev);
++    body.appendChild(figure);
++    body.appendChild(parts.next);
++    dialog.appendChild(bar);
++    dialog.appendChild(body);
++    document.body.appendChild(dialog);
++
++    parts.close.addEventListener("click", function () { dialog.close(); });
++    parts.prev.addEventListener("click", function () { show(current - 1); });
++    parts.next.addEventListener("click", function () { show(current + 1); });
++
++    dialog.addEventListener("click", function (event) {
++      if (event.target === dialog) dialog.close();                // click on the backdrop
++    });
++    dialog.addEventListener("keydown", function (event) {
++      if (items.length < 2) return;
++      if (event.key === "ArrowLeft") { event.preventDefault(); show(current - 1); }
++      else if (event.key === "ArrowRight") { event.preventDefault(); show(current + 1); }
++      else if (event.key === "Home") { event.preventDefault(); show(0); }
++      else if (event.key === "End") { event.preventDefault(); show(items.length - 1); }
++    });
++    dialog.addEventListener("close", function () {
++      document.documentElement.classList.remove("lightbox-open");
++      if (opener && document.contains(opener)) opener.focus();
++      opener = null;
++    });
++
++    var startX = null;
++    parts.image.addEventListener("touchstart", function (event) {
++      startX = event.changedTouches[0].clientX;
++    }, { passive: true });
++    parts.image.addEventListener("touchend", function (event) {
++      if (startX === null || items.length < 2) return;
++      var delta = event.changedTouches[0].clientX - startX;
++      startX = null;
++      if (Math.abs(delta) >= SWIPE_PX) show(delta < 0 ? current + 1 : current - 1);
++    }, { passive: true });
++  }
++
++  function show(index) {
++    current = (index + items.length) % items.length;
++    var item = items[current];
++    parts.image.src = item.full;
++    parts.image.alt = item.alt;
++    if (item.width && item.height) {
++      parts.image.width = item.width;
++      parts.image.height = item.height;
++    } else {
++      parts.image.removeAttribute("width");
++      parts.image.removeAttribute("height");
++    }
++    parts.title.textContent = item.title;
++    parts.caption.textContent = item.caption;
++    parts.count.textContent = (current + 1) + " of " + items.length;
++    var single = items.length < 2;
++    parts.prev.hidden = single;
++    parts.next.hidden = single;
++
++    // Warm the cache for the neighbours so next/previous feels instant.
++    if (!single) {
++      [current - 1, current + 1].forEach(function (i) {
++        var neighbour = items[(i + items.length) % items.length];
++        new Image().src = neighbour.full;
++      });
++    }
++  }
++
++  function open(index, trigger) {
++    if (typeof HTMLDialogElement === "undefined") {              // very old browsers: open the image itself
++      window.open(items[index].full, "_blank", "noopener");
++      return;
++    }
++    if (!dialog) buildDialog();
++    opener = trigger;
++    show(index);
++    document.documentElement.classList.add("lightbox-open");
++    dialog.showModal();
++  }
++
++  /* ---------- grid ---------- */
++
++  function renderGrid() {
++    root.replaceChildren();
++    items.forEach(function (item, index) {
++      var card = el("figure", "shot-card");
++      var button = el("button", "shot-button");
++      button.type = "button";
++      button.setAttribute("aria-haspopup", "dialog");
++
++      var img = el("img");
++      img.src = item.thumb;
++      img.alt = item.alt;
++      img.loading = "lazy";
++      img.decoding = "async";
++      if (item.width && item.height) {
++        img.width = item.width;
++        img.height = item.height;
++      }
++      button.appendChild(img);
++      button.appendChild(el("span", "visually-hidden", ", opens a larger view"));
++      button.addEventListener("click", function () { open(index, button); });
++      card.appendChild(button);
++
++      var caption = el("figcaption");
++      caption.appendChild(el("strong", "", item.title));
++      if (item.caption) caption.appendChild(document.createTextNode(item.caption));
++      card.appendChild(caption);
++      root.appendChild(card);
++    });
++  }
++
++  /* ---------- start ---------- */
++
++  TBL.fetchJson(MANIFEST_URL, { cache: "no-cache" })
++    .then(function (data) {
++      items = cleanEntries(data && data.screenshots);
++      if (items.length) renderGrid();                             // otherwise the static notice stays
++    })
++    .catch(function () { /* keep the static notice */ });
++}());
+diff --git a/docs/assets/js/releases.js b/docs/assets/js/releases.js
+index 937f14450acfa59d595739d8b4196cae1031d9b6..482f88061399341373be3d115e67c78e211d63da 100644
+--- a/docs/assets/js/releases.js
++++ b/docs/assets/js/releases.js
+@@ -1,317 +1,415 @@
+ /* APK releases page for What's Next.
+  *
+- * Data source order:
++ * Data source order (unchanged):
+  *   1. ../../data/releases.json  - snapshot written by the "Update release data"
+- *      GitHub Action (no API rate limit for visitors).
++ *      GitHub Action (tools/fetch_releases.py), so visitors never hit the API limit.
+  *   2. GitHub's public Releases API - used when the snapshot is missing or is
+  *      still the empty placeholder.
+  *
+- * Everything is built with DOM nodes / textContent (never innerHTML), so release
+- * notes cannot inject markup.
++ * Pipeline: load releases -> one record per APK asset -> search + type filter
++ * -> sort -> render. Everything is built with DOM nodes (never innerHTML), so
++ * release notes and release data cannot inject markup.
++ *
++ * Requires site-utils.js (window.TBL).
+  */
+ (function () {
+   "use strict";
+ 
++  var TBL = window.TBL;
++  if (!TBL) return;
++  var el = TBL.element;
++
+   var SNAPSHOT_URL = "../../data/releases.json";
+-  var LIVE_API = "https://api.github.com/repos/tokyo720022-create/What-Next/releases?per_page=100&page=";
+-  var OFFICIAL_RELEASES_URL = "https://github.com/tokyo720022-create/What-Next/releases";
++  var LIVE_API = "https://api.github.com/repos/" + TBL.config.repo + "/releases?per_page=100&page=";
++  var OFFICIAL_RELEASES_URL = TBL.config.releasesUrl;
++  var OFFICIAL_PATH = "/" + TBL.config.repo + "/";
++  var INSTALL_GUIDE_URL = "installation.html";
+   var MAX_PAGES = 20;
+-  var LONG_NOTES = 500;
++  var LONG_NOTES_CHARS = 500;
++  var LONG_NOTES_LINES = 8;
++  var SEARCH_DELAY_MS = 150;
++
++  var TYPE_LABELS = { stable: "Stable release", prerelease: "Pre-release", debug: "Debug / testing build" };
++  var DEFAULTS = { query: "", type: "all", sort: "newest" };
++
++  var dom = {
++    list: document.getElementById("releaseList"),
++    status: document.getElementById("releaseStatus"),
++    notice: document.getElementById("releaseNotice"),
++    controls: document.getElementById("releaseControls"),
++    search: document.getElementById("releaseSearch"),
++    sort: document.getElementById("releaseSort"),
++    reset: document.getElementById("releaseReset"),
++    results: document.getElementById("releaseResults")
++  };
++  if (!dom.list || !dom.status) return;
++
++  var allEntries = [];
++  var markers = { latestStable: null, newestTest: null };
++  var state = { query: DEFAULTS.query, type: DEFAULTS.type, sort: DEFAULTS.sort };
++
++  /* ---------- trusted official URLs only ---------- */
++
++  function officialUrl(value, mustStartWith) {
++    var url = TBL.safeUrl(value, function (u) {
++      return u.protocol === "https:" && u.hostname === "github.com" && u.pathname.indexOf(OFFICIAL_PATH + mustStartWith) === 0;
++    });
++    return url;
++  }
+ 
+-  var releaseList = document.getElementById("releaseList");
+-  var releaseStatus = document.getElementById("releaseStatus");
+-  if (!releaseList || !releaseStatus) return;
++  /* ---------- records ---------- */
+ 
+-  /* ---------- small helpers ---------- */
++  // "debug"/"test"/"testing" as a whole word in the file name, tag or release title.
++  // Deliberately broad: wrongly calling a stable build "debug" is harmless, the
++  // opposite (a debug APK shown as stable) is not.
++  var TEST_WORD = /(?:^|[^a-z])(debug|testing|test)(?:[^a-z]|$)/i;
+ 
+-  function element(tag, className, text) {
+-    var node = document.createElement(tag);
+-    if (className) node.className = className;
+-    if (text !== undefined && text !== null) node.textContent = String(text);
+-    return node;
++  function toEntry(release, asset) {
++    var name = String(asset.name);
++    var isDebug = [name, release.tag_name, release.name].some(function (value) {
++      return TEST_WORD.test(String(value || ""));
++    });
++    var isPre = Boolean(release.prerelease);
++    var size = asset.size === null || asset.size === undefined || asset.size === "" ? NaN : Number(asset.size);
++    var entry = {
++      release: release,
++      asset: asset,
++      downloadUrl: officialUrl(asset.browser_download_url, "releases/download/"),
++      releaseUrl: officialUrl(release.html_url, "releases") || OFFICIAL_RELEASES_URL,
++      releaseName: release.name || release.tag_name || "APK release",
++      tag: release.tag_name || "",
++      file: name,
++      published: release.published_at || release.created_at || "",
++      uploaded: asset.created_at || asset.updated_at || "",
++      size: Number.isFinite(size) && size >= 0 ? size : null,
++      downloads: Number(asset.download_count) || 0,
++      isDebug: isDebug,
++      isPre: isPre,
++      type: isDebug ? "debug" : isPre ? "prerelease" : "stable"
++    };
++    // "How recent is this build": this project's CI re-uses one release and
++    // replaces its APK, so the asset upload date can be newer than the release.
++    entry.when = Math.max(TBL.timeOf(entry.published), TBL.timeOf(entry.uploaded));
++    entry.haystack = [entry.releaseName, entry.tag, entry.file].join("\n").toLowerCase();
++    return entry;
+   }
+ 
+-  function safeUrl(value, hostRule) {
+-    try {
+-      var parsed = new URL(value);
+-      if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
+-      if (hostRule && !hostRule(parsed)) return null;
+-      return parsed.href;
+-    } catch (error) {
+-      return null;
+-    }
++  function buildEntries(releases) {
++    var entries = [];
++    releases.forEach(function (release) {
++      if (!release || release.draft) return;
++      (release.assets || []).forEach(function (asset) {
++        if (!asset || !asset.name || !/\.apk$/i.test(asset.name)) return;
++        var entry = toEntry(release, asset);
++        if (entry.downloadUrl) entries.push(entry);          // untrusted download links are dropped
++      });
++    });
++    return entries;
+   }
+ 
+-  function githubUrl(value) {
+-    return safeUrl(value, function (u) {
+-      return u.protocol === "https:" && u.hostname === "github.com";
+-    }) || OFFICIAL_RELEASES_URL;
+-  }
++  /* ---------- sorting / filtering ---------- */
+ 
+-  function externalLink(url, label) {
+-    var link = element("a", "", label);
+-    link.href = url;
+-    link.target = "_blank";
+-    link.rel = "noopener noreferrer";
+-    return link;
++  function byNewest(a, b) {
++    return (b.when - a.when) ||
++      (TBL.timeOf(b.published) - TBL.timeOf(a.published)) ||
++      a.file.localeCompare(b.file);
+   }
+ 
+-  function formatDate(value) {
+-    if (!value) return "Date not listed";
+-    var date = new Date(value);
+-    if (isNaN(date.getTime())) return "Date not listed";
+-    return new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short", year: "numeric" }).format(date);
++  // Compare sizes (dir 1 = ascending, -1 = descending); unknown sizes always go last.
++  function bySize(a, b, dir) {
++    if (a.size === null && b.size === null) return 0;
++    if (a.size === null) return 1;
++    if (b.size === null) return -1;
++    return dir * (a.size - b.size);
+   }
+ 
+-  function formatSize(bytes) {
+-    if (bytes === null || bytes === undefined || bytes === "" || !Number.isFinite(Number(bytes)) || Number(bytes) < 0) {
+-      return "Size not listed";
+-    }
+-    var mb = Number(bytes) / (1024 * 1024);
+-    return mb < 0.01 ? String(bytes) + " bytes" : mb.toFixed(mb >= 100 ? 0 : 2) + " MB";
++  var SORTERS = {
++    newest: byNewest,
++    oldest: function (a, b) { return byNewest(b, a); },
++    largest: function (a, b) { return bySize(a, b, -1) || byNewest(a, b); },
++    smallest: function (a, b) { return bySize(a, b, 1) || byNewest(a, b); },
++    downloads: function (a, b) { return (b.downloads - a.downloads) || byNewest(a, b); }
++  };
++
++  function matchesQuery(entry, query) {
++    var words = query.toLowerCase().split(/\s+/).filter(Boolean);
++    return words.every(function (word) { return entry.haystack.indexOf(word) !== -1; });
+   }
+ 
+-  function timeOf(value) {
+-    var t = Date.parse(value || "");
+-    return isNaN(t) ? 0 : t;
++  function visibleEntries() {
++    var sorter = SORTERS[state.sort] || SORTERS.newest;
++    return allEntries
++      .filter(function (e) { return matchesQuery(e, state.query) && (state.type === "all" || e.type === state.type); })
++      .sort(sorter);
+   }
+ 
+-  /* ---------- minimal, safe Markdown for release notes ---------- */
+-
+-  var INLINE = /`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<>]*[^\s<>.,;:!?)'"\]])/g;
+-
+-  function appendInline(parent, text) {
+-    var last = 0;
+-    var match;
+-    INLINE.lastIndex = 0;
+-    while ((match = INLINE.exec(text)) !== null) {
+-      if (match.index > last) parent.appendChild(document.createTextNode(text.slice(last, match.index)));
+-      if (match[1] !== undefined) {
+-        parent.appendChild(element("code", "", match[1]));
+-      } else if (match[2] !== undefined) {
+-        parent.appendChild(element("strong", "", match[2]));
+-      } else {
+-        var label = match[3] !== undefined ? match[3] : match[5];
+-        var url = safeUrl(match[3] !== undefined ? match[4] : match[5]);
+-        parent.appendChild(url ? externalLink(url, label) : document.createTextNode(label));
+-      }
+-      last = INLINE.lastIndex;
++  function pickMarkers(entries) {
++    var sorted = entries.slice().sort(byNewest);
++    markers.latestStable = null;
++    markers.newestTest = null;
++    for (var i = 0; i < sorted.length; i += 1) {
++      if (!markers.latestStable && sorted[i].type === "stable") markers.latestStable = sorted[i];
++      if (!markers.newestTest && sorted[i].type === "debug") markers.newestTest = sorted[i];
+     }
+-    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+   }
+ 
+-  function renderNotes(container, markdown) {
+-    var lines = String(markdown).replace(/\r\n?/g, "\n").split("\n");
+-    var paragraph = [];
+-    var list = null;
+-    var quote = null;
+-    var i = 0;
+-
+-    function flushParagraph() {
+-      if (!paragraph.length) return;
+-      var p = element("p");
+-      appendInline(p, paragraph.join("\n"));
+-      container.appendChild(p);
+-      paragraph = [];
+-    }
+-    function flushAll() {
+-      flushParagraph();
+-      list = null;
+-      quote = null;
+-    }
++  /* ---------- rendering ---------- */
+ 
+-    while (i < lines.length) {
+-      var line = lines[i];
+-      var m;
+-
+-      if (/^\s*```/.test(line)) {                       // fenced code block
+-        flushAll();
+-        var code = [];
+-        i += 1;
+-        while (i < lines.length && !/^\s*```/.test(lines[i])) { code.push(lines[i]); i += 1; }
+-        var pre = element("pre");
+-        pre.appendChild(element("code", "", code.join("\n")));
+-        container.appendChild(pre);
+-        i += 1;
+-        continue;
+-      }
+-      if (!line.trim()) { flushAll(); i += 1; continue; }
+-      if (/^\s*([-*_])\s*(\1\s*){2,}$/.test(line)) { flushAll(); i += 1; continue; }   // horizontal rule
+-
+-      if ((m = line.match(/^\s{0,3}#{1,6}\s+(.*?)\s*#*\s*$/))) {                    // heading
+-        flushAll();
+-        var h = element("h3");
+-        appendInline(h, m[1]);
+-        container.appendChild(h);
+-        i += 1;
+-        continue;
+-      }
+-      if ((m = line.match(/^\s*([-*+]|\d+[.)])\s+(.*)$/))) {                        // list item
+-        flushParagraph();
+-        quote = null;
+-        var ordered = /\d/.test(m[1]);
+-        if (!list || list.ordered !== ordered) {
+-          list = { ordered: ordered, node: element(ordered ? "ol" : "ul") };
+-          container.appendChild(list.node);
+-        }
+-        var li = element("li");
+-        appendInline(li, m[2]);
+-        list.node.appendChild(li);
+-        i += 1;
+-        continue;
+-      }
+-      if ((m = line.match(/^\s*>\s?(.*)$/))) {                                       // block quote
+-        flushParagraph();
+-        list = null;
+-        if (!quote) { quote = element("blockquote"); container.appendChild(quote); }
+-        var qp = element("p");
+-        appendInline(qp, m[1]);
+-        quote.appendChild(qp);
+-        i += 1;
+-        continue;
+-      }
+-      list = null;
+-      quote = null;
+-      paragraph.push(line.trim());
+-      i += 1;
+-    }
+-    flushAll();
+-  }
++  function plural(count, word) { return count + " " + word + (count === 1 ? "" : "s"); }
+ 
+-  /* ---------- rendering ---------- */
++  function badge(text, className) { return el("span", "release-badge " + className, text); }
+ 
+-  function emptyMessage(title, message, fallbackUrl) {
+-    releaseList.replaceChildren();
+-    var box = element("div", "empty-state");
+-    box.appendChild(element("strong", "", title));
+-    box.appendChild(element("p", "", message));
+-    if (fallbackUrl) box.appendChild(externalLink(fallbackUrl, "View official GitHub releases ↗")).className = "text-link";
+-    releaseList.appendChild(box);
++  function renderNotes(entry) {
++    var notes = el("div", "release-notes");
++    var body = entry.release.body && String(entry.release.body).trim();
++    if (!body) {
++      notes.appendChild(el("p", "", "No release notes were provided for this release."));
++      return notes;
++    }
++    var lineCount = body.split(/\r\n|\r|\n/).length;
++    if (body.length > LONG_NOTES_CHARS || lineCount > LONG_NOTES_LINES) {
++      var details = el("details");
++      details.appendChild(el("summary", "", "Release notes (tap to expand)"));
++      TBL.renderMarkdown(details, body);
++      notes.appendChild(details);
++    } else {
++      TBL.renderMarkdown(notes, body);
++    }
++    return notes;
+   }
+ 
+-  function renderEntry(entry, isLatest) {
+-    var release = entry.release;
+-    var asset = entry.asset;
+-    var isDebug = /debug/i.test(asset.name || "");
+-
+-    var card = element("article", "release-card");
+-    var head = element("div", "release-card-head");
+-    var titleWrap = element("div");
+-    titleWrap.appendChild(element("div", "release-tag", release.tag_name || "GitHub release"));
+-    titleWrap.appendChild(element("h2", "", release.name || release.tag_name || "APK release"));
++  function renderEntry(entry, index) {
++    var card = el("article", "release-card");
++    var titleId = "apk-title-" + index;
++    card.setAttribute("aria-labelledby", titleId);
++    card.dataset.type = entry.type;
++
++    var head = el("div", "release-card-head");
++    var titleWrap = el("div");
++    titleWrap.appendChild(el("div", "release-tag", entry.tag || "GitHub release"));
++    var title = el("h2", "", entry.releaseName);
++    title.id = titleId;
++    titleWrap.appendChild(title);
+     head.appendChild(titleWrap);
+ 
+-    var badges = element("div", "release-badges");
+-    if (isLatest) badges.appendChild(element("span", "release-badge latest", "Latest APK"));
+-    if (release.prerelease) badges.appendChild(element("span", "release-badge", "Pre-release"));
+-    if (isDebug) badges.appendChild(element("span", "release-badge debug", "Debug / test build"));
++    var badges = el("div", "release-badges");
++    if (entry === markers.latestStable) badges.appendChild(badge("Latest stable", "latest-stable"));
++    badges.appendChild(badge(TYPE_LABELS[entry.type], entry.type));
++    if (entry.isPre && entry.type !== "prerelease") badges.appendChild(badge("Pre-release", "prerelease"));
++    if (entry === markers.newestTest) badges.appendChild(badge("Newest test build", "newest-test"));
+     head.appendChild(badges);
+     card.appendChild(head);
+ 
+-    var meta = element("div", "release-meta");
+-    meta.appendChild(element("span", "", "APK uploaded: " + formatDate(asset.created_at || asset.updated_at || release.published_at)));
+-    meta.appendChild(element("span", "", "File size: " + formatSize(asset.size)));
+-    meta.appendChild(element("span", "", "Downloads: " + Number(asset.download_count || 0).toLocaleString()));
++    var meta = el("div", "release-meta");
++    meta.appendChild(el("span", "", "Published: " + TBL.formatDate(entry.published)));
++    meta.appendChild(el("span", "", "APK uploaded: " + TBL.formatDate(entry.uploaded || entry.published)));
++    meta.appendChild(el("span", "", "File size: " + TBL.formatSize(entry.size)));
++    meta.appendChild(el("span", "", "Downloads: " + entry.downloads.toLocaleString()));
+     card.appendChild(meta);
+ 
+-    var body = release.body && release.body.trim() ? release.body.trim() : "";
+-    var notes = element("div", "release-notes");
+-    if (!body) {
+-      notes.appendChild(element("p", "", "No release notes were provided for this build."));
+-    } else if (body.length > LONG_NOTES) {
+-      var details = element("details");
+-      details.appendChild(element("summary", "", "Release notes"));
+-      renderNotes(details, body);
+-      notes.appendChild(details);
+-    } else {
+-      renderNotes(notes, body);
+-    }
+-    card.appendChild(notes);
++    card.appendChild(renderNotes(entry));
+ 
+-    var assetBox = element("div", "asset-box");
+-    var assetInfo = element("div", "asset-info");
+-    assetInfo.appendChild(element("div", "asset-name", asset.name || "APK file"));
+-    assetInfo.appendChild(element("div", "asset-description", "Android application package · " + formatSize(asset.size)));
++    var assetBox = el("div", "asset-box");
++    var assetInfo = el("div", "asset-info");
++    assetInfo.appendChild(el("div", "asset-name", entry.file));
++    assetInfo.appendChild(el("div", "asset-description", "Android application package · " + TBL.formatSize(entry.size)));
+     assetBox.appendChild(assetInfo);
+ 
+-    var download = element("a", "download-button", "Download APK ↓");
+-    download.href = githubUrl(asset.browser_download_url);
++    var download = el("a", "download-button", "Download APK ↓");
++    download.href = entry.downloadUrl;
+     download.rel = "noopener noreferrer";
+-    download.setAttribute("aria-label", "Download " + (asset.name || "APK file"));
++    download.setAttribute("aria-label", "Download " + entry.file);
+     assetBox.appendChild(download);
+     card.appendChild(assetBox);
+ 
+-    var actions = element("div", "release-actions");
+-    var releaseLink = externalLink(githubUrl(release.html_url), "Release page and notes ↗");
++    var actions = el("div", "release-actions");
++    var releaseLink = TBL.externalLink(entry.releaseUrl, "Release page on GitHub ↗");
+     releaseLink.className = "text-link";
+     actions.appendChild(releaseLink);
++
++    var guide = el("a", "text-link", "Installation guide →");
++    guide.href = INSTALL_GUIDE_URL;
++    actions.appendChild(guide);
++
++    var report = TBL.externalLink(TBL.bugReportUrl({ apk: entry.file, tag: entry.tag, release: entry.releaseName }), "Report a problem with this build ↗");
++    report.className = "text-link report-link";
++    actions.appendChild(report);
+     card.appendChild(actions);
+ 
+-    if (asset.digest && /^sha256:/i.test(asset.digest)) {
+-      var checksum = element("details", "checksum");
+-      checksum.appendChild(element("summary", "", "Show SHA-256 checksum"));
+-      checksum.appendChild(element("code", "", asset.digest.replace(/^sha256:/i, "")));
++    var digest = entry.asset.digest;
++    if (digest && /^sha256:/i.test(digest)) {
++      var checksum = el("details", "checksum");
++      checksum.appendChild(el("summary", "", "Show SHA-256 checksum"));
++      checksum.appendChild(el("code", "", String(digest).replace(/^sha256:/i, "")));
+       card.appendChild(checksum);
+     }
+     return card;
+   }
+ 
+-  function buildEntries(releases) {
+-    var entries = [];
+-    releases.forEach(function (release) {
+-      if (!release || release.draft) return;
+-      (release.assets || []).forEach(function (asset) {
+-        if (asset && asset.name && /\.apk$/i.test(asset.name) && asset.browser_download_url) {
+-          entries.push({ release: release, asset: asset });
+-        }
+-      });
++  function emptyBox(title, message, buttonLabel, onClick) {
++    var box = el("div", "empty-state");
++    box.appendChild(el("strong", "", title));
++    box.appendChild(el("p", "", message));
++    if (buttonLabel) {
++      var button = el("button", "button", buttonLabel);
++      button.type = "button";
++      button.addEventListener("click", onClick);
++      box.appendChild(button);
++    } else {
++      var link = TBL.externalLink(OFFICIAL_RELEASES_URL, "View official GitHub releases ↗");
++      link.className = "text-link";
++      box.appendChild(link);
++    }
++    return box;
++  }
++
++  function updateCounts() {
++    var counts = { all: 0, stable: 0, prerelease: 0, debug: 0 };
++    allEntries.forEach(function (entry) {
++      if (!matchesQuery(entry, state.query)) return;
++      counts.all += 1;
++      counts[entry.type] += 1;
+     });
+-    // Newest release first; the asset's own date breaks ties inside one release.
+-    entries.sort(function (a, b) {
+-      var byRelease = timeOf(b.release.published_at || b.release.created_at) - timeOf(a.release.published_at || a.release.created_at);
+-      if (byRelease) return byRelease;
+-      var byAsset = timeOf(b.asset.created_at || b.asset.updated_at) - timeOf(a.asset.created_at || a.asset.updated_at);
+-      return byAsset || String(a.asset.name).localeCompare(String(b.asset.name));
++    Object.keys(counts).forEach(function (type) {
++      var node = document.querySelector('[data-count="' + type + '"]');
++      if (node) node.textContent = counts[type];
+     });
+-    return entries;
+   }
+ 
+-  // "Latest" = newest stable, non-debug APK; falls back to the newest non-debug APK.
+-  function latestIndex(entries) {
+-    var fallback = -1;
+-    for (var i = 0; i < entries.length; i += 1) {
+-      if (/debug/i.test(entries[i].asset.name)) continue;
+-      if (!entries[i].release.prerelease) return i;
+-      if (fallback === -1) fallback = i;
+-    }
+-    return fallback;
+-  }
++  function render() {
++    var entries = visibleEntries();
++    updateCounts();
++    dom.list.replaceChildren();
+ 
+-  function render(releases, syncedAt) {
+-    var entries = buildEntries(releases);
+-    releaseList.replaceChildren();
+     if (!entries.length) {
+-      releaseStatus.textContent = "No APK files found in the published release list.";
+-      emptyMessage("No APKs published yet", "When an Android APK is attached to a published What's Next release, it will appear here automatically.", OFFICIAL_RELEASES_URL);
+-      return;
++      dom.list.appendChild(emptyBox(
++        "No APK files match",
++        "Nothing matches your search and filters. Try fewer words, a different build type, or clear everything to see all " + plural(allEntries.length, "APK file") + ".",
++        "Clear all filters",
++        resetFilters
++      ));
++    } else {
++      entries.forEach(function (entry, index) { dom.list.appendChild(renderEntry(entry, index)); });
+     }
+-    var text = entries.length + " APK file" + (entries.length === 1 ? "" : "s") + " found across the published GitHub releases.";
+-    if (syncedAt) text += " Release data last updated: " + formatDate(syncedAt) + ".";
+-    releaseStatus.textContent = text;
+ 
+-    var latest = latestIndex(entries);
+-    entries.forEach(function (entry, index) {
+-      releaseList.appendChild(renderEntry(entry, index === latest));
++    if (dom.results) {
++      var filtering = state.query.trim() !== "" || state.type !== "all";
++      if (!filtering) {
++        dom.results.textContent = "Showing all " + plural(allEntries.length, "APK file") + ".";
++      } else if (!entries.length) {
++        dom.results.textContent = "No APK files match your search and filters.";
++      } else {
++        dom.results.textContent = entries.length + " of " + plural(allEntries.length, "APK file") + " match your search and filters.";
++      }
++    }
++  }
++
++  function renderNotice() {
++    if (!dom.notice) return;
++    dom.notice.replaceChildren();
++    dom.notice.hidden = true;
++    if (!allEntries.length || markers.latestStable) return;
++
++    var hasPre = allEntries.some(function (e) { return e.type === "prerelease"; });
++    var intro = hasPre
++      ? "Every APK listed here is a pre-release or a debug/testing build."
++      : "Every APK listed here is a debug/testing build.";
++    dom.notice.appendChild(el("strong", "", "No stable release has been published yet. "));
++    dom.notice.appendChild(document.createTextNode(
++      intro + " Debug builds are meant for testing and use a debug signing key, so Android may refuse to install one over another. Read the "
++    ));
++    var guide = el("a", "text-link", "installation guide");
++    guide.href = INSTALL_GUIDE_URL;
++    dom.notice.appendChild(guide);
++    dom.notice.appendChild(document.createTextNode(" before installing."));
++    dom.notice.hidden = false;
++  }
++
++  /* ---------- controls ---------- */
++
++  function syncControls() {
++    if (dom.search) dom.search.value = state.query;
++    if (dom.sort) dom.sort.value = state.sort;
++    Array.prototype.forEach.call(document.querySelectorAll('input[name="releaseType"]'), function (radio) {
++      radio.checked = radio.value === state.type;
++    });
++  }
++
++  function resetFilters() {
++    state.query = DEFAULTS.query;
++    state.type = DEFAULTS.type;
++    state.sort = DEFAULTS.sort;
++    syncControls();
++    render();
++    if (dom.search) dom.search.focus();
++  }
++
++  function bindControls() {
++    if (!dom.controls) return;
++    var timer = null;
++
++    dom.controls.addEventListener("submit", function (event) { event.preventDefault(); });
++
++    if (dom.search) {
++      dom.search.addEventListener("input", function () {
++        window.clearTimeout(timer);
++        timer = window.setTimeout(function () { state.query = dom.search.value; render(); }, SEARCH_DELAY_MS);
++      });
++      dom.search.addEventListener("search", function () {           // the browser's own clear (x) button
++        window.clearTimeout(timer);
++        state.query = dom.search.value;
++        render();
++      });
++      dom.search.addEventListener("keydown", function (event) {
++        if (event.key === "Escape" && dom.search.value) {
++          event.preventDefault();
++          window.clearTimeout(timer);
++          dom.search.value = "";
++          state.query = "";
++          render();
++        }
++      });
++    }
++    if (dom.sort) {
++      dom.sort.addEventListener("change", function () { state.sort = dom.sort.value; render(); });
++    }
++    Array.prototype.forEach.call(document.querySelectorAll('input[name="releaseType"]'), function (radio) {
++      radio.addEventListener("change", function () { if (radio.checked) { state.type = radio.value; render(); } });
+     });
++    if (dom.reset) dom.reset.addEventListener("click", resetFilters);
+   }
+ 
+   /* ---------- data loading ---------- */
+ 
++  function showReleases(releases, syncedAt) {
++    allEntries = buildEntries(releases);
++    pickMarkers(allEntries);
++
++    if (!allEntries.length) {
++      dom.status.textContent = "No APK files found in the published release list.";
++      if (dom.controls) dom.controls.hidden = true;
++      if (dom.results) dom.results.textContent = "";
++      renderNotice();
++      dom.list.replaceChildren(emptyBox(
++        "No APKs published yet",
++        "When an Android APK is attached to a published What's Next release, it will appear here automatically."
++      ));
++      return;
++    }
++
++    var text = plural(allEntries.length, "APK file") + " found across the published GitHub releases.";
++    if (syncedAt) text += " Release data last updated: " + TBL.formatDate(syncedAt) + ".";
++    dom.status.textContent = text;
++
++    if (dom.controls) dom.controls.hidden = false;
++    renderNotice();
++    syncControls();
++    render();
++  }
++
+   async function loadSnapshot() {
+     try {
+-      var response = await fetch(SNAPSHOT_URL, { cache: "no-cache" });
+-      if (!response.ok) return null;
+-      var data = await response.json();
++      var data = await TBL.fetchJson(SNAPSHOT_URL, { cache: "no-cache" });
+       if (!data || typeof data.updated_at !== "string" || !Array.isArray(data.releases)) return null;
+       return data;
+     } catch (error) {
+@@ -324,9 +422,7 @@
+     var page = 1;
+     var batch;
+     do {
+-      var response = await fetch(LIVE_API + page, { headers: { "Accept": "application/vnd.github+json" } });
+-      if (!response.ok) throw new Error("GitHub returned " + response.status);
+-      batch = await response.json();
++      batch = await TBL.fetchJson(LIVE_API + page, { headers: { "Accept": "application/vnd.github+json" } });
+       if (!Array.isArray(batch)) throw new Error("Unexpected release response");
+       all = all.concat(batch);
+       page += 1;
+@@ -337,16 +433,19 @@
+   async function loadReleases() {
+     try {
+       var snapshot = await loadSnapshot();
+-      if (snapshot) {
+-        render(snapshot.releases, snapshot.updated_at);
+-      } else {
+-        render(await loadLive(), null);
+-      }
++      if (snapshot) showReleases(snapshot.releases, snapshot.updated_at);
++      else showReleases(await loadLive(), null);
+     } catch (error) {
+-      releaseStatus.textContent = "The automatic release list could not be loaded right now.";
+-      emptyMessage("Couldn't load releases", "You can still browse the published builds directly on GitHub. The release list here will retry when the page is refreshed.", OFFICIAL_RELEASES_URL);
++      dom.status.textContent = "The automatic release list could not be loaded right now.";
++      if (dom.controls) dom.controls.hidden = true;
++      if (dom.results) dom.results.textContent = "";
++      dom.list.replaceChildren(emptyBox(
++        "Couldn't load releases",
++        "You can still browse the published builds directly on GitHub. The release list here will retry when the page is refreshed."
++      ));
+     }
+   }
+ 
++  bindControls();
+   loadReleases();
+ }());
+diff --git a/docs/assets/js/roadmap.js b/docs/assets/js/roadmap.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..20d3e0c0e9e5e81ac3cab96688edcbd5cfaef8b6
+--- /dev/null
++++ b/docs/assets/js/roadmap.js
+@@ -0,0 +1,123 @@
++/* Roadmap for the What's Next project page.
++ *
++ * Renders ../data/roadmap.json (statuses + areas + items). To update the
++ * roadmap, edit that file only; no HTML changes are needed.
++ *
++ * Requires site-utils.js (window.TBL).
++ */
++(function () {
++  "use strict";
++
++  var TBL = window.TBL;
++  var root = document.getElementById("roadmapContent");
++  if (!TBL || !root) return;
++  var el = TBL.element;
++
++  var DATA_URL = root.getAttribute("data-source") || "../data/roadmap.json";
++  var ID_RE = /^[a-z][a-z0-9-]*$/;
++  var RELEASED = "released";
++
++  function text(value) { return typeof value === "string" ? value.trim() : ""; }
++
++  function readStatuses(list) {
++    var statuses = [];
++    (Array.isArray(list) ? list : []).forEach(function (s) {
++      if (s && ID_RE.test(text(s.id)) && text(s.label)) {
++        statuses.push({ id: text(s.id), label: text(s.label), description: text(s.description) });
++      }
++    });
++    return statuses;
++  }
++
++  function badge(status) {
++    var node = el("span", "status-badge status-" + status.id, status.label);
++    if (status.description) node.title = status.description;
++    return node;
++  }
++
++  function renderLegend(statuses, counts) {
++    var legend = el("ul", "roadmap-legend");
++    legend.setAttribute("aria-label", "Roadmap status key");
++    statuses.forEach(function (status) {
++      var item = el("li");
++      item.appendChild(badge(status));
++      var count = counts[status.id] || 0;
++      item.appendChild(el("strong", "", count + (count === 1 ? " item" : " items")));
++      legend.appendChild(item);
++    });
++    return legend;
++  }
++
++  function renderGroup(area, title, items, statusById) {
++    if (!items.length) return;
++    var heading = el("h4", "roadmap-group-title", title);
++    area.appendChild(heading);
++    var list = el("ul", "roadmap-items");
++    items.forEach(function (item) {
++      var li = el("li", "roadmap-item");
++      var copy = el("div", "roadmap-item-text");
++      copy.appendChild(el("strong", "", item.title));
++      if (item.description) copy.appendChild(el("span", "", item.description));
++      li.appendChild(copy);
++      li.appendChild(badge(statusById[item.status]));
++      list.appendChild(li);
++    });
++    area.appendChild(list);
++  }
++
++  function render(data) {
++    var statuses = readStatuses(data.statuses);
++    if (!statuses.length || !Array.isArray(data.areas)) throw new Error("Invalid roadmap data");
++    var statusById = {};
++    var order = {};
++    statuses.forEach(function (s, i) { statusById[s.id] = s; order[s.id] = i; });
++
++    var counts = {};
++    var areas = [];
++    data.areas.forEach(function (rawArea) {
++      if (!rawArea || !text(rawArea.title)) return;
++      var items = [];
++      (Array.isArray(rawArea.items) ? rawArea.items : []).forEach(function (rawItem) {
++        var status = text(rawItem && rawItem.status);
++        if (!rawItem || !text(rawItem.title) || !statusById[status]) return;     // unknown status: not shown
++        items.push({ title: text(rawItem.title), description: text(rawItem.description), status: status });
++        counts[status] = (counts[status] || 0) + 1;
++      });
++      if (items.length) areas.push({ title: text(rawArea.title), description: text(rawArea.description), items: items });
++    });
++
++    root.replaceChildren();
++    root.appendChild(renderLegend(statuses, counts));
++
++    var grid = el("div", "roadmap-grid");
++    areas.forEach(function (area) {
++      var card = el("article", "roadmap-area");
++      card.appendChild(el("h3", "", area.title));
++      if (area.description) card.appendChild(el("p", "roadmap-area-desc", area.description));
++
++      var released = area.items.filter(function (i) { return i.status === RELEASED; });
++      var upcoming = area.items
++        .filter(function (i) { return i.status !== RELEASED; })
++        .sort(function (a, b) { return order[a.status] - order[b.status]; });
++      renderGroup(card, "Available now", released, statusById);
++      renderGroup(card, "Coming up", upcoming, statusById);
++      grid.appendChild(card);
++    });
++    root.appendChild(grid);
++
++    var note = text(data.note);
++    var reviewed = text(data.reviewed);
++    var line = note;
++    if (reviewed) {
++      line += (line ? " " : "") + "Last reviewed " + TBL.formatDate(reviewed) +
++        (text(data.appVersion) ? " against What's Next v" + text(data.appVersion) + "." : ".");
++    }
++    if (line) root.appendChild(el("p", "roadmap-note", line));
++  }
++
++  TBL.fetchJson(DATA_URL, { cache: "no-cache" })
++    .then(render)
++    .catch(function () {
++      root.replaceChildren(el("p", "roadmap-note", "The roadmap couldn't be loaded right now. Please refresh the page, or see the project README on GitHub for the current feature list."));
++    });
++}());
+diff --git a/docs/assets/js/site-utils.js b/docs/assets/js/site-utils.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..12f439fa0ce15c4e793b723882d9986ca1ce2ec7
+--- /dev/null
++++ b/docs/assets/js/site-utils.js
+@@ -0,0 +1,287 @@
++/* Shared helpers for Tokyo Brotherhood Lab pages (plain script, no dependencies).
++ *
++ * Loaded before the page scripts (gallery.js, roadmap.js, releases.js) and
++ * exposes one global namespace: window.TBL.
++ *
++ *   TBL.config           project constants (repository, issue links)
++ *   TBL.element()        safe DOM builder (always textContent, never innerHTML)
++ *   TBL.safeUrl()        http/https-only URL validation
++ *   TBL.githubUrl()      only accepts https://github.com/... links
++ *   TBL.renderMarkdown() small, safe Markdown renderer for release notes
++ *   TBL.fetchJson()      fetch + JSON parse with status checking
++ *   TBL.bugReportUrl() / TBL.feedbackUrl()   prefilled GitHub issue links
++ *
++ * Every <a data-bug-report> / <a data-feedback> on a page is upgraded
++ * automatically; without JavaScript they still link to the plain GitHub
++ * "new issue" page.
++ */
++(function (global) {
++  "use strict";
++
++  var TBL = (global.TBL = global.TBL || {});
++
++  TBL.config = {
++    repo: "tokyo720022-create/What-Next",
++    issuesNewUrl: "https://github.com/tokyo720022-create/What-Next/issues/new",
++    releasesUrl: "https://github.com/tokyo720022-create/What-Next/releases",
++    // The What-Next repository has no .github/ISSUE_TEMPLATE folder yet, so the
++    // links prefill the issue body themselves. If you add bug_report.md and
++    // feedback.md under .github/ISSUE_TEMPLATE in the What-Next repository (the
++    // optional templates delivered with this update), set this to true and the
++    // links will open those templates instead.
++    useIssueTemplates: false,
++    bugTemplateFile: "bug_report.md",
++    feedbackTemplateFile: "feedback.md"
++  };
++
++  /* ---------- DOM + URL helpers ---------- */
++
++  TBL.element = function (tag, className, text) {
++    var node = document.createElement(tag);
++    if (className) node.className = className;
++    if (text !== undefined && text !== null) node.textContent = String(text);
++    return node;
++  };
++
++  TBL.safeUrl = function (value, hostRule) {
++    try {
++      var parsed = new URL(value);
++      if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
++      if (hostRule && !hostRule(parsed)) return null;
++      return parsed.href;
++    } catch (error) {
++      return null;
++    }
++  };
++
++  // Only https://github.com/... is accepted; anything else falls back to the
++  // official releases page so a bad value can never become a download link.
++  TBL.githubUrl = function (value, fallback) {
++    return TBL.safeUrl(value, function (u) {
++      return u.protocol === "https:" && u.hostname === "github.com";
++    }) || fallback || TBL.config.releasesUrl;
++  };
++
++  TBL.externalLink = function (url, label) {
++    var link = TBL.element("a", "", label);
++    link.href = url;
++    link.target = "_blank";
++    link.rel = "noopener noreferrer";
++    return link;
++  };
++
++  /* ---------- formatting ---------- */
++
++  TBL.formatDate = function (value) {
++    if (!value) return "Date not listed";
++    var plain = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value));          // date-only: don't shift across time zones
++    var date = plain ? new Date(Number(plain[1]), Number(plain[2]) - 1, Number(plain[3])) : new Date(value);
++    if (isNaN(date.getTime())) return "Date not listed";
++    return new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short", year: "numeric" }).format(date);
++  };
++
++  TBL.formatSize = function (bytes) {
++    if (bytes === null || bytes === undefined || bytes === "" || !Number.isFinite(Number(bytes)) || Number(bytes) < 0) {
++      return "Size not listed";
++    }
++    var mb = Number(bytes) / (1024 * 1024);
++    return mb < 0.01 ? String(bytes) + " bytes" : mb.toFixed(mb >= 100 ? 0 : 2) + " MB";
++  };
++
++  TBL.timeOf = function (value) {
++    var t = Date.parse(value || "");
++    return isNaN(t) ? 0 : t;
++  };
++
++  TBL.fetchJson = async function (url, options) {
++    var response = await fetch(url, options || { cache: "no-cache" });
++    if (!response.ok) throw new Error("Request failed (" + response.status + "): " + url);
++    return response.json();
++  };
++
++  /* ---------- minimal, safe Markdown for release notes ---------- */
++
++  var INLINE = /`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<>]*[^\s<>.,;:!?)'"\]])/g;
++
++  function appendInline(parent, text) {
++    var last = 0;
++    var match;
++    INLINE.lastIndex = 0;
++    while ((match = INLINE.exec(text)) !== null) {
++      if (match.index > last) parent.appendChild(document.createTextNode(text.slice(last, match.index)));
++      if (match[1] !== undefined) {
++        parent.appendChild(TBL.element("code", "", match[1]));
++      } else if (match[2] !== undefined) {
++        parent.appendChild(TBL.element("strong", "", match[2]));
++      } else {
++        var label = match[3] !== undefined ? match[3] : match[5];
++        var url = TBL.safeUrl(match[3] !== undefined ? match[4] : match[5]);
++        parent.appendChild(url ? TBL.externalLink(url, label) : document.createTextNode(label));
++      }
++      last = INLINE.lastIndex;
++    }
++    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
++  }
++
++  TBL.renderMarkdown = function (container, markdown) {
++    var lines = String(markdown).replace(/\r\n?/g, "\n").split("\n");
++    var paragraph = [];
++    var list = null;
++    var quote = null;
++    var i = 0;
++
++    function flushParagraph() {
++      if (!paragraph.length) return;
++      var p = TBL.element("p");
++      appendInline(p, paragraph.join("\n"));
++      container.appendChild(p);
++      paragraph = [];
++    }
++    function flushAll() {
++      flushParagraph();
++      list = null;
++      quote = null;
++    }
++
++    while (i < lines.length) {
++      var line = lines[i];
++      var m;
++
++      if (/^\s*```/.test(line)) {                       // fenced code block
++        flushAll();
++        var code = [];
++        i += 1;
++        while (i < lines.length && !/^\s*```/.test(lines[i])) { code.push(lines[i]); i += 1; }
++        var pre = TBL.element("pre");
++        pre.appendChild(TBL.element("code", "", code.join("\n")));
++        container.appendChild(pre);
++        i += 1;
++        continue;
++      }
++      if (!line.trim()) { flushAll(); i += 1; continue; }
++      if (/^\s*([-*_])\s*(\1\s*){2,}$/.test(line)) { flushAll(); i += 1; continue; }   // horizontal rule
++
++      if ((m = line.match(/^\s{0,3}#{1,6}\s+(.*?)\s*#*\s*$/))) {                    // heading
++        flushAll();
++        var h = TBL.element("h3");
++        appendInline(h, m[1]);
++        container.appendChild(h);
++        i += 1;
++        continue;
++      }
++      if ((m = line.match(/^\s*([-*+]|\d+[.)])\s+(.*)$/))) {                        // list item
++        flushParagraph();
++        quote = null;
++        var ordered = /\d/.test(m[1]);
++        if (!list || list.ordered !== ordered) {
++          list = { ordered: ordered, node: TBL.element(ordered ? "ol" : "ul") };
++          container.appendChild(list.node);
++        }
++        var li = TBL.element("li");
++        appendInline(li, m[2]);
++        list.node.appendChild(li);
++        i += 1;
++        continue;
++      }
++      if ((m = line.match(/^\s*>\s?(.*)$/))) {                                       // block quote
++        flushParagraph();
++        list = null;
++        if (!quote) { quote = TBL.element("blockquote"); container.appendChild(quote); }
++        var qp = TBL.element("p");
++        appendInline(qp, m[1]);
++        quote.appendChild(qp);
++        i += 1;
++        continue;
++      }
++      list = null;
++      quote = null;
++      paragraph.push(line.trim());
++      i += 1;
++    }
++    flushAll();
++  };
++
++  /* ---------- bug report / feedback links ---------- */
++
++  function query(params) {
++    return Object.keys(params)
++      .filter(function (key) { return params[key] !== undefined && params[key] !== ""; })
++      .map(function (key) { return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]); })
++      .join("&");
++  }
++
++  // ctx (all optional): { apk: "file name", tag: "v1.2.3", release: "Release title" }
++  TBL.bugReportUrl = function (ctx) {
++    ctx = ctx || {};
++    var cfg = TBL.config;
++    var build = "";
++    if (ctx.apk) build += "APK: " + ctx.apk;
++    if (ctx.release || ctx.tag) {
++      build += (build ? "\nRelease: " : "Release: ") + [ctx.release, ctx.tag && "(" + ctx.tag + ")"].filter(Boolean).join(" ");
++    }
++
++    if (cfg.useIssueTemplates) {
++      return cfg.issuesNewUrl + "?" + query({ template: cfg.bugTemplateFile, title: "Bug: " });
++    }
++
++    var body = [
++      "## App version or APK filename",
++      build || "<!-- e.g. What Next? 2.1.1, or the APK file name you installed -->",
++      "",
++      "## Device model",
++      "<!-- e.g. Pixel 7, Galaxy S23 -->",
++      "",
++      "## Android version",
++      "<!-- e.g. Android 14 (Settings > About phone) -->",
++      "",
++      "## Description of the problem",
++      "<!-- What went wrong? -->",
++      "",
++      "## Steps to reproduce",
++      "1. ",
++      "2. ",
++      "3. ",
++      "",
++      "## Expected result",
++      "<!-- What did you expect to happen? -->",
++      "",
++      "## Actual result",
++      "<!-- What happened instead? Add screenshots or error text if you can. -->",
++      ""
++    ].join("\n");
++
++    return cfg.issuesNewUrl + "?" + query({ title: "Bug: ", labels: "bug", body: body });
++  };
++
++  TBL.feedbackUrl = function () {
++    var cfg = TBL.config;
++    if (cfg.useIssueTemplates) {
++      return cfg.issuesNewUrl + "?" + query({ template: cfg.feedbackTemplateFile, title: "Feedback: " });
++    }
++    var body = [
++      "## Your feedback or suggestion",
++      "<!-- What would you like to see improved or added? -->",
++      "",
++      "## Why it would help",
++      "<!-- Optional: how would you use it? -->",
++      ""
++    ].join("\n");
++    return cfg.issuesNewUrl + "?" + query({ title: "Feedback: ", labels: "enhancement", body: body });
++  };
++
++  TBL.enhanceIssueLinks = function (root) {
++    var scope = root || document;
++    Array.prototype.forEach.call(scope.querySelectorAll("a[data-bug-report]"), function (link) {
++      link.href = TBL.bugReportUrl({ apk: link.dataset.apk, tag: link.dataset.tag, release: link.dataset.release });
++    });
++    Array.prototype.forEach.call(scope.querySelectorAll("a[data-feedback]"), function (link) {
++      link.href = TBL.feedbackUrl();
++    });
++  };
++
++  if (document.readyState === "loading") {
++    document.addEventListener("DOMContentLoaded", function () { TBL.enhanceIssueLinks(); });
++  } else {
++    TBL.enhanceIssueLinks();
++  }
++}(window));
+diff --git a/docs/data/roadmap.json b/docs/data/roadmap.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..c3494720f9d738e1d9c0622541d5707e895dc9c1
+--- /dev/null
++++ b/docs/data/roadmap.json
+@@ -0,0 +1,75 @@
++{
++  "_help": "Edit this file to update the roadmap on docs/projects/whats-next.html. 'status' must be one of the ids in 'statuses'. Only mark an item 'released' when it is in the app people can use today. Items appear under 'Available now' (released) or 'Coming up' (everything else).",
++  "reviewed": "2026-10-24",
++  "appVersion": "2.1.1",
++  "reviewedAgainst": "What-Next README (v2.1.1), build-apk.yml and capacitor.config.json. Individual features were not re-tested against the app's source files.",
++  "note": "Planned, in-progress and testing items will be added here as they are confirmed. Nothing is listed as coming soon until it is real.",
++  "statuses": [
++    { "id": "planned",     "label": "Planned",     "description": "Not started yet" },
++    { "id": "in-progress", "label": "In progress", "description": "Being worked on now" },
++    { "id": "testing",     "label": "Testing",     "description": "Built and being checked before release" },
++    { "id": "released",    "label": "Released",    "description": "Available in the app today" }
++  ],
++  "areas": [
++    {
++      "id": "discovery",
++      "title": "Discovery",
++      "description": "Finding something to watch or read next.",
++      "items": [
++        { "title": "Pick for me", "status": "released", "description": "Choose Watch, Read or Either and how much time you have (15 minutes to 2 hours) to get a suggestion from your Watching, Reading, Repeating and Planning lists." },
++        { "title": "Discover tab", "status": "released", "description": "Search AniList for new anime or manga by type, genre, sort order (Trending, Popular, Top rated, Newest) and title. Titles already on your list are marked." },
++        { "title": "Trending carousels", "status": "released", "description": "Trending anime and manga on the Pick screen." },
++        { "title": "Genre and 18+ filters", "status": "released", "description": "Genre chips built from your own list, plus show everything, only 18+ or hide 18+ titles." }
++      ]
++    },
++    {
++      "id": "anilist",
++      "title": "AniList integration",
++      "description": "Using your AniList account and AniList's data.",
++      "items": [
++        { "title": "AniList login", "status": "released", "description": "Log in with your AniList account on the web and in the Android app. There is no guest mode." },
++        { "title": "Media pages", "status": "released", "description": "Score, genres, synopsis, characters, staff, relations, recommendations and where to watch for any title." },
++        { "title": "Character, staff and studio pages", "status": "released", "description": "Dedicated pages with favourites, voice actors, roles and related media." },
++        { "title": "Chat", "status": "released", "description": "One-to-one private messages with other AniList users, using AniList's own message system." },
++        { "title": "Discord sync", "status": "released", "description": "Anime and manga updates from your AniList list posted to Discord forum threads, run from inside the app." }
++      ]
++    },
++    {
++      "id": "lists",
++      "title": "List management",
++      "description": "Browsing and updating your anime and manga lists.",
++      "items": [
++        { "title": "Anime and manga lists", "status": "released", "description": "Status tabs, search, a filter sheet (sort, format, status, country, year, length, score, genres) and grid/list customisation." },
++        { "title": "List editor", "status": "released", "description": "Status, progress, score, dates, rewatches, priority, custom lists, notes, private and favourite flags, and remove." },
++        { "title": "Progress tracking", "status": "released", "description": "+1 / -1 progress and Mark as done save to AniList, with consistent status and date rules everywhere." }
++      ]
++    },
++    {
++      "id": "usability",
++      "title": "Usability",
++      "description": "Making the app comfortable to use every day.",
++      "items": [
++        { "title": "Stats and daily goal", "status": "released", "description": "Backlog hours, top genres, titles finished this month, and a daily goal with a streak." },
++        { "title": "Airing schedule", "status": "released", "description": "A countdown to the next episode of every airing anime on your list." },
++        { "title": "Appearance and privacy options", "status": "released", "description": "System, Light, Dark, AMOLED or custom colours, plus a Blur covers option for use in public." }
++      ]
++    },
++    {
++      "id": "stability",
++      "title": "Stability and offline use",
++      "description": "Keeping the app dependable.",
++      "items": [
++        { "title": "Offline mode", "status": "released", "description": "Installs to your home screen and shows your last saved list without a connection. Changes made offline are kept on the device and sent when you are back online." },
++        { "title": "Automated tests", "status": "released", "description": "Structure checks, tracking-rule unit tests and real-browser tests run by a GitHub Actions workflow on every push." }
++      ]
++    },
++    {
++      "id": "android",
++      "title": "Android releases",
++      "description": "Getting the app onto Android phones.",
++      "items": [
++        { "title": "Android APK builds", "status": "released", "description": "An Android app (package com.whatnext.app) with AniList login returning to the app. APKs are currently built as debug/testing builds and published through GitHub releases." }
++      ]
++    }
++  ]
++}
+diff --git a/docs/data/screenshots.json b/docs/data/screenshots.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..968fc29d6b4773d589d5daef8b537f08b4dc558a
+--- /dev/null
++++ b/docs/data/screenshots.json
+@@ -0,0 +1,4 @@
++{
++  "_help": "List genuine What's Next app screenshots here. Files live in docs/assets/images/whats-next/screenshots/ (see the README in that folder). Entries without a non-empty 'alt' are ignored. The gallery shows a notice while 'screenshots' is empty.",
++  "screenshots": []
++}
+diff --git a/docs/projects/README.md b/docs/projects/README.md
+index ec6c15d1ccdeaab571090fe858e7954524db4891..e0f78d73c65864f5b41871367f33ec31c4e3c82b 100644
+--- a/docs/projects/README.md
++++ b/docs/projects/README.md
+@@ -2,8 +2,10 @@
+ 
+ Standalone pages for each Tokyo Brotherhood Lab project.
+ 
+-- `whats-next.html` — What's Next overview
+-- `whats-next/releases.html` — APK release list (data from `../../data/releases.json`)
+-- `tokyo-manga-lab.html` — Tokyo Manga Lab overview
++- `whats-next.html` - What's Next overview, screenshot gallery, roadmap and bug-report links
++- `whats-next/releases.html` - APK release list with search, filters and sorting
++- `whats-next/installation.html` - Android installation and update guide
++- `tokyo-manga-lab.html` - Tokyo Manga Lab overview
+ 
+-Shared styles live in `../assets/css/style.css`. See the root `README.md` for how to add a new project page.
++Shared styles live in `../assets/css/style.css`; shared scripts in `../assets/js/`.
++See the root `README.md` for how the data files drive these pages.
+diff --git a/docs/projects/whats-next.html b/docs/projects/whats-next.html
+index ca92ba2c3f783436817e17a4634bf74d05ae8927..86164f6ab06237933f6c7519e336bbe651c88ac4 100644
+--- a/docs/projects/whats-next.html
++++ b/docs/projects/whats-next.html
+@@ -22,6 +22,9 @@
+   <link rel="icon" href="../assets/images/icon-whats-next.png" type="image/png" sizes="64x64">
+   <link rel="stylesheet" href="../assets/css/style.css">
+   <script src="../assets/js/main.js" defer></script>
++  <script src="../assets/js/site-utils.js" defer></script>
++  <script src="../assets/js/gallery.js" defer></script>
++  <script src="../assets/js/roadmap.js" defer></script>
+   <style>
+     .info-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:18px}
+     .info-card{padding:24px;border:1px solid var(--border);border-radius:18px;background:var(--panel);min-width:0}
+@@ -34,8 +37,6 @@
+     .info-list>div:last-child{border-bottom:0}
+     .info-list dt{color:var(--muted);font-size:.9rem}
+     .info-list dd{margin:0;font-weight:600;font-size:.93rem;overflow-wrap:anywhere}
+-    .inline-link{color:var(--blue);text-decoration:none}
+-    .inline-link:hover{text-decoration:underline}
+     .release-promo{display:flex;justify-content:space-between;align-items:center;gap:28px;padding:clamp(24px,4vw,42px);border:1px solid var(--border);border-radius:22px;background:var(--panel)}
+     .release-promo>div:first-child{max-width:760px}
+     .release-promo h2{margin:12px 0}
+@@ -94,6 +95,8 @@
+           <a class="button button-primary" href="whats-next/releases.html">Browse APK releases →</a>
+           <a class="button" href="https://tokyo720022-create.github.io/What-Next/" target="_blank" rel="noopener noreferrer">Open web app ↗</a>
+           <a class="button" href="https://github.com/tokyo720022-create/What-Next" target="_blank" rel="noopener noreferrer">Source code ↗</a>
++          <a class="button" href="whats-next/installation.html">Install guide →</a>
++          <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
+         </div>
+       </div>
+       <div class="project-logo-frame">
+@@ -133,16 +136,62 @@
+               <div><dt>License</dt><dd>MIT</dd></div>
+               <div><dt>Status</dt><dd>In active development</dd></div>
+               <div><dt>Downloads</dt><dd><a class="inline-link" href="whats-next/releases.html">View all published APKs →</a></dd></div>
++              <div><dt>Install help</dt><dd><a class="inline-link" href="whats-next/installation.html">Android installation guide →</a></dd></div>
++              <div><dt>Feedback</dt><dd><a class="inline-link" href="#report-bug">Report a bug or send feedback →</a></dd></div>
+             </dl>
+           </aside>
+         </div>
+ 
+         <div class="notice">
+-          <strong>Before installing:</strong> some APK filenames indicate debug/testing builds. Check the build label and release notes before installing, and download only from the official release list. Each APK entry links back to its original GitHub release.
++          <strong>Before installing:</strong> some APK filenames indicate debug/testing builds. Check the build label and release notes before installing, and download only from the official release list. Each APK entry links back to its original GitHub release. New to installing APKs? Read the <a class="inline-link" href="whats-next/installation.html">Android installation guide</a>.
+         </div>
+       </div>
+     </section>
+ 
++    <section class="section" id="screenshots" aria-labelledby="screenshots-title">
++      <div class="container">
++        <div class="section-intro">
++          <div class="eyebrow">Screenshots</div>
++          <h2 id="screenshots-title">See the app in action.</h2>
++          <p>Real screens from the What's Next app. Tap a screenshot to enlarge it.</p>
++        </div>
++        <div id="screenshotGallery" class="shot-gallery" data-manifest="../data/screenshots.json" data-image-dir="../assets/images/whats-next/screenshots/">
++          <div class="shot-empty">
++            <span class="shot-empty-title">Screenshots coming soon</span>
++            <p>Genuine screenshots of the app haven't been added to this page yet, and mock-ups are deliberately not shown in their place. You can <a class="inline-link" href="https://tokyo720022-create.github.io/What-Next/" target="_blank" rel="noopener noreferrer">open the web app ↗</a> to see it for yourself (an AniList login is required).</p>
++            <p><strong>For the site maintainer:</strong> add optimised images to <code>docs/assets/images/whats-next/screenshots/</code> and list them in <code>docs/data/screenshots.json</code>. Expected file names, each with a <code>-thumb</code> twin such as <code>home-thumb.webp</code>:</p>
++            <ul>
++              <li><code>home.webp</code> (Pick screen)</li>
++              <li><code>discover.webp</code></li>
++              <li><code>anime-list.webp</code></li>
++              <li><code>manga-list.webp</code></li>
++              <li><code>media-page.webp</code></li>
++              <li><code>schedule.webp</code></li>
++              <li><code>statistics.webp</code></li>
++              <li><code>settings.webp</code></li>
++            </ul>
++            <p>The README in that folder has the step-by-step guide.</p>
++          </div>
++        </div>
++      </div>
++    </section>
++
++    <section class="section" id="roadmap" aria-labelledby="roadmap-title">
++      <div class="container">
++        <div class="section-intro">
++          <div class="eyebrow">Roadmap</div>
++          <h2 id="roadmap-title">What exists, and what's coming.</h2>
++          <p>Features already in the app are listed under <em>Available now</em>. Planned work is kept separate under <em>Coming up</em> and is never described as finished.</p>
++        </div>
++        <div id="roadmapContent" data-source="../data/roadmap.json">
++          <p class="roadmap-note">Loading roadmap…</p>
++        </div>
++        <noscript>
++          <p class="roadmap-note">The roadmap needs JavaScript. For the current feature list, see the <a class="inline-link" href="https://github.com/tokyo720022-create/What-Next#features" target="_blank" rel="noopener noreferrer">project README ↗</a>.</p>
++        </noscript>
++      </div>
++    </section>
++
+     <section class="section" id="apk-releases">
+       <div class="container">
+         <div class="release-promo">
+@@ -152,6 +201,7 @@
+             <p>The releases page gathers every APK attached to the project's published GitHub releases, with version details, file sizes, dates, and direct download links. It refreshes from GitHub automatically.</p>
+             <div class="hero-buttons">
+               <a class="button button-primary" href="whats-next/releases.html">Open APK release list →</a>
++              <a class="button" href="whats-next/installation.html">Installation guide →</a>
+               <a class="button" href="https://github.com/tokyo720022-create/What-Next/releases" target="_blank" rel="noopener noreferrer">GitHub releases ↗</a>
+             </div>
+           </div>
+@@ -160,14 +210,38 @@
+       </div>
+     </section>
+ 
++    <section class="section" id="report-bug" aria-labelledby="report-title">
++      <div class="container">
++        <div class="report-panel">
++          <div>
++            <div class="eyebrow">Bugs &amp; feedback</div>
++            <h2 id="report-title">Found a bug? Let me know.</h2>
++            <p>Bug reports and suggestions are handled on GitHub, so there is nothing to sign up for on this website (a free GitHub account is needed to post). The bug-report button opens a new issue with a ready-made template that asks for:</p>
++            <ul>
++              <li>The app version or APK file name</li>
++              <li>Your device model and Android version</li>
++              <li>A description of the problem and the steps to reproduce it</li>
++              <li>What you expected to happen and what actually happened</li>
++            </ul>
++          </div>
++          <div class="report-actions">
++            <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
++            <a class="button" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-feedback target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
++            <a class="button" href="../index.html#contact">Contact on Discord →</a>
++          </div>
++        </div>
++      </div>
++    </section>
++
+     <section class="section" id="getting-started">
+       <div class="container about">
+         <div class="eyebrow">Getting started</div>
+         <h2>How to try What's Next.</h2>
+-        <p>Open the web app or choose an APK from the release list. Sign in with AniList to use your lists and personalised suggestions. Check the release notes before installing an Android build, and report bugs through the source repository.</p>
++        <p>Open the web app or choose an APK from the release list. Sign in with AniList to use your lists and personalised suggestions. Check the release notes before installing an Android build, and report bugs through GitHub.</p>
+         <div class="about-links">
+           <a class="text-link" href="https://tokyo720022-create.github.io/What-Next/" target="_blank" rel="noopener noreferrer">Open the web app ↗</a>
+           <a class="text-link" href="whats-next/releases.html">Browse APK downloads →</a>
++          <a class="text-link" href="whats-next/installation.html">Android installation guide →</a>
+           <a class="text-link" href="https://github.com/tokyo720022-create/What-Next" target="_blank" rel="noopener noreferrer">Report issues / view source ↗</a>
+           <a class="text-link" href="../index.html#contact">Contact Tokyo →</a>
+         </div>
+diff --git a/docs/projects/whats-next/installation.html b/docs/projects/whats-next/installation.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..1d5555ba6aa8ef787c21d56af4c7904ba6457ff9
+--- /dev/null
++++ b/docs/projects/whats-next/installation.html
+@@ -0,0 +1,196 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1">
++  <meta name="theme-color" content="#090b14">
++  <meta name="description" content="How to download, install and update the What's Next Android APK safely, what to do when Android says the package can't be installed, and how to report installation errors.">
++  <link rel="canonical" href="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next/installation.html">
++  <meta property="og:type" content="website">
++  <meta property="og:site_name" content="Tokyo Brotherhood Lab">
++  <meta property="og:title" content="Android Installation Guide — What's Next | Tokyo Brotherhood Lab">
++  <meta property="og:description" content="How to download, install and update the What's Next Android APK safely, what to do when Android says the package can't be installed, and how to report installation errors.">
++  <meta property="og:url" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next/installation.html">
++  <meta property="og:image" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/assets/images/og-whats-next.jpg">
++  <meta property="og:image:width" content="1200">
++  <meta property="og:image:height" content="630">
++  <meta name="twitter:card" content="summary_large_image">
++  <meta name="twitter:title" content="Android Installation Guide — What's Next | Tokyo Brotherhood Lab">
++  <meta name="twitter:description" content="How to download, install and update the What's Next Android APK safely, what to do when Android says the package can't be installed, and how to report installation errors.">
++  <meta name="twitter:image" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/assets/images/og-whats-next.jpg">
++  <title>Android Installation Guide — What's Next | Tokyo Brotherhood Lab</title>
++  <link rel="icon" href="../../assets/images/icon-whats-next.png" type="image/png" sizes="64x64">
++  <link rel="stylesheet" href="../../assets/css/style.css">
++  <script src="../../assets/js/main.js" defer></script>
++  <script src="../../assets/js/site-utils.js" defer></script>
++</head>
++<body>
++  <header class="header">
++    <div class="header-glow" aria-hidden="true"></div>
++    <div class="container nav">
++      <a class="brand" href="../../index.html" aria-label="Tokyo Brotherhood Lab home">
++        <span class="brand-mark" aria-hidden="true">
++          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
++            <defs><linearGradient id="brandGradient" x1="5" y1="5" x2="43" y2="43"><stop offset="0%" stop-color="#f45bda"/><stop offset="52%" stop-color="#a18aff"/><stop offset="100%" stop-color="#62caff"/></linearGradient></defs>
++            <rect x="2.5" y="2.5" width="43" height="43" rx="14" stroke="url(#brandGradient)" stroke-width="1.5"/>
++            <path d="M13 16H35M24 16V35M16 28L24 20L32 28" stroke="url(#brandGradient)" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
++            <circle cx="24" cy="37" r="2" fill="#62caff"/>
++          </svg>
++        </span>
++        <span class="brand-copy">
++          <span class="brand-name">Tokyo Brotherhood <span class="brand-lab">Lab</span></span>
++          <span class="brand-tagline">ANIME <span>·</span> MANGA <span>·</span> TECHNOLOGY</span>
++        </span>
++      </a>
++      <nav class="nav-links" aria-label="Main navigation">
++        <a class="nav-link" href="../../index.html#projects"><span class="nav-link-index">01</span><span>Projects</span></a>
++        <a class="nav-link" href="../../index.html#contact"><span class="nav-link-index">02</span><span>Contact</span></a>
++        <a class="nav-link nav-about" href="../../index.html#about"><span class="nav-link-index">03</span><span>About</span></a>
++      </nav>
++    </div>
++  </header>
++
++  <main>
++    <section class="container page-hero">
++      <a class="back-link" href="../whats-next.html">← Back to What's Next</a>
++      <div class="eyebrow">Android guide</div>
++      <h1>Install &amp; <span class="gradient-text">update</span></h1>
++      <p class="page-lead">How to download, install and update the What's Next Android APK, what to try when Android says the package can't be installed, and how to report a problem. APKs from outside the Google Play Store need a little extra care, so please read the safety section first.</p>
++      <div class="hero-buttons">
++        <a class="button button-primary" href="releases.html">Browse APK releases →</a>
++        <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
++      </div>
++    </section>
++
++    <section class="section">
++      <div class="container guide-layout">
++        <nav class="guide-toc" aria-label="On this page">
++          <strong>On this page</strong>
++          <ol>
++            <li><a href="#before">Before you install</a></li>
++            <li><a href="#download">Download the APK</a></li>
++            <li><a href="#install">Install it</a></li>
++            <li><a href="#update">Update an installed app</a></li>
++            <li><a href="#troubleshooting">If it can't be installed</a></li>
++            <li><a href="#signatures">Signature mismatches</a></li>
++            <li><a href="#report">Report an installation error</a></li>
++          </ol>
++        </nav>
++
++        <div class="guide-content">
++          <section id="before">
++            <h2>1. Before you install</h2>
++            <h3>Safety precautions</h3>
++            <ul>
++              <li><strong>Use official links only.</strong> Download from the <a class="inline-link" href="releases.html">APK release list</a> on this site or from the project's own GitHub releases. An official download link starts with <code>https://github.com/tokyo720022-create/What-Next/releases/download/</code>. Don't install a file with a similar name that someone sent you in a chat or found on another website.</li>
++              <li><strong>Know what you're installing.</strong> Each entry on the release list is labelled <em>Stable release</em>, <em>Pre-release</em> or <em>Debug / testing build</em>. Debug and testing builds are meant for testing and can be less polished. If the list shows no stable release, none has been published yet.</li>
++              <li><strong>Check the checksum if you can.</strong> When GitHub provides one, the release list shows a SHA-256 checksum under each APK. After downloading, compare it with the checksum of your file (for example <code>sha256sum file.apk</code> on Linux/macOS or <code>Get-FileHash file.apk</code> in Windows PowerShell). If they differ, delete the file and download it again.</li>
++              <li><strong>Read the release notes</strong> before installing, and read the permission prompts Android shows.</li>
++              <li><strong>Protect your AniList login.</strong> What's Next logs you in through AniList's own website in your browser. Treat any login token like a password and never share it.</li>
++              <li><strong>Turn permissions back off.</strong> Installing outside the Play Store needs the "install unknown apps" permission for the app you used to open the file. You can switch it off again afterwards.</li>
++            </ul>
++            <div class="callout">
++              <strong>What this guide doesn't state.</strong> A minimum Android version, device compatibility list and permission list haven't been published for What's Next, so none are given here. If an install fails or the app misbehaves on your phone, please <a class="inline-link" href="#report">report your device model and Android version</a>.
++            </div>
++          </section>
++
++          <section id="download">
++            <h2>2. Download the APK</h2>
++            <ol class="guide-steps">
++              <li>Open the <a class="inline-link" href="releases.html">APK releases</a> page on your Android phone.</li>
++              <li>Pick a build. Use the search box, build-type filter and sort menu if the list is long, and read the release notes. Some builds reuse the same file name (for example <code>app-debug.apk</code>), so compare the <strong>APK uploaded</strong> date rather than the file name to tell builds apart.</li>
++              <li>Tap <strong>Download APK</strong>. Your browser may warn that this type of file can harm your device. That warning appears for every APK; continue only because you used an official link.</li>
++              <li>Wait for the download to finish. If it is interrupted, download it again instead of trying to install a partial file.</li>
++            </ol>
++          </section>
++
++          <section id="install">
++            <h2>3. Install it</h2>
++            <p>Menu names differ slightly between Android versions and phone makers, but the normal system prompts look like this.</p>
++            <ol class="guide-steps">
++              <li>Open the downloaded file from the browser's download notification, or find it in your <strong>Files</strong> or <strong>Downloads</strong> app.</li>
++              <li>If Android says your phone isn't allowed to install unknown apps from this source, tap <strong>Settings</strong> and allow it for the app you are using (for example your browser or file manager). Then go back and open the file again. On older Android versions this is a single "Unknown sources" setting.</li>
++              <li>Tap <strong>Install</strong>. Google Play Protect may scan the app or show a warning because the app isn't from the Play Store. Read the message and continue only if you trust the source.</li>
++              <li>When it finishes, tap <strong>Open</strong>. The app appears as <strong>What Next?</strong>.</li>
++              <li>Log in with your AniList account. AniList opens in your browser and returns you to the app after you approve it.</li>
++            </ol>
++          </section>
++
++          <section id="update">
++            <h2>4. Update an installed app</h2>
++            <ol class="guide-steps">
++              <li>Find your installed version: <strong>Settings → Apps → What Next? → App info</strong> (the version is usually listed at the bottom).</li>
++              <li>Open the <a class="inline-link" href="releases.html">APK releases</a> page and check whether a newer build exists, using the upload date and release notes.</li>
++              <li>Before updating, open What's Next while online and let it finish syncing. The app keeps changes made offline on your device until you are back online, so anything still waiting could be lost if the update has to be done another way.</li>
++              <li>Download the newer APK and open it as described above. Android should offer an <strong>Update</strong> button because it is the same app.</li>
++              <li>If Android refuses, see <a class="inline-link" href="#troubleshooting">If it can't be installed</a> and <a class="inline-link" href="#signatures">Signature mismatches</a>.</li>
++            </ol>
++            <div class="callout callout-warn">
++              <strong>About your data.</strong> Android normally keeps an app's data when a newer version is installed over it, but this isn't guaranteed, and it does not apply if the old version has to be uninstalled first. Locally stored data, such as your saved login, cached lists and unsynced changes, may be lost in that case. Your AniList account data itself is stored by AniList, not by the app.
++            </div>
++          </section>
++
++          <section id="troubleshooting">
++            <h2>5. If it can't be installed</h2>
++            <p>Android may say <em>"App not installed"</em>, <em>"There was a problem parsing the package"</em> or that the package conflicts with an existing one. Work through these in order:</p>
++            <ul>
++              <li><strong>Download problem.</strong> Delete the file and download it again, ideally on a stable connection. Compare the SHA-256 checksum if the release list shows one.</li>
++              <li><strong>Not allowed to install from this source.</strong> Allow "install unknown apps" for the browser or file manager you opened the file with (see step 3 above).</li>
++              <li><strong>Not enough storage.</strong> Free some space and try again.</li>
++              <li><strong>Conflict with an existing install.</strong> If What's Next is already installed, the new file must be signed with the same key. This is the most common cause when updating. See <a class="inline-link" href="#signatures">Signature mismatches</a>.</li>
++              <li><strong>Trying to go backwards.</strong> Android won't install an older build over a newer one. Use the newest build, or uninstall first (which removes local app data).</li>
++              <li><strong>Blocked by Play Protect or a managed device.</strong> Work, school or parental-control profiles can block apps from outside the Play Store. That is a setting on your device, not something the app can change.</li>
++              <li><strong>Still failing?</strong> It may be a compatibility problem with your phone or Android version. <a class="inline-link" href="#report">Report it</a> with the exact message Android showed.</li>
++            </ul>
++          </section>
++
++          <section id="signatures">
++            <h2>6. Why signature mismatches happen</h2>
++            <p>Every Android APK is signed with a key. To install an update over an existing app, Android requires the new APK to be signed with the <strong>same key</strong> as the one already installed. If the key is different, Android treats the file as a different publisher's app and refuses to install it as an update, with a message such as <em>"App not installed as package conflicts with an existing package"</em>.</p>
++            <p>This can happen when:</p>
++            <ul>
++              <li><strong>Debug builds are signed with a debug key.</strong> The project's build script (<code>build-apk.yml</code> in the What-Next repository) builds debug APKs with the Android Gradle task <code>assembleDebug</code>. Android build tools create the debug key automatically on the machine doing the build. If builds are made on different or fresh machines, they can end up with different debug keys.</li>
++              <li><strong>The signing key is changed on purpose.</strong> For example, if a future build is signed with a separate release key, it won't update over a debug build, and the other way round.</li>
++            </ul>
++            <p>The release list can't show which key signed a given APK, so there's no way to tell in advance. If you hit a mismatch, the usual fix is to uninstall the existing What's Next app and install the new APK. <strong>Uninstalling removes the app's local data</strong>, so first open the app online and let any pending changes sync. Afterwards you will need to log in with AniList again.</p>
++          </section>
++
++          <section id="report" class="report-panel">
++            <div>
++              <div class="eyebrow">Something went wrong?</div>
++              <h2>Report an installation error</h2>
++              <p>The best reports are specific. The bug-report button opens a GitHub issue with a ready-made template (a free GitHub account is needed to post). Please include:</p>
++              <ul>
++                <li>The <strong>APK file name</strong> and its <strong>upload date</strong> from the release list</li>
++                <li>Your <strong>device model</strong> and <strong>Android version</strong> (Settings → About phone)</li>
++                <li>The <strong>exact message</strong> Android showed, or a screenshot</li>
++                <li>What you did, step by step, and what you expected to happen</li>
++                <li>Whether What's Next was already installed, and from which build</li>
++              </ul>
++            </div>
++            <div class="report-actions">
++              <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
++              <a class="button" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-feedback target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
++              <a class="button" href="../../index.html#contact">Contact on Discord →</a>
++            </div>
++          </section>
++
++          <div class="about-links">
++            <a class="text-link" href="releases.html">APK releases →</a>
++            <a class="text-link" href="../whats-next.html">Project information →</a>
++            <a class="text-link" href="../../index.html">Tokyo Brotherhood Lab home →</a>
++          </div>
++        </div>
++      </div>
++    </section>
++  </main>
++
++  <footer class="footer">
++    <div class="container footer-inner">
++      <span>© <span id="year"></span> Tokyo Brotherhood Lab.</span>
++      <a href="https://github.com/tokyo720022-create/tokyo-brotherhood-lab-site" target="_blank" rel="noopener noreferrer">Website source ↗</a>
++    </div>
++  </footer>
++
++</body>
++</html>
+diff --git a/docs/projects/whats-next/releases.html b/docs/projects/whats-next/releases.html
+index d7f2e6a783b47eefc2341923f4360f201a941a1c..f29c2ed988f137cfe171faccfba0abb812b5415b 100644
+--- a/docs/projects/whats-next/releases.html
++++ b/docs/projects/whats-next/releases.html
+@@ -22,14 +22,12 @@
+   <link rel="icon" href="../../assets/images/icon-whats-next.png" type="image/png" sizes="64x64">
+   <link rel="stylesheet" href="../../assets/css/style.css">
+   <script src="../../assets/js/main.js" defer></script>
++  <script src="../../assets/js/site-utils.js" defer></script>
+   <script src="../../assets/js/releases.js" defer></script>
+   <style>
+-    .release-page-hero{padding:34px 0 28px}
+-    .release-page-hero h1{font-size:clamp(2.35rem,6vw,4rem);letter-spacing:-1.8px;margin:12px 0}
+-    .release-page-hero p{max-width:760px;color:var(--muted);line-height:1.8}
+     .source-line{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+     .source-pill{padding:7px 11px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.85rem}
+-    .release-status{margin:14px 0 22px;color:var(--muted);font-size:.94rem}
++    .release-status{margin:0 0 14px;color:var(--muted);font-size:.94rem}
+     .release-list{display:grid;grid-template-columns:1fr;gap:16px}
+     .release-card{padding:22px;border:1px solid var(--border);border-radius:18px;background:var(--panel);min-width:0}
+     .release-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+@@ -67,7 +65,7 @@
+     .empty-state p{margin:8px 0 14px}
+     .safety-note{margin:26px 0;padding:18px;border:1px solid var(--border);border-radius:14px;color:var(--muted);line-height:1.75}
+     .safety-note strong{color:var(--text)}
+-    @media(max-width:560px){.release-card{padding:17px}.release-card-head{display:block}.release-badges{justify-content:flex-start;margin-top:10px}.asset-box{align-items:flex-start;flex-direction:column}.download-button{width:100%}}
++    @media(max-width:560px){.release-controls{padding:14px}.control-sort{flex-basis:100%}#releaseReset{width:100%}.release-card{padding:17px}.release-card-head{display:block}.release-badges{justify-content:flex-start;margin-top:10px}.asset-box{align-items:flex-start;flex-direction:column}.download-button{width:100%}}
+   </style>
+ </head>
+ <body>
+@@ -97,21 +95,59 @@
+   </header>
+ 
+   <main>
+-    <section class="container release-page-hero">
++    <section class="container page-hero">
+       <a class="back-link" href="../whats-next.html">← Back to What's Next</a>
+       <div class="eyebrow">Official project downloads</div>
+       <h1>APK <span class="gradient-text">Releases</span></h1>
+-      <p>Browse APK files attached to What's Next GitHub releases. Each entry includes the published build, file size, upload date, and a direct download link. This list is refreshed automatically from the project's public GitHub releases every few hours.</p>
++      <p class="page-lead">Browse APK files attached to What's Next GitHub releases. Each entry shows the release, build type, file size, upload date, release notes, and a direct download link. The list is refreshed automatically from the project's public GitHub releases every few hours.</p>
+       <div class="source-line">
+         <span class="source-pill">Source: official GitHub releases</span>
+         <span class="source-pill">APK files only</span>
+         <a class="text-link" href="https://github.com/tokyo720022-create/What-Next/releases" target="_blank" rel="noopener noreferrer">Open GitHub releases ↗</a>
+       </div>
++      <div class="hero-buttons">
++        <a class="button button-primary" href="installation.html">Installation guide →</a>
++        <a class="button button-bug" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
++        <a class="button" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-feedback target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
++      </div>
+     </section>
+ 
+     <section class="section">
+       <div class="container">
+         <div id="releaseStatus" class="release-status" role="status" aria-live="polite">Loading APK releases from GitHub…</div>
++        <div id="releaseNotice" class="release-notice" hidden></div>
++
++        <form id="releaseControls" class="release-controls" role="search" aria-label="Search, filter and sort APK files" hidden>
++          <div class="control control-search">
++            <label for="releaseSearch">Search APK files</label>
++            <input id="releaseSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Release name, version/tag or file name" aria-controls="releaseList">
++          </div>
++
++          <fieldset class="control control-type">
++            <legend>Build type</legend>
++            <div class="chip-group">
++              <label class="chip"><input type="radio" name="releaseType" value="all" checked><span class="chip-label">All builds <span class="chip-count" data-count="all">0</span></span></label>
++              <label class="chip"><input type="radio" name="releaseType" value="stable"><span class="chip-label">Stable <span class="chip-count" data-count="stable">0</span></span></label>
++              <label class="chip"><input type="radio" name="releaseType" value="prerelease"><span class="chip-label">Pre-releases <span class="chip-count" data-count="prerelease">0</span></span></label>
++              <label class="chip"><input type="radio" name="releaseType" value="debug"><span class="chip-label">Debug / testing <span class="chip-count" data-count="debug">0</span></span></label>
++            </div>
++          </fieldset>
++
++          <div class="control control-sort">
++            <label for="releaseSort">Sort by</label>
++            <select id="releaseSort" aria-controls="releaseList">
++              <option value="newest" selected>Newest first</option>
++              <option value="oldest">Oldest first</option>
++              <option value="largest">Largest file</option>
++              <option value="smallest">Smallest file</option>
++              <option value="downloads">Most downloads</option>
++            </select>
++          </div>
++
++          <button id="releaseReset" class="button" type="button">Clear filters</button>
++        </form>
++        <div id="releaseResults" class="release-results" role="status" aria-live="polite" aria-atomic="true"></div>
++
+         <div id="releaseList" class="release-list">
+           <div class="empty-state"><strong>Loading releases</strong>Checking the official release list for APK files.</div>
+         </div>
+@@ -119,10 +155,12 @@
+           <div class="empty-state"><strong>JavaScript is required</strong>The release list is loaded with JavaScript. You can browse the builds directly on <a class="text-link" href="https://github.com/tokyo720022-create/What-Next/releases">GitHub releases</a>.</div>
+         </noscript>
+         <div class="safety-note">
+-          <strong>Install carefully.</strong> Some builds may be debug/testing packages; filenames that include <code>debug</code> are marked in the list. Check the release information before installing and download only from the official project links shown here. A build published here is not the same as a Play Store release.
++          <strong>Install carefully.</strong> Builds marked <em>Debug / testing build</em> are meant for testing and may behave unexpectedly. Check the release information before installing, download only from the official links shown here, and read the <a class="text-link" href="installation.html">installation guide</a> for update and safety tips.
+         </div>
+         <div class="about-links">
++          <a class="text-link" href="installation.html">Installation guide →</a>
+           <a class="text-link" href="../whats-next.html">Project information →</a>
++          <a class="text-link report-link" href="https://github.com/tokyo720022-create/What-Next/issues/new" data-bug-report target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
+           <a class="text-link" href="https://github.com/tokyo720022-create/What-Next" target="_blank" rel="noopener noreferrer">Source repository ↗</a>
+           <a class="text-link" href="../../index.html">Tokyo Brotherhood Lab home →</a>
+         </div>
+diff --git a/docs/sitemap.xml b/docs/sitemap.xml
+index c2d45166f0c04eb42b113d4fd07ccb2d14b9a714..49fdf731be96443dc80d286f57ac34fb9add87d8 100644
+--- a/docs/sitemap.xml
++++ b/docs/sitemap.xml
+@@ -3,5 +3,6 @@
+   <url><loc>https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/</loc><lastmod>2026-10-24</lastmod></url>
+   <url><loc>https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next.html</loc><lastmod>2026-10-24</lastmod></url>
+   <url><loc>https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next/releases.html</loc><lastmod>2026-10-24</lastmod></url>
++  <url><loc>https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/whats-next/installation.html</loc><lastmod>2026-10-24</lastmod></url>
+   <url><loc>https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/tokyo-manga-lab.html</loc><lastmod>2026-10-24</lastmod></url>
+ </urlset>
+diff --git a/tools/optimize_screenshots.py b/tools/optimize_screenshots.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..efd83358c31970aae123def445c3538390ebd32f
+--- /dev/null
++++ b/tools/optimize_screenshots.py
+@@ -0,0 +1,87 @@
++#!/usr/bin/env python3
++"""Optimise What's Next screenshots for the website gallery.
++
++Usage:
++    python3 tools/optimize_screenshots.py [SOURCE_DIR] [--out OUT_DIR]
++
++For every PNG/JPG/WebP in SOURCE_DIR (default: screenshots-source/) this writes
++  <name>.webp        full size, at most 1080 px wide
++  <name>-thumb.webp  thumbnail, 440 px wide
++into OUT_DIR (default: docs/assets/images/whats-next/screenshots/) and prints a
++JSON entry to paste into docs/data/screenshots.json. The script never invents
++titles, alt text or captions: you must write those yourself.
++
++Requires Pillow:  pip install pillow
++"""
++import argparse
++import json
++import re
++import sys
++from pathlib import Path
++
++try:
++    from PIL import Image, ImageOps
++except ImportError:
++    sys.exit("This tool needs Pillow:  pip install pillow")
++
++FULL_MAX_WIDTH = 1080
++THUMB_WIDTH = 440
++NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
++EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
++
++
++def resized(image, width):
++    if image.width <= width:
++        return image.copy()
++    height = round(image.height * width / image.width)
++    return image.resize((width, height), Image.LANCZOS)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
++    parser.add_argument("source", nargs="?", default="screenshots-source")
++    parser.add_argument("--out", default="docs/assets/images/whats-next/screenshots")
++    args = parser.parse_args()
++
++    source, out = Path(args.source), Path(args.out)
++    if not source.is_dir():
++        sys.exit("Source folder not found: %s (create it and put your screenshots inside)" % source)
++    files = sorted(p for p in source.iterdir() if p.suffix.lower() in EXTENSIONS)
++    if not files:
++        sys.exit("No PNG/JPG/WebP files found in %s" % source)
++    out.mkdir(parents=True, exist_ok=True)
++
++    entries = []
++    for path in files:
++        name = path.stem.lower()
++        if not NAME_RE.match(name):
++            print("Skipping %s: use lowercase letters, digits and dashes (e.g. anime-list.png)" % path.name, file=sys.stderr)
++            continue
++        with Image.open(path) as raw:
++            image = ImageOps.exif_transpose(raw).convert("RGB")
++        if image.width < 600:
++            print("Warning: %s is only %d px wide; it may look blurry." % (path.name, image.width), file=sys.stderr)
++
++        full = resized(image, FULL_MAX_WIDTH)
++        thumb = resized(image, THUMB_WIDTH)
++        full.save(out / (name + ".webp"), "WEBP", quality=82, method=6)
++        thumb.save(out / (name + "-thumb.webp"), "WEBP", quality=78, method=6)
++        print("%-24s -> %s.webp (%dx%d, %d KB), %s-thumb.webp (%d KB)" % (
++            path.name, name, full.width, full.height, (out / (name + ".webp")).stat().st_size // 1024,
++            name, (out / (name + "-thumb.webp")).stat().st_size // 1024), file=sys.stderr)
++        entries.append({
++            "file": name + ".webp",
++            "thumb": name + "-thumb.webp",
++            "width": full.width,
++            "height": full.height,
++            "title": "",
++            "alt": "",
++            "caption": "",
++        })
++
++    print("\nPaste into docs/data/screenshots.json (fill in title, alt and caption; entries without alt are ignored):\n", file=sys.stderr)
++    print(json.dumps(entries, indent=2, ensure_ascii=False))
++
++
++if __name__ == "__main__":
++    main()

@@ -12,7 +12,8 @@
  *   TBL.bugReportUrl() / TBL.feedbackUrl()   prefilled GitHub issue links
  *
  * Every <a data-bug-report> / <a data-feedback> on a page is upgraded
- * automatically; without JavaScript they still link to the plain GitHub
+ * automatically (add data-repo="owner/name" for a project other than
+ * What-Next); without JavaScript they still link to the plain GitHub
  * "new issue" page.
  */
 (function (global) {
@@ -210,18 +211,28 @@
       .join("&");
   }
 
-  // ctx (all optional): { apk: "file name", tag: "v1.2.3", release: "Release title" }
+  // New-issue page for a repository ("owner/name"); defaults to What-Next.
+  function issuesNew(repo) {
+    var cfg = TBL.config;
+    return /^[\w.-]+\/[\w.-]+$/.test(repo || "") && repo !== cfg.repo
+      ? "https://github.com/" + repo + "/issues/new"
+      : cfg.issuesNewUrl;
+  }
+
+  // ctx (all optional): { apk: "file name", tag: "v1.2.3", release: "Release title", repo: "owner/name" }
   TBL.bugReportUrl = function (ctx) {
     ctx = ctx || {};
     var cfg = TBL.config;
+    var base = issuesNew(ctx.repo);
+    var templatesApply = base === cfg.issuesNewUrl;     // the template switch only concerns the What-Next repo
     var build = "";
     if (ctx.apk) build += "APK: " + ctx.apk;
     if (ctx.release || ctx.tag) {
       build += (build ? "\nRelease: " : "Release: ") + [ctx.release, ctx.tag && "(" + ctx.tag + ")"].filter(Boolean).join(" ");
     }
 
-    if (cfg.useIssueTemplates) {
-      return cfg.issuesNewUrl + "?" + query({ template: cfg.bugTemplateFile, title: "Bug: " });
+    if (cfg.useIssueTemplates && templatesApply) {
+      return base + "?" + query({ template: cfg.bugTemplateFile, title: "Bug: " });
     }
 
     var body = [
@@ -232,7 +243,7 @@
       "<!-- e.g. Pixel 7, Galaxy S23 -->",
       "",
       "## Android version",
-      "<!-- e.g. Android 14 (Settings > About phone) -->",
+      "<!-- e.g. Android 14 (Settings > About phone), or your browser if you used the web app -->",
       "",
       "## Description of the problem",
       "<!-- What went wrong? -->",
@@ -250,13 +261,15 @@
       ""
     ].join("\n");
 
-    return cfg.issuesNewUrl + "?" + query({ title: "Bug: ", labels: "bug", body: body });
+    return base + "?" + query({ title: "Bug: ", labels: "bug", body: body });
   };
 
-  TBL.feedbackUrl = function () {
+  TBL.feedbackUrl = function (ctx) {
+    ctx = ctx || {};
     var cfg = TBL.config;
-    if (cfg.useIssueTemplates) {
-      return cfg.issuesNewUrl + "?" + query({ template: cfg.feedbackTemplateFile, title: "Feedback: " });
+    var base = issuesNew(ctx.repo);
+    if (cfg.useIssueTemplates && base === cfg.issuesNewUrl) {
+      return base + "?" + query({ template: cfg.feedbackTemplateFile, title: "Feedback: " });
     }
     var body = [
       "## Your feedback or suggestion",
@@ -266,16 +279,16 @@
       "<!-- Optional: how would you use it? -->",
       ""
     ].join("\n");
-    return cfg.issuesNewUrl + "?" + query({ title: "Feedback: ", labels: "enhancement", body: body });
+    return base + "?" + query({ title: "Feedback: ", labels: "enhancement", body: body });
   };
 
   TBL.enhanceIssueLinks = function (root) {
     var scope = root || document;
     Array.prototype.forEach.call(scope.querySelectorAll("a[data-bug-report]"), function (link) {
-      link.href = TBL.bugReportUrl({ apk: link.dataset.apk, tag: link.dataset.tag, release: link.dataset.release });
+      link.href = TBL.bugReportUrl({ apk: link.dataset.apk, tag: link.dataset.tag, release: link.dataset.release, repo: link.dataset.repo });
     });
     Array.prototype.forEach.call(scope.querySelectorAll("a[data-feedback]"), function (link) {
-      link.href = TBL.feedbackUrl();
+      link.href = TBL.feedbackUrl({ repo: link.dataset.repo });
     });
   };
 

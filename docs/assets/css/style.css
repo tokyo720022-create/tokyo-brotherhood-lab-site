@@ -1201,6 +1201,89 @@ h1 {
 }
 
 /* ========================================
+   PROJECT INFO CARDS (feature list + details)
+   ======================================== */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+  gap: 18px;
+}
+
+.info-card {
+  min-width: 0;
+  padding: 24px;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: var(--panel);
+}
+
+.info-card h3 {
+  margin: 14px 0 18px;
+}
+
+.feature-list {
+  margin: 0;
+  padding-left: 20px;
+
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.feature-list li + li {
+  margin-top: 10px;
+}
+
+.feature-list strong {
+  color: var(--text);
+}
+
+.info-list {
+  margin: 0;
+}
+
+.info-list > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 12px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.info-list > div:last-child {
+  border-bottom: 0;
+}
+
+.info-list dt {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.info-list dd {
+  margin: 0;
+
+  font-size: .93rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .info-list > div {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+}
+
+/* ========================================
    SCREENSHOT GALLERY + LIGHTBOX
    ======================================== */
 

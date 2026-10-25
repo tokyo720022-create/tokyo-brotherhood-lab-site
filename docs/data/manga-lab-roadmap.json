@@ -1,0 +1,64 @@
+{
+  "_help": "Progress and roadmap for the Tokyo Manga Lab page (same format as roadmap.json). 'status' must be one of the ids in 'statuses'. Only mark an item 'released' when it is in the app people can use today. Items appear under 'Available now' (released) or 'Coming up' (everything else).",
+  "reviewed": "2026-10-24",
+  "appName": "Tokyo Manga Lab",
+  "appVersion": "0.9.3",
+  "reviewedAgainst": "Tokyo Manga Lab CHANGELOG.md (through 0.9.3), README.md, BUILD-INFO.md, BUILD-APK.md and capacitor.config.json. Features were not re-tested in the running app.",
+  "note": "Planned, in-progress and testing items will be added here as they are confirmed. Nothing is listed as coming soon until it is real.",
+  "statuses": [
+    { "id": "planned",     "label": "Planned",     "description": "Not started yet" },
+    { "id": "in-progress", "label": "In progress", "description": "Being worked on now" },
+    { "id": "testing",     "label": "Testing",     "description": "Built and being checked before release" },
+    { "id": "released",    "label": "Released",    "description": "Available in the app today" }
+  ],
+  "areas": [
+    {
+      "id": "discovery-library",
+      "title": "Discovery and library",
+      "description": "Finding manga and keeping your own shelf.",
+      "items": [
+        { "title": "MangaDex search and title details", "status": "released", "description": "Search MangaDex, open a title's details and browse its chapter list, with a chapter-language setting." },
+        { "title": "Local library", "status": "released", "description": "Add titles, set a status, mark favourites and group titles into collections. Everything is stored on your own device." },
+        { "title": "Backup export and import", "status": "released", "description": "Save your library as a file and import it again. Importing keeps whichever copy of an item is newer instead of overwriting." },
+        { "title": "Library statistics", "status": "released", "description": "Basic statistics for your library, plus reading sessions and finished chapters recorded by the reader (since 0.7.0)." }
+      ]
+    },
+    {
+      "id": "reading",
+      "title": "Reading",
+      "description": "Reading chapters inside the app.",
+      "items": [
+        { "title": "In-app reader", "status": "released", "description": "Vertical scroll, right-to-left and left-to-right modes, page slider, tap zones, arrow keys, previous/next chapter and a data-saver quality option. It resumes where you stopped (since 0.7.0)." },
+        { "title": "Reader options", "status": "released", "description": "Auto read, screen rotation, status bar, time and battery, volume keys to turn pages, chapter reminder and skipping extras. Rotation, status bar and volume keys work in the Android app only (since 0.8.0)." }
+      ]
+    },
+    {
+      "id": "anilist",
+      "title": "AniList",
+      "description": "Optional. The app works fully without an AniList account.",
+      "items": [
+        { "title": "AniList sign-in and sync", "status": "released", "description": "Sign in with one tap, import your AniList manga list and save status changes back. It matches by exact ID only, never deletes anything and asks before adding titles to AniList (since 0.6.0, one-tap sign-in since 0.9.3)." },
+        { "title": "AniList to MangaDex linking", "status": "released", "description": "AniList-only titles can list and read chapters by matching the AniList ID, or by picking from candidates. Titles are never linked by name similarity (since 0.9.0)." }
+      ]
+    },
+    {
+      "id": "android-pwa",
+      "title": "Web app and Android",
+      "description": "Using Tokyo Manga Lab on your phone.",
+      "items": [
+        { "title": "Installable web app", "status": "released", "description": "A progressive web app. A service worker keeps the app shell available offline, so the app itself can open without a connection. Searching and reading still need one." },
+        { "title": "Android APK build", "status": "released", "description": "A Capacitor-based Android app built by the project's GitHub Actions workflow. APKs are currently debug-signed, which suits installing on your own phone but not Google Play (since 0.5.0)." }
+      ]
+    },
+    {
+      "id": "privacy-quality",
+      "title": "Privacy, safety and quality",
+      "description": "Keeping the app careful and dependable.",
+      "items": [
+        { "title": "Adult content off by default", "status": "released", "description": "Adult-rated titles are hidden unless you turn the preference on, which is only possible in the Android app and needs a confirmation. The web version never receives them." },
+        { "title": "Content-Security-Policy and cover-source limits", "status": "released", "description": "Scripts, connections and objects are limited to what the app uses, and cover images are only accepted from MangaDex and AniList over https (since 0.9.2)." },
+        { "title": "Automated tests", "status": "released", "description": "122 unit tests and 9 browser test suites, with a check that the offline cache lists every module (per BUILD-INFO, version 0.9.3)." }
+      ]
+    }
+  ]
+}

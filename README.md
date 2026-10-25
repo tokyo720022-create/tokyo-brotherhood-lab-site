@@ -22,12 +22,13 @@ docs/                              published by GitHub Pages
 ├── data/
 │   ├── releases.json              generated release snapshot (do not edit by hand)
 │   ├── screenshots.json           gallery manifest (edit)
-│   └── roadmap.json               roadmap content (edit)
+│   ├── roadmap.json               What's Next roadmap (edit)
+│   └── manga-lab-roadmap.json     Tokyo Manga Lab progress/roadmap (edit)
 └── projects/
     ├── whats-next.html            overview, screenshots, roadmap, report-a-bug
     ├── whats-next/releases.html   APK list
     ├── whats-next/installation.html   Android install / update guide
-    └── tokyo-manga-lab.html
+    └── tokyo-manga-lab.html       overview, Android install notes, progress, report-a-bug
 tools/fetch_releases.py            builds data/releases.json from the What-Next releases
 tools/optimize_screenshots.py      resizes screenshots to WebP + writes manifest entries
 .github/workflows/update-releases.yml
@@ -54,7 +55,8 @@ Run the snapshot locally: `python3 tools/fetch_releases.py` (set `GITHUB_TOKEN` 
 
 | To change…            | Edit…                                        |
 |-----------------------|----------------------------------------------|
-| Roadmap items/status  | `docs/data/roadmap.json`                     |
+| What's Next roadmap   | `docs/data/roadmap.json`                     |
+| Tokyo Manga Lab progress | `docs/data/manga-lab-roadmap.json`        |
 | App screenshots       | `docs/data/screenshots.json` + images (see `docs/assets/images/whats-next/screenshots/README.md`) |
 | APK list              | nothing: generated from GitHub releases      |
 
@@ -75,7 +77,7 @@ release-signed APK is published the page shows a "no stable release yet" notice.
 
 ### Bug reports
 
-"Report a bug" links open a prefilled new-issue form on the What-Next repository. The prefill is built in
+"Report a bug" links open a prefilled new-issue form on the project's repository (What-Next by default; add `data-repo="owner/name"` to a link for another project, as the Tokyo Manga Lab page does). The prefill is built in
 `docs/assets/js/site-utils.js`. If you later add `bug_report.md` / `feedback.md` issue templates to the
 What-Next repository, set `useIssueTemplates: true` in that file.
 

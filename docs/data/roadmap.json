@@ -1,6 +1,7 @@
 {
   "_help": "Edit this file to update the roadmap on docs/projects/whats-next.html. 'status' must be one of the ids in 'statuses'. Only mark an item 'released' when it is in the app people can use today. Items appear under 'Available now' (released) or 'Coming up' (everything else).",
   "reviewed": "2026-10-24",
+  "appName": "What's Next",
   "appVersion": "2.1.1",
   "reviewedAgainst": "What-Next README (v2.1.1), build-apk.yml and capacitor.config.json. Individual features were not re-tested against the app's source files.",
   "note": "Planned, in-progress and testing items will be added here as they are confirmed. Nothing is listed as coming soon until it is real.",

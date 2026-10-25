@@ -1,7 +1,9 @@
 /* Roadmap for the What's Next project page.
  *
- * Renders ../data/roadmap.json (statuses + areas + items). To update the
- * roadmap, edit that file only; no HTML changes are needed.
+ * Renders a roadmap data file (statuses + areas + items); the page names it in
+ * data-source (What's Next: ../data/roadmap.json, Tokyo Manga Lab:
+ * ../data/manga-lab-roadmap.json). To update a roadmap, edit its data file only;
+ * no HTML changes are needed. 'appName' and 'appVersion' feed the review note.
  *
  * Requires site-utils.js (window.TBL).
  */
@@ -109,8 +111,9 @@
     var reviewed = text(data.reviewed);
     var line = note;
     if (reviewed) {
+      var project = text(data.appName) || "the app";
       line += (line ? " " : "") + "Last reviewed " + TBL.formatDate(reviewed) +
-        (text(data.appVersion) ? " against What's Next v" + text(data.appVersion) + "." : ".");
+        (text(data.appVersion) ? " against " + project + " v" + text(data.appVersion) + "." : ".");
     }
     if (line) root.appendChild(el("p", "roadmap-note", line));
   }

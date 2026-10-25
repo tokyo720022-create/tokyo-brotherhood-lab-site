@@ -4,35 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090b14">
-  <meta name="description" content="Project information for Tokyo Manga Lab, a manga editing and typesetting creative project by Tokyo Brotherhood Lab.">
+  <meta name="description" content="Tokyo Manga Lab is a local-first manga discovery and library app: MangaDex search, an in-app reader, collections, optional AniList sync, a web app (PWA) and Android APK builds.">
   <link rel="canonical" href="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/tokyo-manga-lab.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tokyo Brotherhood Lab">
   <meta property="og:title" content="Tokyo Manga Lab — Tokyo Brotherhood Lab">
-  <meta property="og:description" content="Project information for Tokyo Manga Lab, a manga editing and typesetting creative project by Tokyo Brotherhood Lab.">
+  <meta property="og:description" content="Tokyo Manga Lab is a local-first manga discovery and library app: MangaDex search, an in-app reader, collections, optional AniList sync, a web app (PWA) and Android APK builds.">
   <meta property="og:url" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/projects/tokyo-manga-lab.html">
   <meta property="og:image" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/assets/images/og-tokyo-manga-lab.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tokyo Manga Lab — Tokyo Brotherhood Lab">
-  <meta name="twitter:description" content="Project information for Tokyo Manga Lab, a manga editing and typesetting creative project by Tokyo Brotherhood Lab.">
+  <meta name="twitter:description" content="Tokyo Manga Lab is a local-first manga discovery and library app: MangaDex search, an in-app reader, collections, optional AniList sync, a web app (PWA) and Android APK builds.">
   <meta name="twitter:image" content="https://tokyo720022-create.github.io/tokyo-brotherhood-lab-site/assets/images/og-tokyo-manga-lab.jpg">
   <title>Tokyo Manga Lab — Tokyo Brotherhood Lab</title>
   <link rel="icon" href="../assets/images/icon-tokyo-manga-lab.png" type="image/png" sizes="64x64">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/main.js" defer></script>
-  <style>
-    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .detail-card{padding:22px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(145deg,#171d32,#0e1221)}
-    .detail-card h3{margin:14px 0 9px}
-    .detail-card p{margin:0;color:var(--muted);font-size:.93rem;line-height:1.7}
-    .project-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
-    .project-fact{padding:16px;border:1px solid var(--border);border-radius:14px;background:var(--panel)}
-    .project-fact span{display:block;color:var(--muted);font-size:.84rem;margin-bottom:7px}
-    .project-fact strong{display:block;font-size:.98rem}
-    @media(max-width:760px){.detail-grid,.project-facts{grid-template-columns:1fr}}
-  </style>
+  <script src="../assets/js/site-utils.js" defer></script>
+  <script src="../assets/js/roadmap.js" defer></script>
 </head>
 <body>
   <header class="header">
@@ -64,15 +55,17 @@
     <section class="container project-hero">
       <div class="project-copy">
         <a class="back-link" href="../index.html#projects">← Back to all projects</a>
-        <div class="eyebrow">Project 02 · Manga creative work</div>
+        <div class="eyebrow">Project 02 · Manga reader &amp; library</div>
         <h1>Tokyo <span class="gradient-text">Manga Lab</span></h1>
-        <p class="project-lead">A manga-focused creative project centred on reading, chapter preparation, translation workflows, lettering, and typesetting.</p>
+        <p class="project-lead">A local-first manga discovery and library app. Search MangaDex, keep your own library on your device, read chapters in the in-app reader, and optionally sync with AniList. Your manga. Your world.</p>
         <div class="tag-row">
-          <span class="tag tag-pink">Manga</span><span class="tag tag-pink">Typesetting</span><span class="tag tag-pink">Translation workflow</span><span class="tag tag-pink">Creative tools</span>
+          <span class="tag tag-pink">Web app (PWA)</span><span class="tag tag-pink">Android APK</span><span class="tag tag-pink">MangaDex</span><span class="tag tag-pink">Local-first</span><span class="tag tag-pink">MIT license</span>
         </div>
         <div class="hero-buttons">
-          <a class="button button-primary" href="../index.html#contact">Contact developer →</a>
-          <a class="button" href="https://github.com/tokyo720022-create" target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a>
+          <a class="button button-primary" href="https://tokyo720022-create.github.io/tokyo-manga-lab/" target="_blank" rel="noopener noreferrer">Open web app ↗</a>
+          <a class="button" href="#android">Android app →</a>
+          <a class="button" href="https://github.com/tokyo720022-create/tokyo-manga-lab" target="_blank" rel="noopener noreferrer">Source code ↗</a>
+          <a class="button button-bug" href="https://github.com/tokyo720022-create/tokyo-manga-lab/issues/new" data-bug-report data-repo="tokyo720022-create/tokyo-manga-lab" target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
         </div>
       </div>
       <div class="project-logo-frame"><img class="project-logo" src="../assets/images/tokyo-manga-lab.webp" alt="Tokyo Manga Lab project logo" width="640" height="640" decoding="async"></div>
@@ -82,29 +75,128 @@
       <div class="container">
         <div class="section-intro">
           <div class="eyebrow">Project information</div>
-          <h2>A workspace for manga creativity.</h2>
-          <p>Tokyo Manga Lab focuses on manga reading, chapter preparation, translation workflows, lettering, and typesetting. The project is being shaped step by step; this page will be updated as specific tools and public resources are confirmed.</p>
+          <h2>Find it. Keep it. Read it.</h2>
+          <p>Tokyo Manga Lab searches MangaDex and keeps your library, progress and settings on your own device. No Tokyo Manga Lab account is needed. It is an independent project and is not affiliated with MangaDex or AniList.</p>
         </div>
-        <div class="detail-grid">
-          <article class="detail-card"><div class="card-icon" aria-hidden="true">▤</div><h3>Manga workflows</h3><p>Bring reading, chapter preparation, page cleanup, and editing tasks into a more organised creative process.</p></article>
-          <article class="detail-card"><div class="card-icon" aria-hidden="true">Aa</div><h3>Typesetting &amp; editing</h3><p>Focus on readable lettering, speech-bubble text placement, consistent typography, and careful image editing.</p></article>
-          <article class="detail-card"><div class="card-icon" aria-hidden="true">✧</div><h3>Resources &amp; collaboration</h3><p>Build toward a clearer collection of project resources and ways for interested manga fans and creators to connect.</p></article>
+
+        <div class="info-grid">
+          <article class="info-card">
+            <div class="card-icon" aria-hidden="true">✦</div>
+            <h3>What you can do</h3>
+            <ul class="feature-list">
+              <li><strong>Search and discover:</strong> search MangaDex and open a title's details and chapter list, with a chapter-language setting.</li>
+              <li><strong>Build a library:</strong> add titles, set a status, mark favourites and group titles into collections. It is all stored on your device.</li>
+              <li><strong>Read in the app:</strong> vertical, right-to-left or left-to-right reading, a page slider, resume where you stopped, auto read and more reader options.</li>
+              <li><strong>Sync with AniList (optional):</strong> import your AniList manga list and save status changes back. The app works fully without it.</li>
+              <li><strong>Keep a backup:</strong> export your library to a file and import it again; importing keeps whichever copy is newer.</li>
+              <li><strong>Use it anywhere:</strong> open it in a browser, add it to your home screen as a web app, or install the Android APK.</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <div class="card-icon" aria-hidden="true">⌘</div>
+            <h3>Project details</h3>
+            <dl class="info-list">
+              <div><dt>Project type</dt><dd>Local-first web app (PWA) with Android APK builds</dd></div>
+              <div><dt>Version</dt><dd>0.9.3, still in active development</dd></div>
+              <div><dt>Content source</dt><dd>MangaDex</dd></div>
+              <div><dt>Accounts</dt><dd>None required. AniList sign-in is optional.</dd></div>
+              <div><dt>Technology</dt><dd>HTML, CSS and JavaScript, IndexedDB, a Cloudflare Worker API, and Capacitor for Android</dd></div>
+              <div><dt>License</dt><dd>MIT</dd></div>
+              <div><dt>History</dt><dd><a class="inline-link" href="https://github.com/tokyo720022-create/tokyo-manga-lab/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog ↗</a></dd></div>
+            </dl>
+          </article>
         </div>
-        <div class="project-facts">
-          <div class="project-fact"><span>Project type</span><strong>Manga-focused creative workflow</strong></div>
-          <div class="project-fact"><span>Current status</span><strong>In development</strong></div>
-          <div class="project-fact"><span>Public downloads</span><strong>No app package announced</strong></div>
+
+        <div class="notice">
+          <strong>Good to know:</strong> MangaDex is the only manga source, and chapter pages load directly from MangaDex. The app does not download, store or re-host them, and offline chapter downloads aren't available. There is no cloud sync, so backups are files you save yourself. If the project's API service is unavailable or out of date, the app says so and links to the chapter on MangaDex instead. Adult-rated titles are hidden by default; they can only be switched on in the Android app, with a confirmation, and the web version never receives them.
         </div>
-        <div class="notice"><strong>Development status:</strong> This page describes the project's current focus. It does not claim that a public app or downloadable package is available; concrete tools and resources will be linked here when confirmed.</div>
+      </div>
+    </section>
+
+    <section class="section" id="android" aria-labelledby="android-title">
+      <div class="container">
+        <div class="section-intro">
+          <div class="eyebrow">Android &amp; web</div>
+          <h2 id="android-title">Install it on your phone.</h2>
+          <p>The web app works in any modern browser. The Android app is the same app wrapped with Capacitor, built by the project's GitHub Actions workflow.</p>
+        </div>
+
+        <div class="info-grid">
+          <article class="info-card">
+            <div class="card-icon" aria-hidden="true">▤</div>
+            <h3>Android APK</h3>
+            <ol class="feature-list">
+              <li>Get the APK from the project's <a class="inline-link" href="https://github.com/tokyo720022-create/tokyo-manga-lab/releases" target="_blank" rel="noopener noreferrer">GitHub releases ↗</a>. Builds are also available from runs of the <em>Build Android APK</em> workflow in the repository's Actions tab (a GitHub account is needed there, and the download is a ZIP that contains the APK).</li>
+              <li>Tap the APK. When Android asks, allow <strong>Install unknown apps</strong> for the app you opened it with (your browser or file manager).</li>
+              <li>Install it and open <strong>Tokyo Manga Lab</strong>.</li>
+            </ol>
+            <p class="notice"><strong>Before you install:</strong> download only from the official project links on this page. The APK is <strong>debug-signed</strong>, which suits installing on your own phone but not Google Play. Android only installs an update over an existing app when both builds were signed with the same key. If Android reports a conflict, export a backup from inside the app first, then uninstall and reinstall. Uninstalling removes the app's local data.</p>
+          </article>
+
+          <article class="info-card">
+            <div class="card-icon" aria-hidden="true">✧</div>
+            <h3>Web app &amp; build info</h3>
+            <dl class="info-list">
+              <div><dt>Web app</dt><dd><a class="inline-link" href="https://tokyo720022-create.github.io/tokyo-manga-lab/" target="_blank" rel="noopener noreferrer">Open Tokyo Manga Lab ↗</a></dd></div>
+              <div><dt>Add to home screen</dt><dd>Use your browser's Install or Add to Home screen option</dd></div>
+              <div><dt>Android app ID</dt><dd>com.tokyobrotherhood.<wbr>mangalab</dd></div>
+              <div><dt>Signing</dt><dd>Debug-signed APK</dd></div>
+              <div><dt>Build guide</dt><dd><a class="inline-link" href="https://github.com/tokyo720022-create/tokyo-manga-lab/blob/main/BUILD-APK.md" target="_blank" rel="noopener noreferrer">BUILD-APK.md ↗</a></dd></div>
+            </dl>
+          </article>
+        </div>
+        <p class="roadmap-note">A minimum Android version and a device compatibility list haven't been published for this app, so none are listed here.</p>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="container">
+        <div class="section-intro">
+          <div class="eyebrow">Progress</div>
+          <h2 id="roadmap-title">What's built, and what's next.</h2>
+          <p>Features already in the app are listed under <em>Available now</em>. Planned work is kept separate under <em>Coming up</em> and is never described as finished.</p>
+        </div>
+        <div id="roadmapContent" data-source="../data/manga-lab-roadmap.json">
+          <p class="roadmap-note">Loading progress…</p>
+        </div>
+        <noscript>
+          <p class="roadmap-note">This section needs JavaScript. See the <a class="inline-link" href="https://github.com/tokyo720022-create/tokyo-manga-lab/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">project changelog ↗</a> for what has been built.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <section class="section" id="report-bug" aria-labelledby="report-title">
+      <div class="container">
+        <div class="report-panel">
+          <div>
+            <div class="eyebrow">Bugs &amp; feedback</div>
+            <h2 id="report-title">Found a bug? Let me know.</h2>
+            <p>Bug reports and suggestions are handled on GitHub, so there is nothing to sign up for on this website (a free GitHub account is needed to post). The bug-report button opens a new issue with a ready-made template that asks for:</p>
+            <ul>
+              <li>The app version or APK file name</li>
+              <li>Your device model and Android version (or browser, for the web app)</li>
+              <li>A description of the problem and the steps to reproduce it</li>
+              <li>What you expected to happen and what actually happened</li>
+            </ul>
+          </div>
+          <div class="report-actions">
+            <a class="button button-bug" href="https://github.com/tokyo720022-create/tokyo-manga-lab/issues/new" data-bug-report data-repo="tokyo720022-create/tokyo-manga-lab" target="_blank" rel="noopener noreferrer">Report a bug ↗</a>
+            <a class="button" href="https://github.com/tokyo720022-create/tokyo-manga-lab/issues/new" data-feedback data-repo="tokyo720022-create/tokyo-manga-lab" target="_blank" rel="noopener noreferrer">Send feedback ↗</a>
+            <a class="button" href="../index.html#contact">Contact on Discord →</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container about">
         <div class="eyebrow">Explore</div>
-        <h2>Follow the creative process.</h2>
-        <p>Find the developer's projects on GitHub or return to the Tokyo Brotherhood Lab homepage.</p>
+        <h2>Follow the project.</h2>
+        <p>Open the app, read the source, or find the developer's other projects on GitHub. You can also return to the Tokyo Brotherhood Lab homepage.</p>
         <div class="about-links">
+          <a class="text-link" href="https://tokyo720022-create.github.io/tokyo-manga-lab/" target="_blank" rel="noopener noreferrer">Open the web app ↗</a>
+          <a class="text-link" href="https://github.com/tokyo720022-create/tokyo-manga-lab" target="_blank" rel="noopener noreferrer">Source repository ↗</a>
           <a class="text-link" href="https://github.com/tokyo720022-create" target="_blank" rel="noopener noreferrer">Developer profile ↗</a>
           <a class="text-link" href="../index.html#projects">All projects →</a>
           <a class="text-link" href="../index.html#contact">Contact Tokyo →</a>

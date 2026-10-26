@@ -1,23 +1,43 @@
 {
-  "updated_at": "2026-10-26T04:55:43Z",
+  "updated_at": "2026-10-26T06:36:36Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
-      "tag_name": "latest-apk",
-      "name": "What Next? v2.1.1 APK",
-      "body": null,
+      "tag_name": "v2.1.1-b43",
+      "name": "What Next? v2.1.1-b43",
+      "body": "What Next? v2.1.1-b43\r\n\r\nA smarter way to discover what to watch or read next.\r\n\r\nThis release introduces new social features, enhanced user profiles, deeper anime and manga statistics, and improvements to the Android release workflow.\r\n\r\n✨ New Features\r\n\r\nPeople & Social Profiles\r\n\r\n- Followers and Following: Browse your followers and the users you follow directly within the app.\r\n- Mutual Follow Indicators: Easily identify users who follow you back.\r\n- User Profiles: View other AniList users' profile banners, avatars, bios, anime and manga statistics, and profile information.\r\n- Follow & Unfollow: Manage your connections directly from user profiles and the contextual menu.\r\n- Direct Messaging: Open a conversation with another AniList user through the app's existing chat integration.\r\n- AniList Integration: Quickly access users' original AniList profiles.\r\n\r\n🎯 Anime & Manga Taste Affinity\r\n\r\n- Compare your ratings with another user's ratings for titles you both have scored.\r\n- View an affinity percentage based on the similarity of your shared ratings.\r\n- Affinity calculations require at least five shared scored titles.\r\n- View separate anime and manga affinity results.\r\n\r\n📊 Detailed User Statistics\r\n\r\n- Explore another user's detailed AniList statistics.\r\n- View visual breakdowns of genres, statuses, demographics, formats, tags, and score distributions.\r\n- Reuse the app's existing statistics presentation for a consistent experience.\r\n\r\n⚙️ Android & Release Improvements\r\n\r\n- Introduced uniquely versioned APK releases.\r\n- Improved Android version-code generation to support installation of newer builds over earlier versions.\r\n- Updated the build workflow to use a consistent signing identity across builds.\r\n- Improved build concurrency handling and ZIP-upload workflow coordination.\r\n\r\n📱 Download\r\n\r\nDownload \"WhatNext-v2.1.1-b43.apk\" from the Assets section below and install it on your Android device.\r\n\r\n🔗 Project Links\r\n\r\n- Repository: https://github.com/tokyo720022-create/What-Next\r\n- APK Download: https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b43/WhatNext-v2.1.1-b43.apk\r\n\r\n---\r\n\r\nWhat Next? is an unofficial AniList companion application developed by Tokyo Brotherhood to help users manage their anime and manga activity, explore statistics, and connect with other AniList users.\r\n\r\nDisclaimer: What Next? is not affiliated with or endorsed by AniList.",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/latest-apk",
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b43",
+      "published_at": "2026-10-26T06:03:20Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b43.apk",
+          "size": 14282708,
+          "download_count": 0,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b43/WhatNext-v2.1.1-b43.apk",
+          "created_at": "2026-10-26T06:03:18Z",
+          "updated_at": "2026-10-26T06:03:19Z",
+          "digest": "sha256:d9b2f49706fe0ff9ddf3acc53b3b7566e2859b3cb15575ad91d7ebb5c61a34db"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.1",
+      "name": "What Next? v2.1.1 APK",
+      "body": "What Next? v2.1.1 APK\r\n\r\nYour personal AniList companion for anime and manga tracking.\r\n\r\nWhat Next? helps you decide what to watch or read next based on your available time, while providing convenient access to your AniList library, statistics, and progress tracking.\r\n\r\n✨ Features\r\n\r\n- Smart Picks: Get anime and manga recommendations from your AniList lists based on your available time.\r\n- Anime & Manga Library: Browse your lists with status tabs, search, sorting, advanced filters, and customizable layouts.\r\n- Discover: Explore trending, popular, top-rated, and recently released anime and manga.\r\n- Progress Tracking: Update episode and chapter progress, change list statuses, manage scores, and mark titles as completed.\r\n- Detailed Media Pages: Explore synopses, genres, characters, staff, studios, relations, recommendations, and other title information.\r\n- Anime & Manga Statistics: View detailed statistics, genre distributions, score breakdowns, and progress insights.\r\n- Airing Schedule: Track upcoming episodes of airing anime from your list.\r\n- Relation Map: Explore franchise connections, prequels, sequels, side stories, and related titles through an interactive map.\r\n- Theme Customization: Choose light, dark, AMOLED, or custom colors.\r\n- Offline Support: Access previously saved lists and use supported features when your internet connection is unavailable.\r\n- AniList Chat: Access AniList's private messaging functionality from within the app.\r\n- Discord Sync: Share anime and manga list updates with configured Discord forum threads.\r\n\r\n📱 Android APK\r\n\r\nDownload the APK from the Assets section below to install What Next? on your Android device.\r\n\r\nNote: Sign in with your AniList account to access your personal library and account features.\r\n\r\n🔗 Links\r\n\r\n- Source Code: https://github.com/tokyo720022-create/What-Next\r\n- AniList: https://anilist.co/\r\n\r\n---\r\n\r\nWhat Next? is an unofficial AniList companion application developed by Tokyo Brotherhood. It is not affiliated with or endorsed by AniList.",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1",
       "published_at": "2026-10-17T05:46:54Z",
       "assets": [
         {
-          "name": "app-debug.apk",
+          "name": "WhatNext-v2.1.1.APK",
           "size": 14275465,
           "download_count": 0,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/latest-apk/app-debug.apk",
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1/WhatNext-v2.1.1.APK",
           "created_at": "2026-10-26T01:21:29Z",
-          "updated_at": "2026-10-26T01:21:30Z",
+          "updated_at": "2026-10-26T06:33:24Z",
           "digest": "sha256:e50cbefd70e1f5301279e5f1f96f66182f77d2b32a043eb4e2c67889611ad840"
         }
       ]

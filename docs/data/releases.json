@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27T05:31:36Z",
+  "updated_at": "2026-10-27T05:35:47Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
@@ -46,7 +46,7 @@
       "tag_name": "v2.1.1",
       "name": "What Next? v2.1.1 APK",
       "body": "What Next? v2.1.1 APK\r\n\r\nYour personal AniList companion for anime and manga tracking.\r\n\r\nWhat Next? helps you decide what to watch or read next based on your available time, while providing convenient access to your AniList library, statistics, and progress tracking.\r\n\r\n✨ Features\r\n\r\n- Smart Picks: Get anime and manga recommendations from your AniList lists based on your available time.\r\n- Anime & Manga Library: Browse your lists with status tabs, search, sorting, advanced filters, and customizable layouts.\r\n- Discover: Explore trending, popular, top-rated, and recently released anime and manga.\r\n- Progress Tracking: Update episode and chapter progress, change list statuses, manage scores, and mark titles as completed.\r\n- Detailed Media Pages: Explore synopses, genres, characters, staff, studios, relations, recommendations, and other title information.\r\n- Anime & Manga Statistics: View detailed statistics, genre distributions, score breakdowns, and progress insights.\r\n- Airing Schedule: Track upcoming episodes of airing anime from your list.\r\n- Relation Map: Explore franchise connections, prequels, sequels, side stories, and related titles through an interactive map.\r\n- Theme Customization: Choose light, dark, AMOLED, or custom colors.\r\n- Offline Support: Access previously saved lists and use supported features when your internet connection is unavailable.\r\n- AniList Chat: Access AniList's private messaging functionality from within the app.\r\n- Discord Sync: Share anime and manga list updates with configured Discord forum threads.\r\n\r\n📱 Android APK\r\n\r\nDownload the APK from the Assets section below to install What Next? on your Android device.\r\n\r\nNote: Sign in with your AniList account to access your personal library and account features.\r\n\r\n🔗 Links\r\n\r\n- Source Code: https://github.com/tokyo720022-create/What-Next\r\n- AniList: https://anilist.co/\r\n\r\n---\r\n\r\nWhat Next? is an unofficial AniList companion application developed by Tokyo Brotherhood. It is not affiliated with or endorsed by AniList.",
-      "prerelease": false,
+      "prerelease": true,
       "draft": false,
       "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1",
       "published_at": "2026-10-17T05:46:54Z",

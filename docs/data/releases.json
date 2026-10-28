@@ -1,7 +1,27 @@
 {
-  "updated_at": "2026-10-27T05:35:47Z",
+  "updated_at": "2026-10-28T05:51:21Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v2.1.1-b45",
+      "name": "What Next? v2.1.1-b45",
+      "body": "🚀 What Next? v2.1.1-b45\r\n\r\nThis release brings a redesigned airing calendar, an improved login experience, expanded customization options, and better account management.\r\n\r\n✨ What's New\r\n\r\n- Redesigned Airing Calendar: New monthly calendar grid with anime posters, weekly episode cards, and month/week view switching.\r\n- Premiere & Finale Filters: Quickly discover anime premieres and season finales.\r\n- Episode Tracking: Mark an aired episode as watched directly from the calendar when it's the next episode available to watch.\r\n- Improved Login Screen: A refreshed visual design with animated backgrounds, clearer login options, and enhanced security guidance for AniList authentication.\r\n- Expanded App Settings: Customize themes, colors, text size, profile picture shapes, title languages, airing times, and more.\r\n- Enhanced AniList Settings: Edit supported account preferences with a dedicated Save Changes workflow.\r\n- Better Account Management: New shortcuts for profile management, account settings, list tools, imports, and app permissions.\r\n- New Device Tools: Sync pending changes, clear locally saved lists and pictures, and copy app information.\r\n\r\n🛠️ Improvements\r\n\r\n- Updated application asset revision to improve cache consistency.\r\n- Refined calendar, login, and settings interfaces.\r\n- Expanded automated end-to-end tests for calendar, login, and settings functionality.\r\n\r\n📋 Full Changelog\r\n\r\n\"[Compare v2.1.1-b44 with v2.1.1-b45](https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b44...v2.1.1-b45)\" (https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b44...v2.1.1-b45)\r\n\r\n---\r\n\r\nWhat Next? — Never wonder what to watch or read next.",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b45",
+      "published_at": "2026-10-28T05:36:51Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b45.apk",
+          "size": 14311902,
+          "download_count": 0,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b45/WhatNext-v2.1.1-b45.apk",
+          "created_at": "2026-10-28T05:36:49Z",
+          "updated_at": "2026-10-28T05:36:50Z",
+          "digest": "sha256:ff89e0fe8cd0aa256081c2e0f0f05432cd956e94261a8eb9a10eafdb3b5085f5"
+        }
+      ]
+    },
     {
       "tag_name": "v2.1.1-b44",
       "name": "What Next? v2.1.1-b44",

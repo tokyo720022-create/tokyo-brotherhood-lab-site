@@ -1,7 +1,27 @@
 {
-  "updated_at": "2026-10-28T05:51:21Z",
+  "updated_at": "2026-10-29T10:07:01Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v2.1.1-b46",
+      "name": "What Next? v2.1.1-b46",
+      "body": "**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b45...v2.1.1-b46",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b46",
+      "published_at": "2026-10-29T05:58:25Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b46.apk",
+          "size": 14311915,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b46/WhatNext-v2.1.1-b46.apk",
+          "created_at": "2026-10-29T05:58:23Z",
+          "updated_at": "2026-10-29T05:58:24Z",
+          "digest": "sha256:6738093ba9b2ee94174fd4e2f222b3cb1a8fe4757985a7e2636916db2153fab2"
+        }
+      ]
+    },
     {
       "tag_name": "v2.1.1-b45",
       "name": "What Next? v2.1.1-b45",
@@ -14,7 +34,7 @@
         {
           "name": "WhatNext-v2.1.1-b45.apk",
           "size": 14311902,
-          "download_count": 0,
+          "download_count": 2,
           "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b45/WhatNext-v2.1.1-b45.apk",
           "created_at": "2026-10-28T05:36:49Z",
           "updated_at": "2026-10-28T05:36:50Z",
@@ -34,7 +54,7 @@
         {
           "name": "WhatNext-v2.1.1-b44.apk",
           "size": 14300830,
-          "download_count": 0,
+          "download_count": 1,
           "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b44/WhatNext-v2.1.1-b44.apk",
           "created_at": "2026-10-27T00:38:43Z",
           "updated_at": "2026-10-27T00:38:44Z",
@@ -54,7 +74,7 @@
         {
           "name": "WhatNext-v2.1.1-b43.apk",
           "size": 14282708,
-          "download_count": 0,
+          "download_count": 1,
           "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b43/WhatNext-v2.1.1-b43.apk",
           "created_at": "2026-10-26T06:03:18Z",
           "updated_at": "2026-10-26T06:03:19Z",
@@ -74,7 +94,7 @@
         {
           "name": "WhatNext-v2.1.1.APK",
           "size": 14275465,
-          "download_count": 0,
+          "download_count": 2,
           "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1/WhatNext-v2.1.1.APK",
           "created_at": "2026-10-26T01:21:29Z",
           "updated_at": "2026-10-26T06:33:24Z",

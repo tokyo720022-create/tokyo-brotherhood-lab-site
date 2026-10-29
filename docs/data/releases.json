@@ -1,12 +1,32 @@
 {
-  "updated_at": "2026-10-29T10:07:01Z",
+  "updated_at": "2026-10-29T18:31:39Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
+      "tag_name": "v2.1.1-b47",
+      "name": "What Next? v2.1.1-b47",
+      "body": "What Next? v2.1.1-b47\r\n\r\n🚀 What's New\r\n\r\n🧠 New Anime & Manga Taste Report\r\n\r\nDiscover your personal anime and manga preferences with the new Taste Report, accessible from the Pick screen.\r\n\r\n- Taste Archetype: Discover your dominant anime or manga theme.\r\n- Theme Index: See which themes you prefer more or less than the average AniList fan.\r\n- Personality Type: Get a four-letter profile based on your preferences for niche vs. mainstream, retro vs. fresh, diverse vs. specialized, and contrarian vs. aligned.\r\n- Hidden Gems: Discover titles that match your unique tastes.\r\n- Genre Mix: Explore the distribution of your favourite genres.\r\n- Rating Differences: Compare your ratings with other fans and find titles where your opinions differ.\r\n- Vibe Sliders: Explore five dimensions of your preferences, from grim vs. wholesome to competitive vs. loyal.\r\n- Share Your Taste: Share your personal taste report.\r\n\r\n📊 Personalized Recommendations\r\n\r\nThe Taste Report compares your AniList collection against popular titles to help you better understand your preferences and discover recommendations that suit your taste.\r\n\r\nRequirements: The report needs at least 8 started or completed titles. The Contrarian personality slider requires at least 8 rated titles.\r\n\r\n🛠️ Additional Updates\r\n\r\n- Added dedicated Taste Report screen styling and functionality.\r\n- Added unit tests for Taste Report calculations.\r\n- Updated project documentation.\r\n- Added the \"site.zip\" archive to the repository.\r\n\r\n🔄 Full Changelog\r\n\r\nCompare the changes between builds b46 and b47:\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b46...v2.1.1-b47\r\n\r\nThank you for using What Next? ❤️\r\n\r\nDiscover your taste. Find your next favourite.",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b47",
+      "published_at": "2026-10-29T10:36:42Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b47.apk",
+          "size": 14311918,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b47/WhatNext-v2.1.1-b47.apk",
+          "created_at": "2026-10-29T10:36:39Z",
+          "updated_at": "2026-10-29T10:36:41Z",
+          "digest": "sha256:72af532fce3959c5bfe5409540db0a4f50023e216ccf912aa7e8f17241f62c97"
+        }
+      ]
+    },
+    {
       "tag_name": "v2.1.1-b46",
       "name": "What Next? v2.1.1-b46",
-      "body": "**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b45...v2.1.1-b46",
-      "prerelease": false,
+      "body": "What Next? v2.1.1-b46\r\n\r\n📦 Release Update\r\n\r\nIntroducing What Next? v2.1.1-b46 — the latest build of What Next?\r\n\r\nThis release includes the changes recorded between builds b45 and b46.\r\n\r\n🔄 Full Changelog\r\n\r\nSee the complete list of changes in this release:\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b45...v2.1.1-b46\r\n\r\n📥 Installation\r\n\r\nDownload the appropriate asset from the release section below and install it on your device.\r\n\r\nThank you for using What Next? ❤️\r\n\r\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b46...v2.1.1-b46",
+      "prerelease": true,
       "draft": false,
       "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b46",
       "published_at": "2026-10-29T05:58:25Z",

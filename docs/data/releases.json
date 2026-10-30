@@ -1,7 +1,47 @@
 {
-  "updated_at": "2026-10-30T01:53:25Z",
+  "updated_at": "2026-10-30T10:09:22Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v2.1.1-b60",
+      "name": "What Next? v2.1.1-b60",
+      "body": "What Next? v2.1.1-b60 — Stable Release\r\n\r\nSTABLE RELEASE · BUILD 60\r\n\r\nThis release introduces a redesigned application launch experience, improved loading feedback, updated splash-screen visuals, and startup reliability improvements.\r\n\r\n✨ What's New\r\n\r\n1. Redesigned Splash Screen\r\n\r\n- Completely redesigned the application opening screen.\r\n- Added a refreshed full-screen visual experience.\r\n- Improved logo presentation with animation and subtle visual effects.\r\n- Added the application name: What Next?\r\n- Introduced the new tagline: Your list. Your next pick.\r\n- Added a descriptive footer: Pick, track and discover with AniList.\r\n- Introduced a new dark purple gradient background.\r\n- Improved spacing and layout for modern mobile screens.\r\n\r\n2. Live Loading Progress Bar\r\n\r\n- Introduced a new animated loading progress indicator.\r\n- Displays loading progress while application resources are being loaded.\r\n- Progress updates as individual screen components and JavaScript modules finish loading.\r\n- Added smooth progress animations.\r\n- Improved visual feedback during application startup.\r\n\r\n3. Startup Improvements\r\n\r\n- Updated application resource revision to \"2.1.1-r15\".\r\n- Updated service worker cache version.\r\n- Improved resource cache invalidation.\r\n- Helps prevent outdated application files from being mixed with newly updated resources.\r\n- Improved handling of the splash screen during application initialisation.\r\n\r\n4. Mobile Experience & Accessibility\r\n\r\n- Improved splash-screen layout for different mobile screen dimensions.\r\n- Added safe-area spacing support.\r\n- Improved small-screen compatibility.\r\n- Respects reduced-motion preferences.\r\n- Preserved the option to disable the opening splash screen through App Settings.\r\n\r\n5. Testing & Quality Improvements\r\n\r\n- Added automated splash-screen end-to-end tests.\r\n- Tested loading progress behaviour.\r\n- Added mobile viewport layout checks.\r\n- Tested splash-screen visibility and dismissal.\r\n- Verified that disabling the splash screen still allows normal application startup.\r\n- Added checks for JavaScript errors during loading.\r\n\r\n---\r\n\r\n✅ Stable Release\r\n\r\nWhat Next? v2.1.1-b60 is now available as a stable release.\r\n\r\nThis update focuses on improving the first impression, application startup experience, and overall interface polish.\r\n\r\nThank you for being part of What Next!\r\n\r\nYour list. Your next pick.\r\n\r\nDeveloped by Tokyo Brotherhood.\r\n\r\n---\r\n\r\nFull Changelog:\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b57...v2.1.1-b60",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b60",
+      "published_at": "2026-10-30T05:39:53Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b60.apk",
+          "size": 11134522,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b60/WhatNext-v2.1.1-b60.apk",
+          "created_at": "2026-10-30T05:39:51Z",
+          "updated_at": "2026-10-30T05:39:52Z",
+          "digest": "sha256:ed699b4eaeb658b51998988a45edac487d8e937cd5abcbbfea5342416e1e7a16"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.1-b57",
+      "name": "What Next? v2.1.1-b57",
+      "body": "What Next? v2.1.1-b57 — Stable Release\r\n\r\nSTABLE RELEASE · BUILD 57\r\n\r\nA major update to What Next! This release brings a redesigned user experience, personalised Anime and Manga discovery, a new Taste Report system, expanded Profile functionality, and several quality-of-life improvements.\r\n\r\n✨ Major New Features\r\n\r\n1. Personalised Taste Report\r\n\r\nIntroducing a detailed system that analyses your AniList activity to understand your Anime and Manga preferences.\r\n\r\n- Personalised Anime and Manga taste analysis.\r\n- Unique taste archetypes based on your strongest interests.\r\n- Four-letter personality classification.\r\n- Theme Index comparing your preferences against the average AniList user.\r\n- Five interactive-style preference indicators:\r\n  - Grim / Wholesome\r\n  - Heart / Brain\r\n  - Dreamers / Schemers\r\n  - Scrappy / Destined\r\n  - Competitive / Loyal\r\n- Discover hidden gems based on your viewing history.\r\n- Explore older classics and newer releases.\r\n- Genre distribution and preference analysis.\r\n- Identify your biggest rating differences compared with other fans.\r\n- Share your personal Taste Report.\r\n\r\n2. Something New for My Taste\r\n\r\nA new recommendation system designed to find titles outside your existing AniList collection.\r\n\r\n- Personalised Anime and Manga recommendations.\r\n- Uses your favourite genres and strongest themes.\r\n- Excludes titles already present in your AniList lists.\r\n- Filters out unreleased titles.\r\n- Integrates with your existing Watch, Read, Genre, Time and 18+ filters.\r\n- Added Another and Hide options.\r\n- Directly add discoveries to your AniList Planning list.\r\n\r\n3. Redesigned Profile\r\n\r\nA completely refreshed Profile experience.\r\n\r\n- Redesigned profile banner and avatar layout.\r\n- Improved Anime, Manga, Following and Followers statistics.\r\n- Added Anime and Manga Tendencies.\r\n- Automatic genre preference analysis.\r\n- Favourite tags and release-year insights.\r\n- First recorded watching/reading year.\r\n- Completion-rate analysis.\r\n- New Favourites section featuring:\r\n  - Anime\r\n  - Manga\r\n  - Characters\r\n  - Staff\r\n  - Studios\r\n- Added Show More pagination.\r\n- Improved navigation to Stats, Chat and Settings.\r\n\r\n🎨 New Anime Themes\r\n\r\nIntroduced eight dedicated themes to personalise the entire application.\r\n\r\n1. Sakura Flowers 🌸\r\n2. One Piece ☠️\r\n3. Naruto 🍥\r\n4. Gintama\r\n5. Dragon Ball\r\n6. Bleach\r\n7. Rent-a-Girlfriend\r\n8. Attack on Titan\r\n\r\nSpecial visual treatments include Sakura petal effects and Gintama-inspired Edo wave patterns.\r\n\r\nAll themes come with their own background, colour palette, accent colours and interface styling.\r\n\r\n📚 Anime & Manga List Improvements\r\n\r\n- Added AniList Custom Lists integration.\r\n- Automatically detects your custom lists.\r\n- Displays the number of titles inside each custom list.\r\n- Filter Anime and Manga collections by individual custom lists.\r\n- Added an All Lists option.\r\n- Custom list filtering works alongside existing status filters and search.\r\n\r\n🔄 Swipe Down to Refresh\r\n\r\nIntroduced a pull-to-refresh system with an animated visual indicator.\r\n\r\nSupported screens:\r\n\r\n- Pick\r\n- Anime and Manga Lists\r\n- Discover\r\n- Seasonal\r\n- Calendar\r\n- Schedule\r\n- Profile\r\n- Stats\r\n- Taste Report\r\n- Chat\r\n\r\nRefresh your content without manually reloading the application.\r\n\r\n🧠 Smarter Recommendation System\r\n\r\n- Improved release-date detection.\r\n- Prevents unreleased titles from appearing in recommendations.\r\n- Avoids suggesting anime episodes that have not aired yet.\r\n- Added New for You identification.\r\n- Improved personalised recommendation selection.\r\n- Added direct Add to Planning functionality for new discoveries.\r\n\r\n⚙️ General Improvements\r\n\r\n- Updated application loading sequence.\r\n- Improved resource and cache version management.\r\n- Refined interface styling across multiple screens.\r\n- Improved Profile presentation and navigation.\r\n- Expanded automated testing.\r\n- Added new end-to-end tests for major features.\r\n- Added additional unit tests for Taste Report calculations.\r\n- Improved overall application consistency.\r\n\r\n---\r\n\r\n✅ Stable Release\r\n\r\nWhat Next? v2.1.1-b57 is now a stable release.\r\n\r\nThank you for using What Next!\r\n\r\nYour Anime and Manga journey, your collection, and your next discovery — all in one place.\r\n\r\nWhat Next? — Discover what to watch or read next.\r\n\r\nDeveloped by Tokyo Brotherhood.\r\n\r\n---\r\n\r\nFull Changelog:\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b47...v2.1.1-b57",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b57",
+      "published_at": "2026-10-30T01:54:36Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b57.apk",
+          "size": 14338951,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b57/WhatNext-v2.1.1-b57.apk",
+          "created_at": "2026-10-30T01:54:34Z",
+          "updated_at": "2026-10-30T01:54:35Z",
+          "digest": "sha256:fcaf02c850d978b6db0f58eb8c728324391b0c86119536794d7acf6153697919"
+        }
+      ]
+    },
     {
       "tag_name": "v2.1.1-b54",
       "name": "What Next? v2.1.1-b54",

@@ -1,64 +1,24 @@
 {
-  "updated_at": "2026-10-30T01:06:34Z",
+  "updated_at": "2026-10-30T01:53:25Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
-      "tag_name": "v2.1.1-b51",
-      "name": "What Next? v2.1.1-b51",
-      "body": "**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b50...v2.1.1-b51",
-      "prerelease": false,
+      "tag_name": "v2.1.1-b54",
+      "name": "What Next? v2.1.1-b54",
+      "body": "What Next? v2.1.1-b54 — Pre-release\r\n\r\n<badge>PRE-RELEASE · BUILD 54</badge>\r\n\r\nThis update introduces a redesigned Profile experience, smarter taste-based recommendations, AniList custom-list filtering, and a new swipe-to-refresh system.\r\n\r\n✨ What's New\r\n\r\n1. Redesigned Profile\r\n\r\n- Redesigned Profile interface with a new banner, avatar, and improved layout.\r\n- Added a dedicated Tendencies section for Anime and Manga.\r\n- Automatically analyses your AniList statistics to identify:\r\n  - Most-loved genres.\r\n  - Least-favoured genres (when enough data is available).\r\n  - Frequently encountered tags.\r\n  - Favourite release years.\r\n  - First recorded watching/reading year.\r\n  - Overall completion rate.\r\n- Added a new Favourites section with separate categories:\r\n  - Anime\r\n  - Manga\r\n  - Characters\r\n  - Staff\r\n  - Studios\r\n- Added pagination with a Show More option.\r\n- Favourite entries now open their respective media or entity pages.\r\n- Improved Profile navigation with redesigned Stats, Chat, and Settings shortcuts.\r\n\r\n2. Something New for My Taste\r\n\r\n- Added a new Something New for My Taste button in the Pick section.\r\n- Generates personalised Anime and Manga recommendations based on your AniList taste report.\r\n- Matches recommendations against your favourite genres and themes.\r\n- Excludes titles already present in your AniList lists.\r\n- Filters out unreleased titles.\r\n- Selects recommendations from the strongest matches to provide variety.\r\n- Added an Add to Planning action for new discoveries.\r\n- Supports Another and Hide actions.\r\n\r\nNote: Taste-based recommendations require at least 8 non-planning entries for the selected media type.\r\n\r\n3. Custom Lists Support\r\n\r\n- Added a new Custom Lists button in Anime and Manga lists.\r\n- Automatically detects your AniList custom lists.\r\n- Displays the number of titles in each custom list.\r\n- Filter your collection by individual custom lists.\r\n- Added an All Lists option to restore the complete collection.\r\n\r\n4. Swipe Down to Refresh\r\n\r\n- Introduced a new pull-to-refresh interaction with an animated indicator.\r\n- Refreshes the current screen without requiring a manual page reload.\r\n- Supported screens include:\r\n  - Pick\r\n  - Anime and Manga Lists\r\n  - Discover\r\n  - Seasonal\r\n  - Calendar\r\n  - Schedule\r\n  - Profile\r\n  - Stats\r\n  - Taste Report\r\n  - Chat\r\n\r\n5. Smarter Recommendations & Improvements\r\n\r\n- Improved release-date detection using AniList media status and start dates.\r\n- Prevents unreleased titles from appearing in normal recommendations.\r\n- Better handling of upcoming episodes and available progress.\r\n- Added a New for You label for personalised discoveries.\r\n- New discoveries offer Add to Planning instead of Mark as Done.\r\n- Improved recommendation flow and reuse of cached taste calculations.\r\n- Updated application resource loading and cache versioning.\r\n\r\n6. Testing & Development\r\n\r\n- Added new automated end-to-end tests for:\r\n  - Custom Lists\r\n  - Taste-based recommendations\r\n  - Profile and Favourites\r\n  - Swipe-to-refresh functionality\r\n- Expanded Profile Tendencies unit tests.\r\n- Improved test coverage for the new features.\r\n\r\n---\r\n\r\n🚧 Pre-release Notice\r\n\r\nThis is an experimental pre-release build intended for testing and feedback.\r\n\r\nSome features may undergo further changes, and unexpected bugs or incomplete behaviour may occur.\r\n\r\nPlease report bugs, UI issues, and suggestions through GitHub Issues.\r\n\r\nThank you for testing What Next!\r\n\r\nMore improvements are on the way.",
+      "prerelease": true,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b51",
-      "published_at": "2026-10-30T00:46:59Z",
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b54",
+      "published_at": "2026-10-30T01:24:35Z",
       "assets": [
         {
-          "name": "WhatNext-v2.1.1-b51.apk",
-          "size": 14325760,
-          "download_count": 0,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b51/WhatNext-v2.1.1-b51.apk",
-          "created_at": "2026-10-30T00:46:57Z",
-          "updated_at": "2026-10-30T00:46:58Z",
-          "digest": "sha256:00445eff3847ab8b2b56be59f8d820a9d053182aca202b976bedab20a0535191"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b50",
-      "name": "What Next? v2.1.1-b50",
-      "body": "**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b49...v2.1.1-b50",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b50",
-      "published_at": "2026-10-30T00:34:44Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b50.apk",
-          "size": 14325767,
+          "name": "WhatNext-v2.1.1-b54.apk",
+          "size": 14337152,
           "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b50/WhatNext-v2.1.1-b50.apk",
-          "created_at": "2026-10-30T00:34:42Z",
-          "updated_at": "2026-10-30T00:34:43Z",
-          "digest": "sha256:c2941a8f611497850a4dbaffbfdd3840e3f3ad9286509065398eb92498bc0b0c"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b49",
-      "name": "What Next? v2.1.1-b49",
-      "body": "**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b47...v2.1.1-b49",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b49",
-      "published_at": "2026-10-30T00:30:34Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b49.apk",
-          "size": 14325758,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b49/WhatNext-v2.1.1-b49.apk",
-          "created_at": "2026-10-30T00:30:33Z",
-          "updated_at": "2026-10-30T00:30:34Z",
-          "digest": "sha256:f1164893b82eaed2b42f6c5b20916637a7a9f79ecdaf4085dcf7b6ca33b0124e"
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b54/WhatNext-v2.1.1-b54.apk",
+          "created_at": "2026-10-30T01:24:32Z",
+          "updated_at": "2026-10-30T01:24:34Z",
+          "digest": "sha256:c1f687390f24044898b012ee8b722729c1a333bbcf8da4d114b3730c668d3dcb"
         }
       ]
     },

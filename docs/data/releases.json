@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-31T12:42:32Z",
+  "updated_at": "2026-11-01T06:17:12Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
       "tag_name": "v2.1.1-b71",
       "name": "What Next? v2.1.1-b71",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1557439.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b69...v2.1.1-b71",
+      "body": "\r\n\r\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b69...v2.1.1-b71",
       "prerelease": false,
       "draft": false,
       "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b71",
@@ -14,51 +14,11 @@
         {
           "name": "WhatNext-v2.1.1-b71.apk",
           "size": 11149713,
-          "download_count": 1,
+          "download_count": 3,
           "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b71/WhatNext-v2.1.1-b71.apk",
           "created_at": "2026-10-31T11:34:57Z",
           "updated_at": "2026-10-31T11:34:58Z",
           "digest": "sha256:6536578ea286cb08e441a6333473b0fa86ccb96cbc2a68e3ab207fb7a49cc347"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b69",
-      "name": "What Next? v2.1.1-b69",
-      "body": "Installs over the previous version: same signing key (SHA-256 c134f34c4b0127bec1a5eac923a686f72633d9ce1be163b092f3143348b7e1f7), version code 1557438.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b68...v2.1.1-b69",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b69",
-      "published_at": "2026-10-31T11:32:58Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b69.apk",
-          "size": 11148934,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b69/WhatNext-v2.1.1-b69.apk",
-          "created_at": "2026-10-31T11:32:56Z",
-          "updated_at": "2026-10-31T11:32:57Z",
-          "digest": "sha256:e12d82b29971c1fe7689568e4dae05565ef125be4904e52597e28167f6c445d6"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b68",
-      "name": "What Next? v2.1.1-b68",
-      "body": "What Next? v2.1.1-b68 — Stable Release 🚀\r\n\r\nA new stable build of What Next? is here!\r\n\r\nWhat Next? is an AniList-powered anime and manga companion designed to make tracking, discovering, organising and exploring your favourite media easier.\r\n\r\nThis release focuses on improving Android build reliability, installation compatibility, application resource loading and release automation while retaining the extensive collection of features available in What Next?.\r\n\r\n---\r\n\r\n✨ Application Features\r\n\r\n🎯 1. Intelligent Pick System\r\n\r\nFind something to watch or read based on your available time.\r\n\r\n- Choose between Watch, Read or Either.\r\n- Time-based recommendations: 15 minutes, 30 minutes, 1 hour or 2 hours.\r\n- Recommendations from Watching, Reading, Repeating and Planning lists.\r\n- Episode and chapter recommendations based on available time.\r\n- Prioritises titles you are already watching or reading.\r\n- Avoids suggesting unreleased titles and unaired episodes.\r\n- Discover something new based on your personal taste.\r\n- Genre and 18+ content filters.\r\n- Surprise Me, Build a Lineup, Another, Hide and Add to Planning options.\r\n\r\n🎨 2. Personal Taste Analysis\r\n\r\nUnderstand your anime and manga preferences through an interactive taste report.\r\n\r\n- Personalised taste archetype.\r\n- Theme Index comparing your preferences against the average AniList user.\r\n- Four-letter personality classification.\r\n- Niche vs Mainstream analysis.\r\n- Retro vs Fresh preferences.\r\n- Diverse vs Specialised preferences.\r\n- Contrarian vs Aligned preferences.\r\n- Hidden gems and personalised recommendations.\r\n- Genre distribution and rating comparisons.\r\n- Five interactive personality and viewing-style sliders.\r\n- Shareable taste report.\r\n\r\n🔎 3. Advanced Discover System\r\n\r\nExplore AniList's catalogue through a unified discovery experience.\r\n\r\n- Live search without requiring a separate search button.\r\n- Search Anime, Manga, Characters, Staff, Studios and Users.\r\n- Explore ranked and popular content.\r\n- Advanced filtering and sorting.\r\n- Filter by genres, tags, year, season, format, status and country.\r\n- Filter by list status and 18+ content.\r\n- Seasonal anime browser.\r\n- Trending anime and manga.\r\n- For You recommendations.\r\n- Rediscover paused and dropped titles.\r\n\r\n📅 4. Anime Seasonal Calendar\r\n\r\nKeep track of anime releases with an integrated calendar.\r\n\r\n- Monthly anime release calendar.\r\n- Episode air dates and times.\r\n- Daily episode schedules.\r\n- Premiere and finale filters.\r\n- Current season filtering.\r\n- Watch progress integration.\r\n- Mark aired episodes as watched.\r\n- Calendar and list viewing modes.\r\n- Quick navigation to the current date and other months.\r\n\r\n📚 5. Advanced Anime & Manga Management\r\n\r\nManage your entire AniList library from one place.\r\n\r\n- Complete anime and manga lists.\r\n- Watching, Completed, Planning, Paused, Dropped and other status categories.\r\n- Search and advanced filtering.\r\n- Grid and list layouts.\r\n- Customisable columns and display options.\r\n- Custom AniList lists support.\r\n- Progress tracking with +1 and -1 controls.\r\n- Score management.\r\n- Start and finish date management.\r\n- Rewatch tracking.\r\n- Priority and personal notes.\r\n- Private and favourite options.\r\n- Automatic completion when reaching the final episode.\r\n- Offline progress queue and automatic synchronisation.\r\n\r\n📖 6. Detailed Media Pages\r\n\r\nExplore individual anime and manga with comprehensive information.\r\n\r\n- Synopsis and cover information.\r\n- Scores and favourites.\r\n- Genres and tags.\r\n- Spoiler-controlled tags.\r\n- Characters and voice actors.\r\n- Staff and production information.\r\n- Studios and producers.\r\n- Streaming availability information.\r\n- Related anime and manga.\r\n- Recommendations.\r\n- Dedicated character, staff and studio profiles.\r\n\r\n🗺️ 7. Franchise Relation Map\r\n\r\nExplore connected anime and manga franchises visually.\r\n\r\n- Interactive relationship graph.\r\n- Prequels, sequels and side stories.\r\n- Core and related connections.\r\n- Character relationship connections.\r\n- Zoom controls and interactive navigation.\r\n- Expand and collapse franchise branches.\r\n- Alternative list view.\r\n- Add titles directly to Planning.\r\n- Supports large franchise maps.\r\n\r\n👤 8. Profile & Social Features\r\n\r\nExplore your AniList profile and interact with other users.\r\n\r\n- AniList profile banner and avatar.\r\n- Anime and manga statistics.\r\n- Profile biography and colour.\r\n- Following and followers.\r\n- Mutual follower indicators.\r\n- User profiles and affinity scores.\r\n- Shared rating comparisons.\r\n- Detailed user statistics.\r\n- Favourite anime, manga, characters, staff and studios.\r\n- Personal tendencies and viewing preferences.\r\n- Private one-to-one AniList messaging.\r\n\r\n📊 9. Statistics & Progress Tracking\r\n\r\nUnderstand your viewing and reading habits.\r\n\r\n- Anime and manga statistics.\r\n- Genre, format and demographic breakdowns.\r\n- Status and score distribution.\r\n- Tag statistics.\r\n- Daily progress goal.\r\n- Progress streak.\r\n- Last seven days activity chart.\r\n- Continue watching and reading list.\r\n- Personal backlog overview.\r\n\r\n🔄 10. AniList Triple Sync (Advanced)\r\n\r\nSynchronise your library across multiple accounts and platforms.\r\n\r\n- AniList to another AniList account.\r\n- AniList to MyAnimeList.\r\n- Anime and manga synchronisation.\r\n- Full library migration.\r\n- Incremental change-based synchronisation.\r\n- Progress, score, status, dates, notes and other supported fields.\r\n- Per-title synchronisation fingerprints.\r\n- Failed-item retry support.\r\n- Optional automatic synchronisation.\r\n- Optional title additions and removals.\r\n- Rate-limit-aware requests.\r\n- Advanced Settings access control.\r\n\r\nThis feature requires users to configure their own API credentials. Synchronisation credentials remain on the device.\r\n\r\n🎭 11. Personalisation & Privacy\r\n\r\nCustomise the application experience.\r\n\r\n- Eight anime-inspired themes.\r\n- One Piece theme enabled by default.\r\n- Sakura Flowers, Naruto, Gintama, Dragon Ball, Bleach, Rent-a-Girlfriend and Attack on Titan themes.\r\n- Profile picture shape customisation.\r\n- Adjustable text size.\r\n- Configurable opening splash screen.\r\n- Cover blurring.\r\n- Hidden titles.\r\n- Airing time display preferences.\r\n- Japanese, Korean, Chinese and Taiwanese title display preferences.\r\n- Additional AniList account settings.\r\n\r\n📱 12. Offline & Application Experience\r\n\r\n- Home-screen installation support.\r\n- Offline application caching.\r\n- Previously saved list access without an internet connection.\r\n- Automatic data refresh when connectivity returns.\r\n- Animated loading screen.\r\n- Dedicated application branding.\r\n- Android application support.\r\n\r\n---\r\n\r\n🛠️ What's Improved in v2.1.1-b68\r\n\r\n1. Android Installation Compatibility\r\n\r\n- Established a consistent Android signing configuration.\r\n- Every build uses the same signing keystore.\r\n- New APKs can update existing installations without requiring an uninstall.\r\n- Existing application data can be retained during normal in-place updates.\r\n\r\n2. Improved APK Verification\r\n\r\n- Added automatic signing certificate verification.\r\n- Added APK version name and version code verification.\r\n- Build process checks the APK before publishing.\r\n- Prevents accidentally publishing an APK signed with an incompatible key.\r\n\r\n3. Improved Version Management\r\n\r\n- Automated version name generation.\r\n- Automatically increasing Android version code.\r\n- Better protection against version downgrade errors.\r\n- Every build receives its own versioned GitHub release.\r\n\r\n4. Improved Build Automation\r\n\r\n- Updated GitHub Actions build workflow.\r\n- Added Capacitor plugin validation.\r\n- Improved application resource packaging.\r\n- Automatic Android launcher icon and splash screen generation.\r\n- Improved build concurrency handling.\r\n- Automated APK naming and release publishing.\r\n\r\n5. Improved Application Resource Management\r\n\r\n- Updated application revision to r17.\r\n- Updated service worker cache revision.\r\n- Improved cache refresh behaviour.\r\n- Old application caches are removed when the new revision activates.\r\n- Helps prevent older application resources from mixing with updated files.\r\n\r\n---\r\n\r\n📦 Installation Information\r\n\r\nVersion: 2.1.1-b68\r\nRelease Type: Stable\r\nVersion Code: 1556880\r\n\r\nInstallation compatibility:\r\n\r\n- Compatible with the previous installation using the same signing certificate.\r\n- Supports in-place APK updates.\r\n- Uninstalling the previous version should not be necessary when the signing key and package identity match.\r\n\r\nSigning Certificate SHA-256:\r\n\"c134f34c4b0127bec1a5eac923a686f72633d9ce1be163b092f3143348b7e1f7\"\r\n\r\n---\r\n\r\n❤️ About What Next?\r\n\r\nWhat Next? is built around the idea of bringing your anime and manga experience together in one application.\r\n\r\nDiscover new titles, manage your AniList library, analyse your preferences, follow seasonal releases, explore franchises and synchronise your media progress.\r\n\r\nYour Anime. Your Manga. Your Library. Your What Next?\r\n\r\nDeveloped by Tokyo Brotherhood.",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b68",
-      "published_at": "2026-10-31T02:14:59Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b68.apk",
-          "size": 11148929,
-          "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b68/WhatNext-v2.1.1-b68.apk",
-          "created_at": "2026-10-31T02:14:54Z",
-          "updated_at": "2026-10-31T02:14:58Z",
-          "digest": "sha256:5b57725b93b2b265144b5c566ad0be0fff340153048b350dc63033adaf317468"
         }
       ]
     }

@@ -1,111 +1,51 @@
 {
-  "updated_at": "2026-11-05T06:56:08Z",
+  "updated_at": "2026-11-05T17:27:36Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
-      "tag_name": "v2.1.1-b88",
-      "name": "What Next? v2.1.1-b88",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564307, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b83...v2.1.1-b88",
-      "prerelease": false,
+      "tag_name": "v3.0.0-b94",
+      "name": "What Next? v3.0.0-b94",
+      "body": "🚀 What Next? v3.0.0-b94\r\n\r\n<badge>PRE-RELEASE · TESTING BUILD</badge>\r\n\r\nWelcome to What Next? Version 3.0.0!\r\n\r\nThis release introduces a new Discord card customization system for AniList Triple Sync, bringing dedicated visual styles to different anime and manga categories.\r\n\r\n✨ What's New\r\n\r\n1. Discord Themed Update Cards\r\n\r\nIntroducing category-specific Discord update cards!\r\n\r\n🌀 Isekai Theme\r\n\r\n- Dedicated violet/purple visual design.\r\n- Custom gem-style progress bar.\r\n- Isekai-inspired titles and descriptions.\r\n- Quest-style progress and status labels.\r\n- Special completion message.\r\n\r\n💕 Rom-Com Theme\r\n\r\n- Dedicated pink visual design.\r\n- Heart-style progress bar.\r\n- Romantic-themed titles and descriptions.\r\n- Custom status descriptions.\r\n- Special completion message.\r\n\r\n2. Custom Theme Detection\r\n\r\n- Automatically detects supported categories from custom AniList list names.\r\n- Isekai, Iseki and Tensei lists receive the Isekai theme.\r\n- Rom Com and Romantic Comedy lists receive the Rom-Com theme.\r\n- Unmatched lists continue using standard Discord cards.\r\n- Themed cards only apply to lists configured to receive their own Discord threads.\r\n\r\n3. New Discord Customization Settings\r\n\r\nAdded new controls under:\r\n\r\nSettings → AniList Triple Sync → Discord\r\n\r\n- Enable or disable themed cards.\r\n- Choose Standard, Isekai or Rom-Com for test cards.\r\n- Preview different card appearances through the existing test buttons.\r\n- Keep General Updates cards separate from category-specific themed threads.\r\n\r\n4. Testing & Reliability\r\n\r\n- Added dedicated unit tests for Discord card themes.\r\n- Expanded Triple Sync end-to-end tests.\r\n- Tested category detection, theme selection, progress bars and Discord card formatting.\r\n- Improved release documentation.\r\n\r\n---\r\n\r\n🧪 Pre-release Notice\r\n\r\nThis is an experimental build of What Next? v3.0.0.\r\n\r\nIt is intended for testing and feedback before a stable release.\r\n\r\nYou may encounter unexpected behaviour or bugs. Please report any issues through GitHub Issues.\r\n\r\nRecommended: Keep a backup of important information and verify your synchronization settings before testing.\r\n\r\n---\r\n\r\n📦 Build Information\r\n\r\n- Version: 3.0.0\r\n- Build: b94\r\n- Version Code: 1564626\r\n- Release Channel: Pre-release\r\n- Build Type: Release\r\n- Signing: Same certificate as previous builds.\r\n\r\nSigning Certificate SHA-256:\r\n\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nThe APK can be installed over the previous version without uninstalling, provided the installed build uses the same signing certificate.\r\n\r\n🔗 Full Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b91...v3.0.0-b94\r\n\r\n---\r\n\r\nWhat Next? — Your list. Your next pick.\r\n\r\nDeveloped by Tokyo Brotherhood.",
+      "prerelease": true,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b88",
-      "published_at": "2026-11-05T06:02:33Z",
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b94",
+      "published_at": "2026-11-05T11:21:03Z",
       "assets": [
         {
-          "name": "WhatNext-v2.1.1-b88.apk",
-          "size": 9162056,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b88/WhatNext-v2.1.1-b88.apk",
-          "created_at": "2026-11-05T06:02:32Z",
-          "updated_at": "2026-11-05T06:02:32Z",
-          "digest": "sha256:118a54fafbb4d613844960acf00555c6ea367d8bf6f14c298cf50888db910324"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b86",
-      "name": "What Next? v2.1.1-b86",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564074, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b85...v2.1.1-b86",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b86",
-      "published_at": "2026-11-05T02:09:37Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b86.apk",
-          "size": 9159176,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b86/WhatNext-v2.1.1-b86.apk",
-          "created_at": "2026-11-05T02:09:35Z",
-          "updated_at": "2026-11-05T02:09:36Z",
-          "digest": "sha256:1da8c10f435e532e47183a6d65a511c69b2be80ae2dbac8bfbc8bfc120da2004"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b85",
-      "name": "What Next? v2.1.1-b85",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564072, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b84...v2.1.1-b85",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b85",
-      "published_at": "2026-11-05T02:07:18Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b85.apk",
-          "size": 9159181,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b85/WhatNext-v2.1.1-b85.apk",
-          "created_at": "2026-11-05T02:07:16Z",
-          "updated_at": "2026-11-05T02:07:17Z",
-          "digest": "sha256:e1501ef2bd52dc3f9e81cc4b7a612a6f1a8a26db1d9a161e561953006569f9cc"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b84",
-      "name": "What Next? v2.1.1-b84",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564054, release build.\n\n## What's Changed\n* Unpack site.zip by @tokyo720022-create in https://github.com/tokyo720022-create/What-Next/pull/1\n\n## New Contributors\n* @tokyo720022-create made their first contribution in https://github.com/tokyo720022-create/What-Next/pull/1\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b81...v2.1.1-b84",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b84",
-      "published_at": "2026-11-05T01:49:20Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b84.apk",
-          "size": 9159171,
+          "name": "WhatNext-v3.0.0-b94.apk",
+          "size": 9169674,
           "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b84/WhatNext-v2.1.1-b84.apk",
-          "created_at": "2026-11-05T01:49:18Z",
-          "updated_at": "2026-11-05T01:49:19Z",
-          "digest": "sha256:533d31d8254b172d2aa37028abb814aa5d7ae1341e99d6983610215d84f04cce"
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b94/WhatNext-v3.0.0-b94.apk",
+          "created_at": "2026-11-05T11:21:00Z",
+          "updated_at": "2026-11-05T11:21:01Z",
+          "digest": "sha256:40aa33cd9f8c5c8ed7c7cfa19a5628bc9e41db4cc457fe07e0749a41fb16787b"
         }
       ]
     },
     {
-      "tag_name": "v2.1.1-b83",
-      "name": "What Next? v2.1.1-b83",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564041, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b81...v2.1.1-b83",
+      "tag_name": "v2.1.1-b91",
+      "name": "What Next? v2.1.1-b91",
+      "body": "🚀 What Next? v2.1.1-b91\r\n\r\n✨ What's New\r\n\r\n1. Smart Cache System\r\n\r\n- Introduced a new persistent local caching system.\r\n- Faster loading of previously visited pages and saved content.\r\n- Cached lists, profiles and statistics remain available offline.\r\n- Previously opened anime and manga pages load instantly while refreshing their data in the background.\r\n- Automatic cache cleanup based on data age:\r\n  - Media cards and pages: 3 days.\r\n  - Airing calendar: 7 days.\r\n  - Account data and lists: 14 days.\r\n- Improved storage management with automatic cache cleanup when storage becomes full.\r\n\r\n2. Improved Performance & API Management\r\n\r\n- Introduced an AniList API request pacing system.\r\n- Automatically manages request frequency based on AniList's rate limits.\r\n- Handles temporary API failures, timeouts and rate-limit responses.\r\n- Reserves request capacity for tracking and saving progress.\r\n- Improved network error handling and retry behaviour.\r\n\r\n3. Session & Account Management\r\n\r\n- Automatic sign-out after 14 days of inactivity.\r\n- Account-specific cached data is cleared when switching AniList accounts.\r\n- Improved logout and account cleanup.\r\n- Pending tracking changes get a final synchronization attempt before automatic sign-out.\r\n- Added manual cache clearing under Settings → Account.\r\n\r\n4. New About Screen\r\n\r\n- View installed application version and build information.\r\n- Check for the latest stable release directly through GitHub.\r\n- Read release notes inside the application.\r\n- Added Open Source Licenses section.\r\n- Added Privacy Policy access.\r\n- Added configurable social and project links.\r\n\r\n5. Improved AniList Settings\r\n\r\n- Added timezone configuration.\r\n- Added an option to use the phone's timezone.\r\n- Expanded notification preferences with individual notification controls.\r\n- Added support for the Always activity merge setting.\r\n- Improved custom profile colour handling.\r\n- Better cache invalidation when account preferences change.\r\n\r\n6. Rich Text & Spoiler Support\r\n\r\n- Improved AniList descriptions and profile biography rendering.\r\n- Added Markdown formatting support:\r\n  - Bold and italic.\r\n  - Strikethrough.\r\n  - Inline code.\r\n  - Clickable links.\r\n- Added tap-to-reveal spoiler support.\r\n- Supports nested and multiline spoilers.\r\n- Safer rendering of AniList-provided text.\r\n\r\n7. Login & Application Improvements\r\n\r\n- Improved native Android AniList login using application deep links.\r\n- Improved application startup and cached Pick restoration.\r\n- Removed legacy web service worker and cache registrations.\r\n- Updated application loading and resource management.\r\n\r\n8. Quality & Reliability\r\n\r\n- Added dedicated cache and API pacing unit tests.\r\n- Added session and offline cache end-to-end tests.\r\n- Added About screen testing.\r\n- Expanded settings and application stability tests.\r\n\r\n---\r\n\r\n📦 Installation & Compatibility\r\n\r\n- Build: b91\r\n- Version: 2.1.1\r\n- Version Code: 1564603\r\n- Build Type: Release build\r\n- Update Compatibility: Compatible with the previous installation.\r\n- Signing Certificate: Same signing key as previous releases.\r\n\r\nSigning Certificate SHA-256:\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nYour existing application data is retained when updating normally.\r\n\r\n🔗 Full Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b81...v2.1.1-b91\r\n\r\n---\r\n\r\nWhat Next? — Your list. Your next pick.\r\n\r\nTrack your anime. Track your manga. Discover what's next.\r\n\r\nDeveloped by Tokyo Brotherhood.",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b83",
-      "published_at": "2026-11-05T01:37:18Z",
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b91",
+      "published_at": "2026-11-05T10:58:37Z",
       "assets": [
         {
-          "name": "WhatNext-v2.1.1-b83.apk",
-          "size": 9159185,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b83/WhatNext-v2.1.1-b83.apk",
-          "created_at": "2026-11-05T01:37:16Z",
-          "updated_at": "2026-11-05T01:37:17Z",
-          "digest": "sha256:1814e296c36619078f2a50a16fccc920c83896fa300f0035a4b794ae86e6364c"
+          "name": "WhatNext-v2.1.1-b91.apk",
+          "size": 9167904,
+          "download_count": 2,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b91/WhatNext-v2.1.1-b91.apk",
+          "created_at": "2026-11-05T10:58:36Z",
+          "updated_at": "2026-11-05T10:58:37Z",
+          "digest": "sha256:a3c785a2ede0013024827ee9407baf5f23575ae0a9900100488996c1ec820929"
         }
       ]
     },
     {
       "tag_name": "v2.1.1-b81",
       "name": "What Next? v2.1.1-b81",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1562588, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b78...v2.1.1-b81",
+      "body": "🚀 What Next? v2.1.1-b81\r\n\r\nWhat's New & Improved\r\n\r\n1. Improved Discord Integration\r\n\r\n- Better detection of deleted or invalid Discord webhooks.\r\n- Clearer error messages with explanations and suggested fixes.\r\n- Checks webhook availability before sending test messages.\r\n- Test messages now confirm the destination thread.\r\n\r\n2. More Reliable AniList Triple Sync\r\n\r\n- Improved handling of Discord API errors and rate limits.\r\n- Automatically stops repeated requests when Discord is unavailable.\r\n- Unsent update cards are preserved for the next sync.\r\n- Pending cards are delivered when the webhook or Discord service recovers.\r\n- Better reporting for individual failed cards.\r\n\r\n3. Stability & Improvements\r\n\r\n- Improved Discord synchronization error handling.\r\n- Expanded automated end-to-end tests.\r\n- Updated application and service worker cache revisions to ensure updated files load together.\r\n\r\n📦 Installation & Compatibility\r\n\r\n- Release build.\r\n- Compatible with the previous installation.\r\n- Same signing certificate.\r\n- Existing app data is retained when updating normally.\r\n\r\nSigning Certificate SHA-256:\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nVersion Code: \"1562588\"\r\n\r\nBuild: \"b81\"\r\n\r\nFull Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b78...v2.1.1-b81\r\n\r\nThank you for using What Next?!\r\n\r\nTrack your anime. Track your manga. Discover what's next.",
       "prerelease": false,
       "draft": false,
       "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b81",
@@ -119,26 +59,6 @@
           "created_at": "2026-11-04T01:23:41Z",
           "updated_at": "2026-11-04T01:23:43Z",
           "digest": "sha256:7a37028d40db41642bdce380c1cb7c976bb7b208445c9c11b30151e3cced7a46"
-        }
-      ]
-    },
-    {
-      "tag_name": "v2.1.1-b78",
-      "name": "What Next? v2.1.1-b78",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1560346, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b75...v2.1.1-b78",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b78",
-      "published_at": "2026-11-02T12:01:26Z",
-      "assets": [
-        {
-          "name": "WhatNext-v2.1.1-b78.apk",
-          "size": 9148591,
-          "download_count": 3,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b78/WhatNext-v2.1.1-b78.apk",
-          "created_at": "2026-11-02T12:01:24Z",
-          "updated_at": "2026-11-02T12:01:25Z",
-          "digest": "sha256:dc2e63020a014c87718f1c4fc9f316e537af58649671276335407997ac84c3a1"
         }
       ]
     },

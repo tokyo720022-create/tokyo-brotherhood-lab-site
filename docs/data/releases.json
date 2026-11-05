@@ -1,7 +1,87 @@
 {
-  "updated_at": "2026-11-05T01:30:39Z",
+  "updated_at": "2026-11-05T04:17:03Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v2.1.1-b86",
+      "name": "What Next? v2.1.1-b86",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564074, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b85...v2.1.1-b86",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b86",
+      "published_at": "2026-11-05T02:09:37Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b86.apk",
+          "size": 9159176,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b86/WhatNext-v2.1.1-b86.apk",
+          "created_at": "2026-11-05T02:09:35Z",
+          "updated_at": "2026-11-05T02:09:36Z",
+          "digest": "sha256:1da8c10f435e532e47183a6d65a511c69b2be80ae2dbac8bfbc8bfc120da2004"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.1-b85",
+      "name": "What Next? v2.1.1-b85",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564072, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b84...v2.1.1-b85",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b85",
+      "published_at": "2026-11-05T02:07:18Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b85.apk",
+          "size": 9159181,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b85/WhatNext-v2.1.1-b85.apk",
+          "created_at": "2026-11-05T02:07:16Z",
+          "updated_at": "2026-11-05T02:07:17Z",
+          "digest": "sha256:e1501ef2bd52dc3f9e81cc4b7a612a6f1a8a26db1d9a161e561953006569f9cc"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.1-b84",
+      "name": "What Next? v2.1.1-b84",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564054, release build.\n\n## What's Changed\n* Unpack site.zip by @tokyo720022-create in https://github.com/tokyo720022-create/What-Next/pull/1\n\n## New Contributors\n* @tokyo720022-create made their first contribution in https://github.com/tokyo720022-create/What-Next/pull/1\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b81...v2.1.1-b84",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b84",
+      "published_at": "2026-11-05T01:49:20Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b84.apk",
+          "size": 9159171,
+          "download_count": 2,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b84/WhatNext-v2.1.1-b84.apk",
+          "created_at": "2026-11-05T01:49:18Z",
+          "updated_at": "2026-11-05T01:49:19Z",
+          "digest": "sha256:533d31d8254b172d2aa37028abb814aa5d7ae1341e99d6983610215d84f04cce"
+        }
+      ]
+    },
+    {
+      "tag_name": "v2.1.1-b83",
+      "name": "What Next? v2.1.1-b83",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1564041, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b81...v2.1.1-b83",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b83",
+      "published_at": "2026-11-05T01:37:18Z",
+      "assets": [
+        {
+          "name": "WhatNext-v2.1.1-b83.apk",
+          "size": 9159185,
+          "download_count": 1,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b83/WhatNext-v2.1.1-b83.apk",
+          "created_at": "2026-11-05T01:37:16Z",
+          "updated_at": "2026-11-05T01:37:17Z",
+          "digest": "sha256:1814e296c36619078f2a50a16fccc920c83896fa300f0035a4b794ae86e6364c"
+        }
+      ]
+    },
     {
       "tag_name": "v2.1.1-b81",
       "name": "What Next? v2.1.1-b81",

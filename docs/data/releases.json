@@ -1,7 +1,27 @@
 {
-  "updated_at": "2026-11-05T13:36:25Z",
+  "updated_at": "2026-11-06T01:34:01Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v3.0.0-b96",
+      "name": "What Next? v3.0.0-b96",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1565444, release build.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b94...v3.0.0-b96",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b96",
+      "published_at": "2026-11-06T01:00:23Z",
+      "assets": [
+        {
+          "name": "WhatNext-v3.0.0-b96.apk",
+          "size": 9170370,
+          "download_count": 2,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b96/WhatNext-v3.0.0-b96.apk",
+          "created_at": "2026-11-06T01:00:21Z",
+          "updated_at": "2026-11-06T01:00:22Z",
+          "digest": "sha256:e6e580770dd4a8e5c240b5f713f83c78fdfa4d84996c2b397012d4a517370741"
+        }
+      ]
+    },
     {
       "tag_name": "v3.0.0-b94",
       "name": "What Next? v3.0.0-b94",

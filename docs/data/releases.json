@@ -1,7 +1,27 @@
 {
-  "updated_at": "2026-11-08T10:30:07Z",
+  "updated_at": "2026-11-08T17:57:33Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v3.0.0-b114",
+      "name": "What Next? v3.0.0-b114",
+      "body": "🚀 What Next? v3.0.0-b114\r\n\r\nA major UI and usability update focused on improving the List Editor, refreshing the overall interface, and making everyday navigation smoother.\r\n\r\n✨ What's New\r\n\r\n🎨 Major UI Upgrade\r\n\r\n- Extensive visual improvements across the application.\r\n- Redesigned Anime and Manga list screens.\r\n- Improved spacing, layouts, typography, buttons and visual consistency.\r\n- Updated recommendation cards with a cleaner presentation.\r\n- Improved title pages with sharper banner images and gradient transitions.\r\n\r\n🛠️ List Editor Fixes & Improvements\r\n\r\n- Fixed issues in the list editing experience.\r\n- Redesigned the editor with organized card-based sections.\r\n- Added a cover image and title information to the editor header.\r\n- Improved status selection with colour indicators.\r\n- Enhanced episode and chapter progress controls.\r\n- Added an All button to instantly complete progress.\r\n- Added clearer progress percentages and remaining counts.\r\n- Improved score selection, priority controls and privacy toggle.\r\n- Refined dates, rewatches/rereads, custom lists and notes.\r\n- Improved Save and Remove controls.\r\n\r\n📚 Anime & Manga Lists\r\n\r\n- Redesigned the list toolbar with four dedicated controls:\r\n  - Search\r\n  - Filter\r\n  - Customise\r\n  - Custom Lists\r\n- Added a sticky status filter row with colour indicators and entry counts.\r\n- Improved list cards, status badges and progress bars.\r\n- Updated the +1 progress button with a new gradient appearance.\r\n- Reduced initial rendering from 48 to 24 titles.\r\n- Show More now loads the next 24 titles.\r\n\r\n📡 Anime Airing Indicators\r\n\r\n- Added upcoming episode information directly to anime cards.\r\n- Displays the number of unwatched released episodes (e.g. 3 new).\r\n- Shows upcoming episode numbers and countdowns (e.g. Ep 8 · 2d).\r\n- Hides airing indicators for completed and dropped titles.\r\n\r\n🎲 Pick Screen Improvements\r\n\r\n- Reorganized recommendation controls.\r\n- Improved recommendation cards with score, format and genre chips.\r\n- Added a clearer Up Next section.\r\n- Improved watch/read duration and progress information.\r\n- Refined recommendation action buttons.\r\n\r\n📺 Media Page Improvements\r\n\r\n- Sharper banner presentation.\r\n- Improved banner-to-content gradient transitions.\r\n- Better poster positioning and statistics card layout.\r\n- Improved fallback appearance when a banner is unavailable or invalid.\r\n\r\n⚙️ Stability & Development\r\n\r\n- Added \"package-lock.json\" for more consistent dependency installations.\r\n- Updated UI regression and robustness tests.\r\n- Added dedicated end-to-end checks for the upgraded interface.\r\n\r\n---\r\n\r\n📲 Update Compatibility\r\n\r\nInstalls over the previous version.\r\n\r\n- Same signing key (SHA-256):\r\n  \"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n- Version code: \"1569146\"\r\n- Release build.\r\n\r\nFull Changelog:\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b112...v3.0.0-b114",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b114",
+      "published_at": "2026-11-08T14:42:00Z",
+      "assets": [
+        {
+          "name": "WhatNext-v3.0.0-b114.apk",
+          "size": 9173144,
+          "download_count": 2,
+          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b114/WhatNext-v3.0.0-b114.apk",
+          "created_at": "2026-11-08T14:41:59Z",
+          "updated_at": "2026-11-08T14:42:00Z",
+          "digest": "sha256:34a258926282239399df93138f1315a98d801a2d0f0caa0aa9ebfb453b54f6ca"
+        }
+      ]
+    },
     {
       "tag_name": "v3.0.0-b112",
       "name": "What Next? v3.0.0-b112",

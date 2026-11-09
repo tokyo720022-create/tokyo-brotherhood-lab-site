@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T07:49:35Z",
+  "updated_at": "2026-11-09T13:37:35Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
@@ -19,26 +19,6 @@
           "created_at": "2026-11-09T06:47:12Z",
           "updated_at": "2026-11-09T06:47:13Z",
           "digest": "sha256:6c5ee2fcbf8d21ac7af3380db8ef981bc1c0ec581d6c59a3a70aeb19a236517f"
-        }
-      ]
-    },
-    {
-      "tag_name": "v3.0.0-b117",
-      "name": "What Next? v3.0.0-b117",
-      "body": "What Next? v3.0.0-b117\r\n\r\n🚀 Upgrade Summary\r\n\r\nThis release introduces a major upgrade to the Anime & Manga list experience, with four layout styles, improved list customisation, long-press quick view, and personalised backgrounds.\r\n\r\n✨ What's New\r\n\r\n1. Four List Layout Styles\r\n\r\n- Linear: Covers and title details displayed horizontally.\r\n- Grid: Customisable 2, 3 or 4-column grid.\r\n- Simplified: Minimal text-only layout without downloading cover images.\r\n- Album: Large cover artwork with titles and progress displayed over the image.\r\n\r\n2. Long-Press Quick View\r\n\r\n- Long-press any Anime or Manga entry to open its quick view.\r\n- View title, status, score, priority and personal notes.\r\n- Update episode or chapter progress using +1 and -1.\r\n- Open the full media page directly from quick view.\r\n\r\n3. Advanced List Customisation\r\n\r\nNew options under Customise List:\r\n\r\n- Enable or disable long-press quick view.\r\n- Hide unscored titles.\r\n- Hide progress information.\r\n- Hide airing indicators.\r\n- Display Notes indicators.\r\n- Display Priority indicators with Low, Medium and High labels.\r\n\r\n4. Personalised Background Images\r\n\r\n- Select a picture from your device.\r\n- Apply it as the background for Anime and Manga lists.\r\n- Images are automatically resized and compressed before being saved.\r\n- Remove the custom background whenever you like.\r\n- Background preferences remain saved even after signing out.\r\n\r\n⚙️ Under-the-Hood Improvements\r\n\r\n- Extended AniList list data integration to include notes and priority.\r\n- Improved local list updates and caching for additional entry information.\r\n- Updated application resource revision to prevent mixing older and newer cached files.\r\n- Added the updated project website link to application configuration.\r\n- Updated project documentation and list customisation descriptions.\r\n\r\n📲 Installation & Compatibility\r\n\r\n- Direct upgrade supported.\r\n- No need to uninstall the previous version.\r\n- Uses the same signing key as previous releases.\r\n\r\nVersion: 3.0.0-b117\r\nVersion Code: 1570067\r\nAPK Size: 8.75 MB\r\n\r\nFull Changelog\r\n\r\n\"[Compare v3.0.0-b114 → v3.0.0-b117](https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b114...v3.0.0-b117)\" (https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b114...v3.0.0-b117)\r\n\r\nEnjoy a more personalised What Next? experience! ❤️",
-      "prerelease": false,
-      "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b117",
-      "published_at": "2026-11-09T06:02:10Z",
-      "assets": [
-        {
-          "name": "WhatNext-v3.0.0-b117.apk",
-          "size": 9176723,
-          "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b117/WhatNext-v3.0.0-b117.apk",
-          "created_at": "2026-11-09T06:02:09Z",
-          "updated_at": "2026-11-09T06:02:09Z",
-          "digest": "sha256:14c01e9ee87f4a7086c5f245797b83cf09d630f63a1bf84a4462ace3a97e836f"
         }
       ]
     },

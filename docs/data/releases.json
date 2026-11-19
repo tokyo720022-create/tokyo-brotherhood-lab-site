@@ -1,21 +1,41 @@
 {
-  "updated_at": "2026-11-18T11:52:45Z",
+  "updated_at": "2026-11-19T02:37:53Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
+    {
+      "tag_name": "v3.0.0-b194",
+      "name": "What Next? v3.0.0-b194",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1584237, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/OrewaTokyo/What-Next/compare/v3.0.0-b191...v3.0.0-b194",
+      "prerelease": false,
+      "draft": false,
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b194",
+      "published_at": "2026-11-19T02:13:05Z",
+      "assets": [
+        {
+          "name": "WhatNext-v3.0.0-b194.apk",
+          "size": 10519064,
+          "download_count": 2,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b194/WhatNext-v3.0.0-b194.apk",
+          "created_at": "2026-11-19T02:13:04Z",
+          "updated_at": "2026-11-19T02:13:05Z",
+          "digest": "sha256:cb7d2511cb33d3ca213b1711ab90ffffe049f06e48421afba7d7c51557e3c288"
+        }
+      ]
+    },
     {
       "tag_name": "v3.0.0-b191",
       "name": "What Next? v3.0.0-b191",
       "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1583211, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b188...v3.0.0-b191",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b191",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b191",
       "published_at": "2026-11-18T09:06:51Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b191.apk",
           "size": 10516552,
-          "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b191/WhatNext-v3.0.0-b191.apk",
+          "download_count": 4,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b191/WhatNext-v3.0.0-b191.apk",
           "created_at": "2026-11-18T09:06:50Z",
           "updated_at": "2026-11-18T09:06:51Z",
           "digest": "sha256:72579c2bd6d9aa09039fe9c55d3bd29c58e73cbee52314e210291152784283b7"
@@ -28,14 +48,14 @@
       "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1582033, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b182...v3.0.0-b185",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b185",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b185",
       "published_at": "2026-11-17T13:29:35Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b185.apk",
           "size": 10510410,
-          "download_count": 3,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b185/WhatNext-v3.0.0-b185.apk",
+          "download_count": 4,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b185/WhatNext-v3.0.0-b185.apk",
           "created_at": "2026-11-17T13:29:33Z",
           "updated_at": "2026-11-17T13:29:34Z",
           "digest": "sha256:9746b02204be7660f796c6979394545244103d15028425f0e88787196f765c9a"
@@ -48,14 +68,14 @@
       "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1580365, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b179...v3.0.0-b182",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b182",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b182",
       "published_at": "2026-11-16T09:41:43Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b182.apk",
           "size": 10477515,
-          "download_count": 5,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b182/WhatNext-v3.0.0-b182.apk",
+          "download_count": 6,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b182/WhatNext-v3.0.0-b182.apk",
           "created_at": "2026-11-16T09:41:41Z",
           "updated_at": "2026-11-16T09:41:42Z",
           "digest": "sha256:a2093c8a7c24e2bbb46ffb9e66fa3265a43539c9f986eb085fca0a5e7b9afa20"
@@ -68,14 +88,14 @@
       "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1579986, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b172...v3.0.0-b179",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b179",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b179",
       "published_at": "2026-11-16T03:22:26Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b179.apk",
           "size": 10469948,
-          "download_count": 5,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b179/WhatNext-v3.0.0-b179.apk",
+          "download_count": 6,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b179/WhatNext-v3.0.0-b179.apk",
           "created_at": "2026-11-16T03:22:24Z",
           "updated_at": "2026-11-16T03:22:25Z",
           "digest": "sha256:29326e3ac67419b4e3c4498fc5e8ec32bf5c924901e8a2a343ba6a639b56e700"
@@ -88,14 +108,14 @@
       "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1578844, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b121...v3.0.0-b172",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b172",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b172",
       "published_at": "2026-11-15T08:19:07Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b172.apk",
           "size": 10328427,
-          "download_count": 5,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b172/WhatNext-v3.0.0-b172.apk",
+          "download_count": 6,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b172/WhatNext-v3.0.0-b172.apk",
           "created_at": "2026-11-15T08:19:05Z",
           "updated_at": "2026-11-15T08:19:06Z",
           "digest": "sha256:2d00c87c12c97d3b8e2f49f4a5e40c77f933d59f05b75789371e0a7929df92f3"
@@ -108,14 +128,14 @@
       "body": "What Next? v3.0.0-b121 — Pre-release\r\n\r\n<badge color=\"warning\">Pre-release · Testing Build</badge>\r\n\r\n🚀 Upgrade Summary\r\n\r\nThis pre-release introduces significant improvements to the Schedule and Taste Report experiences, featuring redesigned interfaces, improved navigation and more detailed visual information.\r\n\r\n✨ What's New\r\n\r\n1. Redesigned Anime Schedule\r\n\r\n- New day-based schedule with episodes grouped by airing date.\r\n- Horizontal day selector with episode counts.\r\n- Added All, Watching and Planning filters.\r\n- Improved anime cards with posters and episode number indicators.\r\n- Visual progress tracking for already-aired episodes.\r\n- Shows how many episodes are waiting for you.\r\n- Improved airing countdown and time presentation.\r\n- Special indicators for aired and upcoming episodes.\r\n\r\n2. Taste Report – New Location & UI\r\n\r\n- Moved Taste Report from the Pick screen to your Profile.\r\n- Added a redesigned gradient-based archetype card.\r\n- New statistics section showing titles analysed, rated titles and popular titles compared.\r\n- Personality type displayed through four individual letter cards.\r\n- Improved personality sliders with visual progress indicators.\r\n- Added percentage-based personality lean indicators.\r\n- Improved Anime/Manga selection interface.\r\n- Updated navigation and back-button behaviour.\r\n\r\n3. UI & Navigation Improvements\r\n\r\n- Added dedicated Schedule styling.\r\n- Refined Profile favourites navigation appearance.\r\n- Improved screen navigation consistency.\r\n- Updated application resource revision to ensure refreshed assets are loaded correctly.\r\n\r\n4. Development & Testing\r\n\r\n- Updated end-to-end Taste Report tests for the new Profile navigation.\r\n- Updated project documentation.\r\n- Improved consistency across the updated screens.\r\n\r\n⚠️ Pre-release Notice\r\n\r\nThis is an early testing build and may contain unexpected bugs or incomplete behaviour.\r\n\r\n- Feedback and bug reports are welcome.\r\n- Some features may receive further adjustments before the stable release.\r\n- Back up important information and verify AniList synchronisation after testing.\r\n\r\n📲 Installation & Compatibility\r\n\r\n- Direct installation over the previous version is supported.\r\n- Uses the same signing key as previous builds.\r\n- No manual uninstallation required.\r\n\r\nVersion: 3.0.0-b121\r\nVersion Code: 1570112\r\nRelease Channel: Pre-release\r\n\r\nFull Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b117...v3.0.0-b121\r\n\r\nThank you for helping test What Next?! ❤️",
       "prerelease": true,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b121",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b121",
       "published_at": "2026-11-09T06:47:13Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b121.apk",
           "size": 9179732,
-          "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b121/WhatNext-v3.0.0-b121.apk",
+          "download_count": 3,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b121/WhatNext-v3.0.0-b121.apk",
           "created_at": "2026-11-09T06:47:12Z",
           "updated_at": "2026-11-09T06:47:13Z",
           "digest": "sha256:6c5ee2fcbf8d21ac7af3380db8ef981bc1c0ec581d6c59a3a70aeb19a236517f"
@@ -128,14 +148,14 @@
       "body": "🚀 What Next? v3.0.0-b114\r\n\r\nA major UI and usability update focused on improving the List Editor, refreshing the overall interface, and making everyday navigation smoother.\r\n\r\n✨ What's New\r\n\r\n🎨 Major UI Upgrade\r\n\r\n- Extensive visual improvements across the application.\r\n- Redesigned Anime and Manga list screens.\r\n- Improved spacing, layouts, typography, buttons and visual consistency.\r\n- Updated recommendation cards with a cleaner presentation.\r\n- Improved title pages with sharper banner images and gradient transitions.\r\n\r\n🛠️ List Editor Fixes & Improvements\r\n\r\n- Fixed issues in the list editing experience.\r\n- Redesigned the editor with organized card-based sections.\r\n- Added a cover image and title information to the editor header.\r\n- Improved status selection with colour indicators.\r\n- Enhanced episode and chapter progress controls.\r\n- Added an All button to instantly complete progress.\r\n- Added clearer progress percentages and remaining counts.\r\n- Improved score selection, priority controls and privacy toggle.\r\n- Refined dates, rewatches/rereads, custom lists and notes.\r\n- Improved Save and Remove controls.\r\n\r\n📚 Anime & Manga Lists\r\n\r\n- Redesigned the list toolbar with four dedicated controls:\r\n  - Search\r\n  - Filter\r\n  - Customise\r\n  - Custom Lists\r\n- Added a sticky status filter row with colour indicators and entry counts.\r\n- Improved list cards, status badges and progress bars.\r\n- Updated the +1 progress button with a new gradient appearance.\r\n- Reduced initial rendering from 48 to 24 titles.\r\n- Show More now loads the next 24 titles.\r\n\r\n📡 Anime Airing Indicators\r\n\r\n- Added upcoming episode information directly to anime cards.\r\n- Displays the number of unwatched released episodes (e.g. 3 new).\r\n- Shows upcoming episode numbers and countdowns (e.g. Ep 8 · 2d).\r\n- Hides airing indicators for completed and dropped titles.\r\n\r\n🎲 Pick Screen Improvements\r\n\r\n- Reorganized recommendation controls.\r\n- Improved recommendation cards with score, format and genre chips.\r\n- Added a clearer Up Next section.\r\n- Improved watch/read duration and progress information.\r\n- Refined recommendation action buttons.\r\n\r\n📺 Media Page Improvements\r\n\r\n- Sharper banner presentation.\r\n- Improved banner-to-content gradient transitions.\r\n- Better poster positioning and statistics card layout.\r\n- Improved fallback appearance when a banner is unavailable or invalid.\r\n\r\n⚙️ Stability & Development\r\n\r\n- Added \"package-lock.json\" for more consistent dependency installations.\r\n- Updated UI regression and robustness tests.\r\n- Added dedicated end-to-end checks for the upgraded interface.\r\n\r\n---\r\n\r\n📲 Update Compatibility\r\n\r\nInstalls over the previous version.\r\n\r\n- Same signing key (SHA-256):\r\n  \"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n- Version code: \"1569146\"\r\n- Release build.\r\n\r\nFull Changelog:\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b112...v3.0.0-b114",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b114",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b114",
       "published_at": "2026-11-08T14:42:00Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b114.apk",
           "size": 9173144,
-          "download_count": 3,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b114/WhatNext-v3.0.0-b114.apk",
+          "download_count": 4,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b114/WhatNext-v3.0.0-b114.apk",
           "created_at": "2026-11-08T14:41:59Z",
           "updated_at": "2026-11-08T14:42:00Z",
           "digest": "sha256:34a258926282239399df93138f1315a98d801a2d0f0caa0aa9ebfb453b54f6ca"
@@ -148,14 +168,14 @@
       "body": "What Next? v3.0.0-b112\r\n\r\n🚀 Upgrade Summary\r\n\r\nThis release includes updated website assets and configuration improvements to keep What Next? up to date.\r\n\r\nWhat's improved in this version?\r\n\r\n- Updated Website Content: Integrated the latest \"site.zip\" package into the application.\r\n- Configuration Updates: Updated \"config.js\" to incorporate the latest project changes.\r\n- Improved Integration: Synced the bundled website files with the latest project updates.\r\n- Maintenance Updates: Included the latest development changes and release improvements.\r\n\r\n📲 Upgrade & Compatibility\r\n\r\n- Direct Upgrade Supported: Install this version directly over your existing What Next? installation.\r\n- No Uninstallation Required: Your existing app can be upgraded without manually removing the previous version.\r\n- Signature Verified: Uses the same signing key as the previous release.\r\n- Version Code: 1567140\r\n\r\nRelease Information\r\n\r\n- App Version: 3.0.0-b112\r\n- Release Type: Build Release\r\n\r\nUpdate now to get the latest What Next? build! ❤️",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b112",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b112",
       "published_at": "2026-11-07T05:15:26Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b112.apk",
           "size": 9169675,
-          "download_count": 1,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b112/WhatNext-v3.0.0-b112.apk",
+          "download_count": 2,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b112/WhatNext-v3.0.0-b112.apk",
           "created_at": "2026-11-07T05:15:24Z",
           "updated_at": "2026-11-07T05:15:25Z",
           "digest": "sha256:29cda7321d7683adc3522912f9124f542c2177a087088308480bf9c3623c8d17"
@@ -168,14 +188,14 @@
       "body": "What Next? v3.0.0-b96 — Pre-release\r\n\r\nWe're getting closer to the stable release of What Next?! 🚀\r\n\r\nThe major feature development phase is largely complete. Development is now focused on stabilizing the application, improving reliability, refining existing functionality, and addressing any remaining issues.\r\n\r\nWhat's happening now?\r\n\r\n- Core feature development is largely complete.\r\n- Focus shifted towards bug fixing and stability.\r\n- Existing features are being refined and tested.\r\n- Performance and overall app reliability remain priorities.\r\n- Preparing the foundation for the upcoming stable v3.0.0 release.\r\n\r\nInstallation & Compatibility\r\n\r\n- Installs over the previous version.\r\n- Same signing key as previous releases.\r\n- Version code: \"1565444\"\r\n- Build type: Release\r\n\r\nSigning key SHA-256:\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nFull Changelog\r\n\r\n\"[Compare v3.0.0-b94 → v3.0.0-b96](https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b94...v3.0.0-b96)\" (https://github.com/tokyo720022-create/What-Next/compare/v3.0.0-b94...v3.0.0-b96)\r\n\r\nImportant\r\n\r\nThis is a pre-release build. Bugs and unexpected behaviour may still occur. Feedback and bug reports are welcome.\r\n\r\nThank you for being part of the What Next? journey! ❤️",
       "prerelease": true,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b96",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b96",
       "published_at": "2026-11-06T01:00:23Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b96.apk",
           "size": 9170370,
-          "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b96/WhatNext-v3.0.0-b96.apk",
+          "download_count": 3,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b96/WhatNext-v3.0.0-b96.apk",
           "created_at": "2026-11-06T01:00:21Z",
           "updated_at": "2026-11-06T01:00:22Z",
           "digest": "sha256:e6e580770dd4a8e5c240b5f713f83c78fdfa4d84996c2b397012d4a517370741"
@@ -188,14 +208,14 @@
       "body": "🚀 What Next? v3.0.0-b94\r\n\r\n<badge>PRE-RELEASE · TESTING BUILD</badge>\r\n\r\nWelcome to What Next? Version 3.0.0!\r\n\r\nThis release introduces a new Discord card customization system for AniList Triple Sync, bringing dedicated visual styles to different anime and manga categories.\r\n\r\n✨ What's New\r\n\r\n1. Discord Themed Update Cards\r\n\r\nIntroducing category-specific Discord update cards!\r\n\r\n🌀 Isekai Theme\r\n\r\n- Dedicated violet/purple visual design.\r\n- Custom gem-style progress bar.\r\n- Isekai-inspired titles and descriptions.\r\n- Quest-style progress and status labels.\r\n- Special completion message.\r\n\r\n💕 Rom-Com Theme\r\n\r\n- Dedicated pink visual design.\r\n- Heart-style progress bar.\r\n- Romantic-themed titles and descriptions.\r\n- Custom status descriptions.\r\n- Special completion message.\r\n\r\n2. Custom Theme Detection\r\n\r\n- Automatically detects supported categories from custom AniList list names.\r\n- Isekai, Iseki and Tensei lists receive the Isekai theme.\r\n- Rom Com and Romantic Comedy lists receive the Rom-Com theme.\r\n- Unmatched lists continue using standard Discord cards.\r\n- Themed cards only apply to lists configured to receive their own Discord threads.\r\n\r\n3. New Discord Customization Settings\r\n\r\nAdded new controls under:\r\n\r\nSettings → AniList Triple Sync → Discord\r\n\r\n- Enable or disable themed cards.\r\n- Choose Standard, Isekai or Rom-Com for test cards.\r\n- Preview different card appearances through the existing test buttons.\r\n- Keep General Updates cards separate from category-specific themed threads.\r\n\r\n4. Testing & Reliability\r\n\r\n- Added dedicated unit tests for Discord card themes.\r\n- Expanded Triple Sync end-to-end tests.\r\n- Tested category detection, theme selection, progress bars and Discord card formatting.\r\n- Improved release documentation.\r\n\r\n---\r\n\r\n🧪 Pre-release Notice\r\n\r\nThis is an experimental build of What Next? v3.0.0.\r\n\r\nIt is intended for testing and feedback before a stable release.\r\n\r\nYou may encounter unexpected behaviour or bugs. Please report any issues through GitHub Issues.\r\n\r\nRecommended: Keep a backup of important information and verify your synchronization settings before testing.\r\n\r\n---\r\n\r\n📦 Build Information\r\n\r\n- Version: 3.0.0\r\n- Build: b94\r\n- Version Code: 1564626\r\n- Release Channel: Pre-release\r\n- Build Type: Release\r\n- Signing: Same certificate as previous builds.\r\n\r\nSigning Certificate SHA-256:\r\n\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nThe APK can be installed over the previous version without uninstalling, provided the installed build uses the same signing certificate.\r\n\r\n🔗 Full Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b91...v3.0.0-b94\r\n\r\n---\r\n\r\nWhat Next? — Your list. Your next pick.\r\n\r\nDeveloped by Tokyo Brotherhood.",
       "prerelease": true,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v3.0.0-b94",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b94",
       "published_at": "2026-11-05T11:21:03Z",
       "assets": [
         {
           "name": "WhatNext-v3.0.0-b94.apk",
           "size": 9169674,
-          "download_count": 2,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v3.0.0-b94/WhatNext-v3.0.0-b94.apk",
+          "download_count": 3,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b94/WhatNext-v3.0.0-b94.apk",
           "created_at": "2026-11-05T11:21:00Z",
           "updated_at": "2026-11-05T11:21:01Z",
           "digest": "sha256:40aa33cd9f8c5c8ed7c7cfa19a5628bc9e41db4cc457fe07e0749a41fb16787b"
@@ -208,14 +228,14 @@
       "body": "🚀 What Next? v2.1.1-b91\r\n\r\n✨ What's New\r\n\r\n1. Smart Cache System\r\n\r\n- Introduced a new persistent local caching system.\r\n- Faster loading of previously visited pages and saved content.\r\n- Cached lists, profiles and statistics remain available offline.\r\n- Previously opened anime and manga pages load instantly while refreshing their data in the background.\r\n- Automatic cache cleanup based on data age:\r\n  - Media cards and pages: 3 days.\r\n  - Airing calendar: 7 days.\r\n  - Account data and lists: 14 days.\r\n- Improved storage management with automatic cache cleanup when storage becomes full.\r\n\r\n2. Improved Performance & API Management\r\n\r\n- Introduced an AniList API request pacing system.\r\n- Automatically manages request frequency based on AniList's rate limits.\r\n- Handles temporary API failures, timeouts and rate-limit responses.\r\n- Reserves request capacity for tracking and saving progress.\r\n- Improved network error handling and retry behaviour.\r\n\r\n3. Session & Account Management\r\n\r\n- Automatic sign-out after 14 days of inactivity.\r\n- Account-specific cached data is cleared when switching AniList accounts.\r\n- Improved logout and account cleanup.\r\n- Pending tracking changes get a final synchronization attempt before automatic sign-out.\r\n- Added manual cache clearing under Settings → Account.\r\n\r\n4. New About Screen\r\n\r\n- View installed application version and build information.\r\n- Check for the latest stable release directly through GitHub.\r\n- Read release notes inside the application.\r\n- Added Open Source Licenses section.\r\n- Added Privacy Policy access.\r\n- Added configurable social and project links.\r\n\r\n5. Improved AniList Settings\r\n\r\n- Added timezone configuration.\r\n- Added an option to use the phone's timezone.\r\n- Expanded notification preferences with individual notification controls.\r\n- Added support for the Always activity merge setting.\r\n- Improved custom profile colour handling.\r\n- Better cache invalidation when account preferences change.\r\n\r\n6. Rich Text & Spoiler Support\r\n\r\n- Improved AniList descriptions and profile biography rendering.\r\n- Added Markdown formatting support:\r\n  - Bold and italic.\r\n  - Strikethrough.\r\n  - Inline code.\r\n  - Clickable links.\r\n- Added tap-to-reveal spoiler support.\r\n- Supports nested and multiline spoilers.\r\n- Safer rendering of AniList-provided text.\r\n\r\n7. Login & Application Improvements\r\n\r\n- Improved native Android AniList login using application deep links.\r\n- Improved application startup and cached Pick restoration.\r\n- Removed legacy web service worker and cache registrations.\r\n- Updated application loading and resource management.\r\n\r\n8. Quality & Reliability\r\n\r\n- Added dedicated cache and API pacing unit tests.\r\n- Added session and offline cache end-to-end tests.\r\n- Added About screen testing.\r\n- Expanded settings and application stability tests.\r\n\r\n---\r\n\r\n📦 Installation & Compatibility\r\n\r\n- Build: b91\r\n- Version: 2.1.1\r\n- Version Code: 1564603\r\n- Build Type: Release build\r\n- Update Compatibility: Compatible with the previous installation.\r\n- Signing Certificate: Same signing key as previous releases.\r\n\r\nSigning Certificate SHA-256:\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nYour existing application data is retained when updating normally.\r\n\r\n🔗 Full Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b81...v2.1.1-b91\r\n\r\n---\r\n\r\nWhat Next? — Your list. Your next pick.\r\n\r\nTrack your anime. Track your manga. Discover what's next.\r\n\r\nDeveloped by Tokyo Brotherhood.",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b91",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v2.1.1-b91",
       "published_at": "2026-11-05T10:58:37Z",
       "assets": [
         {
           "name": "WhatNext-v2.1.1-b91.apk",
           "size": 9167904,
-          "download_count": 3,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b91/WhatNext-v2.1.1-b91.apk",
+          "download_count": 4,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v2.1.1-b91/WhatNext-v2.1.1-b91.apk",
           "created_at": "2026-11-05T10:58:36Z",
           "updated_at": "2026-11-05T10:58:37Z",
           "digest": "sha256:a3c785a2ede0013024827ee9407baf5f23575ae0a9900100488996c1ec820929"
@@ -228,14 +248,14 @@
       "body": "🚀 What Next? v2.1.1-b81\r\n\r\nWhat's New & Improved\r\n\r\n1. Improved Discord Integration\r\n\r\n- Better detection of deleted or invalid Discord webhooks.\r\n- Clearer error messages with explanations and suggested fixes.\r\n- Checks webhook availability before sending test messages.\r\n- Test messages now confirm the destination thread.\r\n\r\n2. More Reliable AniList Triple Sync\r\n\r\n- Improved handling of Discord API errors and rate limits.\r\n- Automatically stops repeated requests when Discord is unavailable.\r\n- Unsent update cards are preserved for the next sync.\r\n- Pending cards are delivered when the webhook or Discord service recovers.\r\n- Better reporting for individual failed cards.\r\n\r\n3. Stability & Improvements\r\n\r\n- Improved Discord synchronization error handling.\r\n- Expanded automated end-to-end tests.\r\n- Updated application and service worker cache revisions to ensure updated files load together.\r\n\r\n📦 Installation & Compatibility\r\n\r\n- Release build.\r\n- Compatible with the previous installation.\r\n- Same signing certificate.\r\n- Existing app data is retained when updating normally.\r\n\r\nSigning Certificate SHA-256:\r\n\"c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72\"\r\n\r\nVersion Code: \"1562588\"\r\n\r\nBuild: \"b81\"\r\n\r\nFull Changelog\r\n\r\nhttps://github.com/tokyo720022-create/What-Next/compare/v2.1.1-b78...v2.1.1-b81\r\n\r\nThank you for using What Next?!\r\n\r\nTrack your anime. Track your manga. Discover what's next.",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b81",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v2.1.1-b81",
       "published_at": "2026-11-04T01:23:44Z",
       "assets": [
         {
           "name": "WhatNext-v2.1.1-b81.apk",
           "size": 9149609,
-          "download_count": 3,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b81/WhatNext-v2.1.1-b81.apk",
+          "download_count": 4,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v2.1.1-b81/WhatNext-v2.1.1-b81.apk",
           "created_at": "2026-11-04T01:23:41Z",
           "updated_at": "2026-11-04T01:23:43Z",
           "digest": "sha256:7a37028d40db41642bdce380c1cb7c976bb7b208445c9c11b30151e3cced7a46"
@@ -248,14 +268,14 @@
       "body": "<h1>What Next? v2.1.1-b75</h1>\r\n<h3>Official Android Release | Build 75</h3>\r\n<p><strong>What Next?</strong> is an unofficial AniList-powered anime and manga companion designed to help you discover, organise, track, and manage your anime and manga journey.</p>\r\n<p>This release is being published as a fresh GitHub release following the removal of previous release entries. It provides a clean release record for build 75.</p>\r\n<h2>✨ About What Next?</h2>\r\n<p>What Next? goes beyond a traditional anime tracking application. It combines personalised recommendations, intelligent time-based suggestions, advanced library management, anime discovery, seasonal schedules, statistics, and social features in one application.</p>\r\n<h3>🌟 Main Features</h3>\r\n<ul>\r\n<li><strong>Smart Recommendations:</strong> Discover anime and manga based on your personal interests, genres, themes, and AniList activity.</li>\r\n<li><strong>Time-Based Picks:</strong> Find something to watch or read depending on your available time.</li>\r\n<li><strong>Anime &amp; Manga Tracking:</strong> Manage your Watching, Completed, Planning, Paused, Dropped, and Reading lists.</li>\r\n<li><strong>Advanced Discovery:</strong> Explore anime, manga, characters, staff, studios, and AniList users.</li>\r\n<li><strong>Seasonal Anime:</strong> Browse anime by release year, season, and format.</li>\r\n<li><strong>Release Calendar:</strong> Track upcoming episodes, premieres, and season finales.</li>\r\n<li><strong>Taste Reports:</strong> Analyse your preferences, favourite genres, themes, ratings, and viewing personality.</li>\r\n<li><strong>Detailed Statistics:</strong> Explore your anime and manga progress, ratings, genres, demographics, and activity.</li>\r\n<li><strong>Franchise Relation Maps:</strong> Explore connections between anime and manga franchises.</li>\r\n<li><strong>User Profiles:</strong> View AniList profiles, followers, following lists, and user statistics.</li>\r\n<li><strong>Private Messaging:</strong> Communicate with other AniList users through the built-in chat.</li>\r\n<li><strong>Advanced List Editor:</strong> Manage scores, progress, dates, rewatches, priorities, notes, favourites, and custom lists.</li>\r\n<li><strong>AniList &amp; MyAnimeList Synchronisation:</strong> Advanced AniList Triple Sync functionality.</li>\r\n<li><strong>Offline Support:</strong> Access previously saved information when an internet connection is unavailable.</li>\r\n<li><strong>Personalisation:</strong> Anime-inspired themes, interface customisation, privacy options, and more.</li>\r\n</ul>\r\n<h2>📦 Release Information</h2>\r\n\r\nDetail | Information\r\n-- | --\r\nApplication | What Next?\r\nVersion | 2.1.1\r\nBuild | 75\r\nRelease Tag | v2.1.1-b75\r\nVersion Code | 1558884\r\nBuild Type | Release Build\r\nPlatform | Android\r\nDistribution | GitHub Releases\r\n\r\n\r\n<h2>🔐 Android Installation &amp; Security</h2>\r\n<p>This APK is signed using the same Android signing certificate as the previous compatible builds.</p>\r\n<p><strong>Signing certificate SHA-256:</strong></p>\r\n<p><code>c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72</code></p>\r\n<ul>\r\n<li>Same application signing key.</li>\r\n<li>Higher Android version code.</li>\r\n<li>Release build rather than a standard debug build.</li>\r\n<li>APK signing and version verification are performed during the build process.</li>\r\n</ul>\r\n<p><strong>Upgrade compatibility:</strong> Existing installations signed with the same certificate can be updated directly without uninstalling the previous version. Your existing application data should remain intact.</p>\r\n<h2>🔄 Important Notes</h2>\r\n<ul>\r\n<li>An AniList account is required to use the application.</li>\r\n<li>This is an unofficial third-party AniList companion.</li>\r\n<li>What Next? is not affiliated with or endorsed by AniList.</li>\r\n<li>Certain advanced synchronisation features require users to configure their own API credentials.</li>\r\n</ul>\r\n<h2>❤️ Project</h2>\r\n<p><strong>What Next? — One place for your anime and manga journey.</strong></p>\r\n<p>Developed under <strong>Tokyo Brotherhood</strong>.</p>\r\n<p>Creator: Hariharasuthan Karunakaran</p>\r\n<p>GitHub Repository:\r\nhttps://github.com/tokyo720022-create/What-Next</p>\r\n",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/tokyo720022-create/What-Next/releases/tag/v2.1.1-b75",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v2.1.1-b75",
       "published_at": "2026-11-01T11:39:16Z",
       "assets": [
         {
           "name": "WhatNext-v2.1.1-b75.apk",
           "size": 9144901,
-          "download_count": 3,
-          "browser_download_url": "https://github.com/tokyo720022-create/What-Next/releases/download/v2.1.1-b75/WhatNext-v2.1.1-b75.apk",
+          "download_count": 4,
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v2.1.1-b75/WhatNext-v2.1.1-b75.apk",
           "created_at": "2026-11-01T11:39:14Z",
           "updated_at": "2026-11-01T11:39:15Z",
           "digest": "sha256:b4c773df232980ffc9b688f4bd930f9a1f5717361fc6a0a4429500a531866d7b"

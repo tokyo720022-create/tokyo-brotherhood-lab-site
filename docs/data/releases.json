@@ -1,24 +1,24 @@
 {
-  "updated_at": "2026-11-19T02:37:53Z",
+  "updated_at": "2026-11-20T02:22:34Z",
   "source": "https://github.com/tokyo720022-create/What-Next/releases",
   "releases": [
     {
-      "tag_name": "v3.0.0-b194",
-      "name": "What Next? v3.0.0-b194",
-      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1584237, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/OrewaTokyo/What-Next/compare/v3.0.0-b191...v3.0.0-b194",
+      "tag_name": "v3.0.0-b198",
+      "name": "What Next? v3.0.0-b198",
+      "body": "Installs over the previous version: same signing key (SHA-256 c2198c9ebde534385ad8bff490994676b9bebf74b550d36fb662bfe802a2cc72), version code 1585575, release build. Native add-ons (yes = secure login storage and background alerts, secure = login storage only, no = neither): yes.\n\n**Full Changelog**: https://github.com/OrewaTokyo/What-Next/compare/v3.0.0-b194...v3.0.0-b198",
       "prerelease": false,
       "draft": false,
-      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b194",
-      "published_at": "2026-11-19T02:13:05Z",
+      "html_url": "https://github.com/OrewaTokyo/What-Next/releases/tag/v3.0.0-b198",
+      "published_at": "2026-11-20T00:31:00Z",
       "assets": [
         {
-          "name": "WhatNext-v3.0.0-b194.apk",
-          "size": 10519064,
+          "name": "WhatNext-v3.0.0-b198.apk",
+          "size": 10519120,
           "download_count": 2,
-          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b194/WhatNext-v3.0.0-b194.apk",
-          "created_at": "2026-11-19T02:13:04Z",
-          "updated_at": "2026-11-19T02:13:05Z",
-          "digest": "sha256:cb7d2511cb33d3ca213b1711ab90ffffe049f06e48421afba7d7c51557e3c288"
+          "browser_download_url": "https://github.com/OrewaTokyo/What-Next/releases/download/v3.0.0-b198/WhatNext-v3.0.0-b198.apk",
+          "created_at": "2026-11-20T00:30:58Z",
+          "updated_at": "2026-11-20T00:30:59Z",
+          "digest": "sha256:3cc96b1e6f0d393262c700f6c67f849507b752456a8e5aae7d1bf62235c100ad"
         }
       ]
     },
